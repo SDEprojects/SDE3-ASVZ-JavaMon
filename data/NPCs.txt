@@ -1,0 +1,8 @@
+<?xml version = "1.0"?>
+<class>
+    <npc>
+        <firstname>Professor</firstname>
+        <lastname>Wei</lastname>
+        <dialog>Welcome to the wooooorllld of POKEMANZ</dialog>
+    </npc>
+</class>

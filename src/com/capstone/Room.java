@@ -25,6 +25,11 @@ public class Room {
     }
 
     //Getters and Setters
+
+    public String getName() {
+        return name;
+    }
+
     public String getNorthTile() {
         return northTile;
     }
@@ -69,16 +74,15 @@ public class Room {
         /*if (npcList.isEmpty()){
             System.out.println("There's noone else here.");
         } else if (!npcList.isEmpty()){
-
             System.out.println("People in the room: ");
             for(String person : npcList){
                 System.out.println(person);
             }
         }
-
         //check if itemList is empty, if not , print out the list of interactable items.
         if (itemList.isEmpty()){
 
         }*/
     }
 }
+

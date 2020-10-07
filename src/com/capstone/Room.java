@@ -26,7 +26,6 @@ public class Room {
 
     //Getters and Setters
 
-
     public String getName() {
         return name;
     }
@@ -82,6 +81,8 @@ public class Room {
         }
         //check if itemList is empty, if not , print out the list of interactable items.
         if (itemList.isEmpty()){
+
         }*/
     }
 }
+

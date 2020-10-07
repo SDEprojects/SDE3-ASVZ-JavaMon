@@ -67,7 +67,7 @@ public class Room {
 
         //check if npc list is empty, if not, print out the list of npcs in the room.
         /*if (npcList.isEmpty()){
-            System.out.println("There's noone else here.");
+            System.out.println("There's no one else here.");
         } else if (!npcList.isEmpty()){
 
             System.out.println("People in the room: ");

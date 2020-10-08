@@ -6,7 +6,7 @@ public class Room {
     private String name;
     private String description;
     private String npcName; //interactable npc list
-    private String itemName; //interactable item list, can be used for tall grass etc...
+    private String interactableItem; //interactable item list, can be used for tall grass etc...
     private String northTile;
     private String southTile;
     private String eastTile;
@@ -21,6 +21,12 @@ public class Room {
         southTile = adjSouthTile;
         eastTile = adjEastTile;
         westTile = adjWestTile;
+
+    }
+    public Room(String roomName, String roomDescription, String adjNorthTile, String adjSouthTile, String adjEastTile, String adjWestTile, String roomNPC, String roomInteractable) {
+        this(roomName, roomDescription, adjNorthTile,adjSouthTile,adjEastTile,adjWestTile);
+        npcName = roomNPC;
+        interactableItem = roomInteractable;
 
     }
 
@@ -61,8 +67,8 @@ public class Room {
             System.out.println("No one is here.");
         }
         //Check if itemList is empty
-        if(itemName != null && !itemName.trim().isEmpty()){
-            System.out.println("You observe the room and see a " + itemName); //singular item for first iteration
+        if(interactableItem != null && !interactableItem.trim().isEmpty()){
+            System.out.println("You observe the room and see a " + interactableItem); //singular item for first iteration
         } else {
             System.out.println("You look around and find nothing of interest here.");
         }

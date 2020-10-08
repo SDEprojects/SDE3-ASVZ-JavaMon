@@ -52,6 +52,13 @@ public class Room {
         return westTile;
     }
 
+    public String getNpcName() {
+        return npcName;
+    }
+
+    public String getInteractableItem() {
+        return interactableItem;
+    }
 
     //Business Methods
 

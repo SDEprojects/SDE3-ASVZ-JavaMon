@@ -30,7 +30,7 @@
         <interactable>nothing</interactable>
     </room>
     <room>
-        <name>Home</name>
+        <name>My House</name>
         <description>Home sweet home!</description>
         <adjacent_north>nothing</adjacent_north>
         <adjacent_south>nothing</adjacent_south>
@@ -99,7 +99,7 @@
         <adjacent_south>Dark Forest</adjacent_south>
         <adjacent_east>nothing</adjacent_east>
         <adjacent_west>nothing</adjacent_west>
-        <npc>Trainer Laura</npc>
+        <npc>Police Officer Laura</npc>
         <interactable>Short Grass</interactable>
     </room>
     <room>
@@ -113,11 +113,41 @@
         <interactable>nothing</interactable>
     </room>
     <room>
-        <name>Viridian City Gym</name>
-        <description>Gym Leader: Subash Pokemon Type: Rock</description>
-        <adjacent_north>nothing</adjacent_north>
+        <name>Viridian City Gym Room 1</name>
+        <description>Gym Trainer Room</description>
+        <adjacent_north>Viridian City Gym Room 2</adjacent_north>
         <adjacent_south>nothing</adjacent_south>
         <adjacent_east>Viridian City Pokemon Center</adjacent_east>
+        <adjacent_west>nothing</adjacent_west>
+        <npc>Musician Andrew</npc>
+        <interactable>nothing</interactable>
+    </room>
+    <room>
+        <name>Viridian City Gym Room 2</name>
+        <description>Gym Trainer Room</description>
+        <adjacent_north>Viridian City Gym Room 3</adjacent_north>
+        <adjacent_south>Viridian City Gym Room 1</adjacent_south>
+        <adjacent_east>nothing</adjacent_east>
+        <adjacent_west>nothing</adjacent_west>
+        <npc>Interpreter Everett</npc>
+        <interactable>nothing</interactable>
+    </room>
+    <room>
+        <name>Viridian City Gym Room 3</name>
+        <description>Gym Trainer Room</description>
+        <adjacent_north>Viridian City Gym Final Room</adjacent_north>
+        <adjacent_south>Viridian City Gym Room 2</adjacent_south>
+        <adjacent_east>nothing</adjacent_east>
+        <adjacent_west>nothing</adjacent_west>
+        <npc>Soccer Player Emeke</npc>
+        <interactable>nothing</interactable>
+    </room>
+    <room>
+        <name>Viridian City Gym Final Room</name>
+        <description>Gym Leader: Subash Pokemon Type: Rock</description>
+        <adjacent_north>nothing</adjacent_north>
+        <adjacent_south>Viridian City Gym Room 3</adjacent_south>
+        <adjacent_east>nothing</adjacent_east>
         <adjacent_west>nothing</adjacent_west>
         <npc>Gym Leader Subash</npc>
         <interactable>nothing</interactable>

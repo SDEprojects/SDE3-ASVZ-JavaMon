@@ -13,12 +13,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class InitXML {
-    public Collection<NPCFactory> listOfNpcs = new ArrayList<>();
+    public Collection<NPCFactory> listOfNPCs = new ArrayList<>();
     public Collection<Room> listOfRooms = new ArrayList<>();
 
     public String npcDialog(String npcName){
-        for (NPCFactory NPC : listOfNpcs) {
-            if (NPC.getName().equals(npcName)) {
+        for (NPCFactory NPC : listOfNPCs) {
+            if (NPC.getName().toLowerCase().equals(npcName)) {
                 return NPC.getDialog();
             }
         }
@@ -53,7 +53,7 @@ public class InitXML {
                 Element npcEle = (Element) npc;
                 String npcName = npcEle.getElementsByTagName("name").item(0).getTextContent();
                 String npcDialog = npcEle.getElementsByTagName("dialog").item(0).getTextContent();
-                listOfNpcs.add(new NPCFactory(npcName,npcDialog));
+                listOfNPCs.add(new NPCFactory(npcName,npcDialog));
 
             }
         }

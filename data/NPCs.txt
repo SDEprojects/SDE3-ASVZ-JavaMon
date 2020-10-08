@@ -43,7 +43,7 @@
 
     <npc>
         <name>Trainer David</name>
-        <dialog>Take a <br> , let's have a battle!</dialog>
+        <dialog>Take a BREAK , let's have a battle!</dialog>
     </npc>
 
     <npc>

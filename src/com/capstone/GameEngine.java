@@ -8,80 +8,101 @@ public class GameEngine {
         InitXML game = new InitXML();
         game.initNPCs();
         game.initRooms();
-        Player player1 = new Player("Subash");
+        TextParser parser = new TextParser();
+
+
+        Player player1 = new Player();
         Room startingRoom = game.getRoom("Oak's Lab");
         player1.setCurrentRoom(startingRoom);
+
+        player1.getCurrentRoom().displayOutput();
+        System.out.println("=====================================================");
 
         //actual loop for gamez
         while (true) {
             //promp user for input
-            player1.getCurrentRoom().displayOutput();
-            String userInput = "What do you wanna do? ";
+
+            String userInput = parser.getUserInput();
+            System.out.println("=====================================================");
+
+            //for checking the map
+            if ((userInput.toLowerCase().equals("check map")) || (userInput.toLowerCase().equals("map"))) {
+                player1.checkMap();
+            }
+
 
             //for the movement
-            if (userInput == "move or something") {
-                String direction = "some user input direction";
-                if (player1.validMove(direction)) ;
-                switch (direction) {
-                    case "north":
-                        player1.setCurrentRoom(game.getRoom(player1.getCurrentRoom().getNorthTile()));
-                    case "east":
-                        player1.setCurrentRoom(game.getRoom(player1.getCurrentRoom().getEastTile()));
-                    case "south":
-                        player1.setCurrentRoom(game.getRoom(player1.getCurrentRoom().getSouthTile()));
-                    case "West":
-                        player1.setCurrentRoom(game.getRoom(player1.getCurrentRoom().getWestTile()));
-                }
-            }
-            else if (userInput == "interact ") {
-                String interact = "some user interact object";
-                if (player1.validMove(direction));
-                switch (direction) {
-                    case "north":
-                        player1.setCurrentRoom(game.getRoom(player1.getCurrentRoom().getNorthTile()));
-                    case "east":
-                        player1.setCurrentRoom(game.getRoom(player1.getCurrentRoom().getEastTile()));
-                    case "south":
-                        player1.setCurrentRoom(game.getRoom(player1.getCurrentRoom().getSouthTile()));
-                    case "West":
-                        player1.setCurrentRoom(game.getRoom(player1.getCurrentRoom().getWestTile()));
-                }
-            }
+            else if (userInput.split(" ")[0].toLowerCase().equals("go")) {
+                String direction = userInput.split(" ",2)[1].toLowerCase();
 
+                if (player1.validMove(direction)) {
+                    System.out.println("You moved " + direction);
+                    switch (direction) {
+                        case "north":
+                            player1.setCurrentRoom(game.getRoom(player1.getCurrentRoom().getNorthTile()));
+                            break;
+                        case "east":
+                            player1.setCurrentRoom(game.getRoom(player1.getCurrentRoom().getEastTile()));
+                            break;
+                        case "south":
+                            player1.setCurrentRoom(game.getRoom(player1.getCurrentRoom().getSouthTile()));
+                            break;
+                        case "west":
+                            player1.setCurrentRoom(game.getRoom(player1.getCurrentRoom().getWestTile()));
+                            break;
+                    }
+                    player1.getCurrentRoom().displayOutput();
+                }
+                else System.out.println("You can't go in that direction!");
+
+
+            } else if (userInput.split(" ")[0].toLowerCase().equals("talk")) {
+                String npc = userInput.split(" ",2)[1].toLowerCase();
+                if (player1.getCurrentRoom().getNpcName().toLowerCase().equals(npc)) {
+                    System.out.println('"' + game.npcDialog(npc) + '"');
+                }
+                else System.out.println("Theres nobody named that here to talk to!");
+            } else if (userInput.split(" ")[0].toLowerCase().equals("interact")) {
+                String interactable = userInput.split(" ",2)[1].toLowerCase();
+                if (player1.getCurrentRoom().getInteractableItem().toLowerCase().equals(interactable)) {
+                    System.out.println("You try to interact with " + interactable);
+                    System.out.println("We need to implement an interactables class <_>");
+                }
+                else System.out.println("Theres no " + interactable + " here to interact with!");
+
+            }
+            System.out.println("=====================================================");
         }
 
-
-
-        //everything below is hardcoded for testing
-
-        //for getting dialog of a npc, do these calls...
-        System.out.println(game.listOfNpcs);
-        System.out.println(game.npcDialog("Nurse Didi"));
-
-
-        //must setCurrentRoom(room) first before calling move and other stuff)
-
-        System.out.println(player1.getName());
-
-
-
-        startingRoom.displayOutput();
-
-        //System.out.println(player1.getCurrentRoom()); //room class needs a toString to display itself... if needed, prob not needed
-        System.out.println("===============================================");
-
-        if (player1.validMove("north")) {
-            System.out.println("PLayer moved north");
-            System.out.println("===============================================");
-            Room roomNorth = game.getRoom(player1.getCurrentRoom().getNorthTile());
-            player1.setCurrentRoom(roomNorth);
-            roomNorth.displayOutput();
-
-
-            //ASK TOM.... For implementation of NPCs in a Room... should we do a HAS-A relationship, or just query NPC Dialog when you interact as long as the current room contains the NPC.
-
-
-        }
+//        //everything below is hardcoded for testing
+//
+//        //for getting dialog of a npc, do these calls...
+//        System.out.println(game.listOfNpcs);
+//        System.out.println(game.npcDialog("Nurse Didi"));
+//
+//
+//        //must setCurrentRoom(room) first before calling move and other stuff)
+//
+//        System.out.println(player1.getName());
+//
+//
+//
+//        startingRoom.displayOutput();
+//
+//        //System.out.println(player1.getCurrentRoom()); //room class needs a toString to display itself... if needed, prob not needed
+//        System.out.println("===============================================");
+//
+//        if (player1.validMove("north")) {
+//            System.out.println("PLayer moved north");
+//            System.out.println("===============================================");
+//            Room roomNorth = game.getRoom(player1.getCurrentRoom().getNorthTile());
+//            player1.setCurrentRoom(roomNorth);
+//            roomNorth.displayOutput();
+//
+//
+//            //ASK TOM.... For implementation of NPCs in a Room... should we do a HAS-A relationship, or just query NPC Dialog when you interact as long as the current room contains the NPC.
+//
+//
+//        }
     }
-
 }

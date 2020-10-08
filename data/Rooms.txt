@@ -30,7 +30,7 @@
         <interactable>nothing</interactable>
     </room>
     <room>
-        <name>Home</name>
+        <name>My House</name>
         <description>Home sweet home!</description>
         <adjacent_north>nothing</adjacent_north>
         <adjacent_south>nothing</adjacent_south>

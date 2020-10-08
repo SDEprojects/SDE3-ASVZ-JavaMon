@@ -1,20 +1,27 @@
 package com.capstone;
 
+import java.lang.reflect.Array;
 import java.util.Scanner;
 
 public class TextParser {
     private String userInput;
 
+    public void move(String direction, Room room) {
+
+    }
+
     public String getUserInput() {
-        String inputString = null;
+        String inputString = "";
         try {
-            System.out.println("Enter a String: ");
+            System.out.println("Enter a command: ");
             Scanner scanner = new Scanner(System.in);
             inputString = scanner.nextLine();
 
             //input validation
-            if (!inputValidation(inputString)) {
-                inputValidation(inputString);
+            while (!inputValidation(inputString)) {
+                System.out.println("=====================================================");
+                System.out.println("Enter a command: ");
+                inputString = scanner.nextLine();
             }
 
 
@@ -32,25 +39,25 @@ public class TextParser {
 //                System.out.println("You have entered an invalid move");
 //                isValidString();
 //            }
-
-            //conditions for actual action
-            if (inputString.split(" ")[0].toLowerCase().equals("go")) {
-
-            }
-            else if (inputString.split(" ")[0].toLowerCase().equals("talk")) {
-
-            }
-
-            else if (inputString.split(" ")[0].toLowerCase().equals("interact")) {
-
-            }
-
+//
+//            //conditions for actual action... use populated xml page for synonyms?
+//            if (inputString.split(" ")[0].toLowerCase().equals("go")) {
+//
+//            }
+//            else if (inputString.split(" ")[0].toLowerCase().equals("talk")) {
+//
+//            }
+//
+//            else if (inputString.split(" ")[0].toLowerCase().equals("interact")) {
+//
+//            }
         }
         catch (IllegalArgumentException e){
             getUserInput();
         }
-        System.out.println("Printed String: "+inputString);
         return inputString;
+        //System.out.println("Printed String: "+inputString);   for testing purposes
+
     }
 
     private boolean inputValidation(String input) {
@@ -58,6 +65,10 @@ public class TextParser {
             System.out.println("Your input cannot be empty");
             return false;
             //throw new IllegalArgumentException("You have not entered a move");
+        }
+        else if (input.split(" ").length < 2) {
+            System.out.println("You have entered an invalid move, what can you do with only one word?");
+            return false;
         }
         else if (input.matches("[-+]?[0-9]*\\.?[0-9]+")) {
             System.out.println("You have entered an invalid move");

@@ -1,8 +1,9 @@
 <?xml version = "1.0"?>
 <class>
     <npc>
-        <name>Professor Wei PhD</name>
-        <dialog>Welcome to the wooooorllld of POKEMANZ</dialog>
+        <name>Professor Oak</name>
+        <dialog>Hey! You're finally here, I've been waiting for you. I'm going on vacation soon... and the flight I'm going on has a strict 1 Pokemon carry on limit. I'm going to need you to look after one while I'm gone! I'll even let you choose who you want to take!
+        Choose one: (Bulbasaur (Grass-Type), Charmander (Fire-Type), Squirtle (Water-Type))</dialog>
     </npc>
 
     <npc>
@@ -12,19 +13,68 @@
 
     <npc>
         <name>Gym Leader Subash</name>
-        <dialog>Look at me, I am the Captain now</dialog>
+        <dialog>Have you seen the northern lights?</dialog>
     </npc>
 
     <npc>
-        <name>Rando Trainer</name>
+        <name>Trainer Amanda</name>
         <dialog>Why you beefing? Wanna Fight?</dialog>
     </npc>
 
     <npc>
         <name>Rival Vladimir</name>
-        <dialog>Pikachu is bomb</dialog>
+        <dialog>Dude, Pikachu is bomb.</dialog>
     </npc>
 
+    <npc>
+        <name>Mom</name>
+        <dialog>Be sure to get plenty of rest and eat healthy!</dialog>
+    </npc>
+
+    <npc>
+        <name>Bug Catcher Sanju</name>
+        <dialog>I will TRY to CATCH all of the BUG Pokemons! No EXCEPTIONS!</dialog>
+    </npc>
+
+    <npc>
+        <name>Adventurer Michael</name>
+        <dialog>This forest is nothing! I have mastered the art of mapping and navigating all labyrinths!</dialog>
+    </npc>
+
+    <npc>
+        <name>Trainer David</name>
+        <dialog>Take a <br> , let's have a battle!</dialog>
+    </npc>
+
+    <npc>
+        <name>Trainer Laura</name>
+        <dialog>Care for a battle?!</dialog>
+    </npc>
+
+    <npc>
+        <name>Trainer David</name>
+        <dialog>Take a <br> , let's have a battle!</dialog>
+    </npc>
+
+    <npc>
+        <name>Employee Chris</name>
+        <dialog>Welcome to the PokeMart!</dialog>
+    </npc>
+
+    <npc>
+        <name>Hiker Rajan</name>
+        <dialog>I love the outdoors!</dialog>
+    </npc>
+
+    <npc>
+        <name>Spelunker Steven</name>
+        <dialog>All these Rock-Type Pokemon around here! Im glad I have Plant (Grass-Type) with me!.</dialog>
+    </npc>
+
+    <npc>
+        <name>Team Rocket Grunt Anthony</name>
+        <dialog>You shall not pass!</dialog>
+    </npc>
 
 
 </class>

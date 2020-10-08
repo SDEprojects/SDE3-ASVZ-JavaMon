@@ -69,6 +69,19 @@
         <npc>Adventurer Michael</npc>
         <interactable>Boulder</interactable>
     </room>
+
+    <room>
+        <name>Strange House</name>
+        <description>A Strange looking house at the edge of the clearing... Inside you see.. </description>
+        <adjacent_north>nothing</adjacent_north>
+        <adjacent_south>nothing</adjacent_south>
+        <adjacent_east>nothing</adjacent_east>
+        <adjacent_west>Clearing</adjacent_west>
+        <npc>Zack</npc>
+        <interactable>Psyducks</interactable>
+    </room>
+
+
     <room>
         <name>Dark Forest</name>
         <description>A super dense, dark and spooky forest</description>
@@ -77,7 +90,7 @@
         <adjacent_east>nothing</adjacent_east>
         <adjacent_west>nothing</adjacent_west>
         <npc>Trainer David</npc>
-        <interactable>nothing</interactable>
+        <interactable>Dense Vegetation</interactable>
     </room>
     <room>
         <name>Route 2</name>
@@ -119,6 +132,7 @@
         <npc>Employee Chris</npc>
         <interactable>nothing</interactable>
     </room>
+
 
     <room>
         <name>Cave Entrance</name>

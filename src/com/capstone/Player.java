@@ -57,7 +57,7 @@ public class Player {
         //displays rooms in the 4 cardinal directions and your current room
 
         //replace sout with text parser output call later on
-        System.out.println("You are currently in: " + this.currentRoom);
+        System.out.println("You are currently in: " + this.currentRoom.getName());
         System.out.println("To the North of you is: " + this.currentRoom.getNorthTile());
         System.out.println("To the East of you is: " + this.currentRoom.getEastTile());
         System.out.println("To the South of you is: " + this.currentRoom.getSouthTile());
@@ -69,28 +69,31 @@ public class Player {
         switch (direction) {
             case "north":
             case "up":
-                if (!currentRoom.getNorthTile().equals("Nothing")){
+                if (!currentRoom.getNorthTile().equals("nothing")) {
                     return true;
                 }
+                break;
             case "east":
             case "right":
-                if (!currentRoom.getEastTile().equals("Nothing")){
+                if (!currentRoom.getEastTile().equals("nothing")) {
                     return true;
                 }
+                break;
             case "south":
             case "down":
-                if (!currentRoom.getSouthTile().equals("Nothing")){
+                if (!currentRoom.getSouthTile().equals("nothing")) {
                     return true;
                 }
+                break;
             case "west":
             case "left":
-                if (!currentRoom.getWestTile().equals("Nothing")){
+                if (!currentRoom.getWestTile().equals("nothing")) {
                     return true;
                 }
-            default:
-                System.out.println("There's nothing there! You can't go that way!");
-                return false;
+                break;
         }
+        System.out.println("There's nothing there! You can't go that way!");
+        return false;
     }
 
     @Override

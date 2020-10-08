@@ -6,6 +6,8 @@
         <adjacent_south>Lake</adjacent_south>
         <adjacent_east>Rival's House</adjacent_east>
         <adjacent_west>My House</adjacent_west>
+        <npc>Professor Oak</npc>
+        <interactable>nothing</interactable>
     </room>
     <room>
         <name>Rival's House</name>
@@ -14,6 +16,8 @@
         <adjacent_south>nothing</adjacent_south>
         <adjacent_east>nothing</adjacent_east>
         <adjacent_west>Oak's Lab</adjacent_west>
+        <npc>Rival Vladimir</npc>
+        <interactable>nothing</interactable>
     </room>
     <room>
         <name>Lake</name>
@@ -22,14 +26,18 @@
         <adjacent_south>nothing</adjacent_south>
         <adjacent_east>nothing</adjacent_east>
         <adjacent_west>nothing</adjacent_west>
+        <npc>Angler Andrew</npc>
+        <interactable>nothing</interactable>
     </room>
     <room>
-        <name>Home</name>
+        <name>My House</name>
         <description>Home sweet home!</description>
         <adjacent_north>nothing</adjacent_north>
         <adjacent_south>nothing</adjacent_south>
         <adjacent_east>Oak's Lab</adjacent_east>
         <adjacent_west>nothing</adjacent_west>
+        <npc>Mom</npc>
+        <interactable>nothing</interactable>
     </room>
     <room>
         <name>Route 1</name>
@@ -38,6 +46,8 @@
         <adjacent_south>Oak's Lab</adjacent_south>
         <adjacent_east>nothing</adjacent_east>
         <adjacent_west>nothing</adjacent_west>
+        <npc>Trainer Amanda</npc>
+        <interactable>Tall Grass</interactable>
     </room>
     <room>
         <name>Forest</name>
@@ -46,6 +56,8 @@
         <adjacent_south>Route 1</adjacent_south>
         <adjacent_east>Cave Entrance</adjacent_east>
         <adjacent_west>Clearing</adjacent_west>
+        <npc>Bug Catcher Sanju</npc>
+        <interactable>Tall Grass</interactable>
     </room>
     <room>
         <name>Clearing</name>
@@ -54,7 +66,22 @@
         <adjacent_south>nothing</adjacent_south>
         <adjacent_east>Strange House</adjacent_east>
         <adjacent_west>Forest</adjacent_west>
+        <npc>Adventurer Michael</npc>
+        <interactable>Boulder</interactable>
     </room>
+
+    <room>
+        <name>Strange House</name>
+        <description>A Strange looking house at the edge of the clearing... Inside you see.. </description>
+        <adjacent_north>nothing</adjacent_north>
+        <adjacent_south>nothing</adjacent_south>
+        <adjacent_east>nothing</adjacent_east>
+        <adjacent_west>Clearing</adjacent_west>
+        <npc>Zack</npc>
+        <interactable>Psyducks</interactable>
+    </room>
+
+
     <room>
         <name>Dark Forest</name>
         <description>A super dense, dark and spooky forest</description>
@@ -62,6 +89,8 @@
         <adjacent_south>Forest</adjacent_south>
         <adjacent_east>nothing</adjacent_east>
         <adjacent_west>nothing</adjacent_west>
+        <npc>Trainer David</npc>
+        <interactable>Dense Vegetation</interactable>
     </room>
     <room>
         <name>Route 2</name>
@@ -70,6 +99,8 @@
         <adjacent_south>Dark Forest</adjacent_south>
         <adjacent_east>nothing</adjacent_east>
         <adjacent_west>nothing</adjacent_west>
+        <npc>Police Officer Laura</npc>
+        <interactable>Short Grass</interactable>
     </room>
     <room>
         <name>Viridian City Pokemon Center</name>
@@ -78,14 +109,48 @@
         <adjacent_south>Route 2</adjacent_south>
         <adjacent_east>Viridian City PokeMart</adjacent_east>
         <adjacent_west>Viridian City Gym</adjacent_west>
+        <npc>Nurse Didi</npc>
+        <interactable>nothing</interactable>
     </room>
     <room>
-        <name>Viridian City Gym</name>
-        <description>Gym Leader: Subash Pokemon Type: Rock</description>
-        <adjacent_north>nothing</adjacent_north>
+        <name>Viridian City Gym Room 1</name>
+        <description>Gym Trainer Room</description>
+        <adjacent_north>Viridian City Gym Room 2</adjacent_north>
         <adjacent_south>nothing</adjacent_south>
         <adjacent_east>Viridian City Pokemon Center</adjacent_east>
         <adjacent_west>nothing</adjacent_west>
+        <npc>Musician Andrew</npc>
+        <interactable>nothing</interactable>
+    </room>
+    <room>
+        <name>Viridian City Gym Room 2</name>
+        <description>Gym Trainer Room</description>
+        <adjacent_north>Viridian City Gym Room 3</adjacent_north>
+        <adjacent_south>Viridian City Gym Room 1</adjacent_south>
+        <adjacent_east>nothing</adjacent_east>
+        <adjacent_west>nothing</adjacent_west>
+        <npc>Interpreter Everett</npc>
+        <interactable>nothing</interactable>
+    </room>
+    <room>
+        <name>Viridian City Gym Room 3</name>
+        <description>Gym Trainer Room</description>
+        <adjacent_north>Viridian City Gym Final Room</adjacent_north>
+        <adjacent_south>Viridian City Gym Room 2</adjacent_south>
+        <adjacent_east>nothing</adjacent_east>
+        <adjacent_west>nothing</adjacent_west>
+        <npc>Soccer Player Emeke</npc>
+        <interactable>nothing</interactable>
+    </room>
+    <room>
+        <name>Viridian City Gym Final Room</name>
+        <description>Gym Leader: Subash Pokemon Type: Rock</description>
+        <adjacent_north>nothing</adjacent_north>
+        <adjacent_south>Viridian City Gym Room 3</adjacent_south>
+        <adjacent_east>nothing</adjacent_east>
+        <adjacent_west>nothing</adjacent_west>
+        <npc>Gym Leader Subash</npc>
+        <interactable>nothing</interactable>
     </room>
     <room>
         <name>Viridian City PokeMart</name>
@@ -94,7 +159,10 @@
         <adjacent_south>nothing</adjacent_south>
         <adjacent_east>nothing</adjacent_east>
         <adjacent_west>Viridian City Pokemon Center</adjacent_west>
+        <npc>Employee Chris</npc>
+        <interactable>nothing</interactable>
     </room>
+
 
     <room>
         <name>Cave Entrance</name>
@@ -103,6 +171,8 @@
         <adjacent_south>Dark Cavern</adjacent_south>
         <adjacent_east>Forest</adjacent_east>
         <adjacent_west>Hallway</adjacent_west>
+        <npc>Hiker Rajan</npc>
+        <interactable>Hole in the wall</interactable>
     </room>
     <room>
         <name>Dark Cavern</name>
@@ -111,6 +181,8 @@
         <adjacent_south>nothing</adjacent_south>
         <adjacent_east>nothing</adjacent_east>
         <adjacent_west>nothing</adjacent_west>
+        <npc>Spelunker Steven</npc>
+        <interactable>Pile of rocks</interactable>
     </room>
     <room>
         <name>Hallway</name>
@@ -119,5 +191,7 @@
         <adjacent_south>nothing</adjacent_south>
         <adjacent_east>Cave Entrance</adjacent_east>
         <adjacent_west>nothing</adjacent_west>
+        <npc>Team Rocket Grunt Anthony</npc>
+        <interactable>Cave in rubble</interactable>
     </room>
 </class>

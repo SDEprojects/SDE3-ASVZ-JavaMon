@@ -52,11 +52,6 @@
     </npc>
 
     <npc>
-        <name>Trainer David</name>
-        <dialog>Take a <br> , let's have a battle!</dialog>
-    </npc>
-
-    <npc>
         <name>Employee Chris</name>
         <dialog>Welcome to the PokeMart!</dialog>
     </npc>

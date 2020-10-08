@@ -33,7 +33,7 @@
 
     <npc>
         <name>Bug Catcher Sanju</name>
-        <dialog>I will TRY to CATCH all of the BUG Pokemons! No EXCEPTIONS!</dialog>
+        <dialog>I will TRY to CATCH all of the bug Pokemons! No EXCEPTIONS!</dialog>
     </npc>
 
     <npc>
@@ -43,12 +43,12 @@
 
     <npc>
         <name>Trainer David</name>
-        <dialog>Take a <br> , let's have a battle!</dialog>
+        <dialog>Take a BREAK , let's have a battle!</dialog>
     </npc>
 
     <npc>
-        <name>Trainer Laura</name>
-        <dialog>Care for a battle?!</dialog>
+        <name>Police Officer Laura</name>
+        <dialog>Why are you acting sus?</dialog>
     </npc>
 
     <npc>
@@ -69,6 +69,26 @@
     <npc>
         <name>Team Rocket Grunt Anthony</name>
         <dialog>You shall not pass!</dialog>
+    </npc>
+
+    <npc>
+        <name>Zack</name>
+        <dialog>Have you heard of the tale of the siren head?</dialog>
+    </npc>
+
+    <npc>
+        <name>Musician Andrew</name>
+        <dialog>My Pokemon will ROCK your socks!</dialog>
+    </npc>
+
+    <npc>
+        <name>Interpreter Everett</name>
+        <dialog>I can speak to Pokemon.</dialog>
+    </npc>
+
+    <npc>
+        <name>Soccer Player Emeke</name>
+        <dialog>I didn't know what a Pokemon was until on this week!</dialog>
     </npc>
 
 

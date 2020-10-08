@@ -69,24 +69,28 @@ public class Player {
         switch (direction) {
             case "north":
             case "up":
-                if (!currentRoom.getNorthTile().equals("Nothing")) {
+                if (!currentRoom.getNorthTile().equals("nothing")) {
                     return true;
                 }
+                break;
             case "east":
             case "right":
-                if (!currentRoom.getEastTile().equals("Nothing")) {
+                if (!currentRoom.getEastTile().equals("nothing")) {
                     return true;
                 }
+                break;
             case "south":
             case "down":
-                if (!currentRoom.getSouthTile().equals("Nothing")) {
+                if (!currentRoom.getSouthTile().equals("nothing")) {
                     return true;
                 }
+                break;
             case "west":
             case "left":
-                if (!currentRoom.getWestTile().equals("Nothing")) {
+                if (!currentRoom.getWestTile().equals("nothing")) {
                     return true;
                 }
+                break;
         }
         System.out.println("There's nothing there! You can't go that way!");
         return false;

@@ -127,7 +127,7 @@
         <adjacent_south>Dark Cavern</adjacent_south>
         <adjacent_east>Forest</adjacent_east>
         <adjacent_west>Hallway</adjacent_west>
-        <npc>Spelunker Rajan</npc>
+        <npc>Hiker Rajan</npc>
         <interactable>Hole in the wall</interactable>
     </room>
     <room>

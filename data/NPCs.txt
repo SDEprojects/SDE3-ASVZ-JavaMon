@@ -1,0 +1,28 @@
+<?xml version = "1.0"?>
+<class>
+    <npc>
+        <name>Professor Wei PhD</name>
+        <dialog>Welcome to the wooooorllld of POKEMANZ</dialog>
+    </npc>
+
+    <npc>
+        <name>Nurse Didi</name>
+        <dialog>Would you like to heal your Pokemon? (AT THE COST OF BLOOOOOOOOOOOD)</dialog>
+    </npc>
+
+    <npc>
+        <name>Gym Leader Subash</name>
+        <dialog>Look at me, I am the Captain now</dialog>
+    </npc>
+
+    <npc>
+        <name>Rando Trainer</name>
+        <dialog>Why you beefing? Wanna Fight?</dialog>
+    </npc>
+
+    <npc>
+        <name>Rival Vladimir</name>
+        <dialog>Pikachu is bomb</dialog>
+    </npc>
+
+</class>

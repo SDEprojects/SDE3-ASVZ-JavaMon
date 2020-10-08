@@ -2,5 +2,7 @@ package com.capstone;
 
 public class rpgPlaceholder {
 
-    // Testing versioning
+    //Testing branch and merging/committing.
+
 }
+

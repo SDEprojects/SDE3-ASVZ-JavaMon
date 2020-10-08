@@ -37,7 +37,7 @@ public class InitXML {
     public void initNPCs() {
         try {
 
-            //big formating block for taking XML from the provided txt doc "NPCs.txt" in data
+            //big formatting block for taking XML from the provided txt doc "NPCs.txt" in data
             File inputFile = new File(String.valueOf(Path.of("data", "NPCs.txt")));
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
@@ -65,7 +65,7 @@ public class InitXML {
     public void initRooms() {
         try {
 
-            //big formating block for taking XML from the provided txt doc "NPCs.txt" in data
+            //big formatting block for taking XML from the provided txt doc "Rooms.txt" in data
             File inputFile = new File(String.valueOf(Path.of("data", "Rooms.txt")));
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();

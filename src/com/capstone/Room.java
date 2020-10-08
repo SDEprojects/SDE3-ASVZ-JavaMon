@@ -65,7 +65,7 @@ public class Room {
     //This method displays room information to the user.
     void displayOutput(){
         System.out.println("Your current location: " + name);
-        System.out.println("Room Description: " + description);
+        System.out.println("Location Description: " + description);
 
         //Check if npcName is null or empty, if not print out the npc name.
         if(npcName != null && !npcName.trim().isEmpty()){
@@ -75,13 +75,10 @@ public class Room {
         }
         //Check if itemList is empty
         if(interactableItem != null && !interactableItem.trim().isEmpty()){
-            System.out.println("You observe the room and see a " + interactableItem); //singular item for first iteration
+            System.out.println("You observe the area and see " + interactableItem); //singular item for first iteration
         } else {
             System.out.println("You look around and find nothing of interest here.");
         }
-
-
-
 
         //check if npc list is empty, if not, print out the list of npcs in the room.
         /*if (npcList.isEmpty()){

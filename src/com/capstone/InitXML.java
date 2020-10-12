@@ -15,6 +15,7 @@ import java.util.Collection;
 public class InitXML {
     public Collection<NPCFactory> listOfNPCs = new ArrayList<>();
     public Collection<Room> listOfRooms = new ArrayList<>();
+    public Collection<Pokemon> listOfPokemon = new ArrayList<>();
 
     public String npcDialog(String npcName){
         for (NPCFactory NPC : listOfNPCs) {
@@ -94,6 +95,67 @@ public class InitXML {
                 String roomInteractable = roomEle.getElementsByTagName("interactable").item(0).getTextContent();
 
                 listOfRooms.add(new Room(roomName,roomDescription,roomAdjNorth,roomAdjSouth,roomAdjEast,roomAdjWest, roomNPC, roomInteractable));
+
+            }
+        }
+        catch (Exception e) {
+            System.out.println("there was an error");
+        }
+
+    }
+
+    public void initPokemon(){
+        try {
+
+            //big formatting block for taking XML from the provided txt doc "Rooms.txt" in data
+            File inputFile = new File(String.valueOf(Path.of("data", "Pokemon.txt")));
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.parse(inputFile);
+            doc.getDocumentElement().normalize();
+            NodeList pokemonList = doc.getElementsByTagName("pokemon"); //roomList now contains all the nodes in the file with tag NPC
+
+            for (int temp = 0; temp < pokemonList.getLength(); temp++) { //iterating over all the nodes in npcList
+
+                Node pokemon = pokemonList.item(temp);
+
+                //downcast, getting element we want, then recasting to node, then getting the text .... what
+                Element pokeEle = (Element) pokemon;
+                String pokemonName = pokeEle.getElementsByTagName("name").item(0).getTextContent();
+
+                String pokemonType = pokeEle.getElementsByTagName("type").item(0).getTextContent();
+
+                //If the string "nothing" is returned from any of the adjacent rooms, that means you cannot navigate to them.
+                //As of now health attack and startingexp are strings. May need a different way of getting values or need to tryparse
+                //the strings into int.
+                String pokeHealth = pokeEle.getElementsByTagName("health").item(0).getTextContent();
+                String pokeAttack = pokeEle.getElementsByTagName("attack").item(0).getTextContent();
+                String startingExp = pokeEle.getElementsByTagName("startingExp").item(0).getTextContent();
+
+                //Need implementation for moves. The moves in the Pokemon xml are in the form of a dictionary
+
+                //it looks like this in the xml:
+
+                /*<pokemon>
+                    <name>Squirtle</name>
+                    <type>Grass</type>
+                    <health>12</health>
+                    <attack>3</attack>
+                    <startingExp>50</startingExp>
+	                <moves>
+	                    <move1= "Tackle" basedmg= 2 energy= 10/>
+                        <move2= "Water Gun" basedmg= 3 energy= 5/>
+	                    <move3= "nothing" basedmg = 0 energy = 0/>
+	                    <move4= "nothing" basedmg = 0 energy = 0/>
+	                </moves>
+                </pokemon>*/
+
+
+                //roomNPC and roomInteractable holds the value from the rooms.txt xml with the npc and interactable tags.
+                String roomNPC = pokeEle.getElementsByTagName("npc").item(0).getTextContent();
+                String roomInteractable = pokeEle.getElementsByTagName("interactable").item(0).getTextContent();
+
+                listOfPokemon.add(new Pokemon(pokemonName, pokemonType));
 
             }
         }

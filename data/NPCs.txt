@@ -144,5 +144,8 @@
         <pokemon>none</pokemon>
     </npc>
 
-
+    <npc>
+        <name>Angler Andrew</name>
+        <dialog>I cant wait to Sous Vide some tuna steak for dinner!</dialog>
+    </npc>
 </class>

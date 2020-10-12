@@ -3,17 +3,20 @@ package com.capstone;
 public class Room {
 
     //Class Fields
-    private String name;
-    private String description;
-    private String npcName; //interactable npc list
-    private String interactableItem; //interactable item list, can be used for tall grass etc...
-    private String northTile;
-    private String southTile;
-    private String eastTile;
-    private String westTile;
+    private String name; //The name of the room, this is set from the Rooms.txt XML <name> tag
+    private String description; //The room description, set from the Rooms.txt XML <description> tag
+    private String npcName; //The npc name , set from <npc> tag in the Rooms.txt XML
+    private String interactableItem; //interactableItem, set from <interactable> tag in Rooms.txt XML
+
+    private String northTile; //uses the data from <adjacent_north> in Rooms.txt XML
+    private String southTile; //uses the data from <adjacent_south> in Rooms.txt XML
+    private String eastTile; //uses the data from <adjacent_east> in Rooms.txt XML
+    private String westTile; //uses the data from <adjacent_west> in Rooms.txt XML
 
 
     //Constructor(s)
+
+    //This constructor is for rooms that does not have interactableItems or npcs.
     public Room(String roomName, String roomDescription, String adjNorthTile, String adjSouthTile, String adjEastTile, String adjWestTile) {
         name = roomName;
         description = roomDescription;
@@ -23,6 +26,8 @@ public class Room {
         westTile = adjWestTile;
 
     }
+
+    //Constructor that allows for npc and interactable instantiation.
     public Room(String roomName, String roomDescription, String adjNorthTile, String adjSouthTile, String adjEastTile, String adjWestTile, String roomNPC, String roomInteractable) {
         this(roomName, roomDescription, adjNorthTile,adjSouthTile,adjEastTile,adjWestTile);
         npcName = roomNPC;
@@ -35,6 +40,8 @@ public class Room {
     public String getName() {
         return name;
     }
+
+
 
     public String getNorthTile() {
         return northTile;
@@ -64,6 +71,7 @@ public class Room {
 
     //This method displays room information to the user.
     void displayOutput(){
+        //Prints out the name and description of the room.
         System.out.println("Your current location: " + name);
         System.out.println("Location Description: " + description);
 

@@ -13,12 +13,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class InitXML {
-    public Collection<NPCFactory> listOfNpcs = new ArrayList<>();
+    public Collection<NPCFactory> listOfNPCs = new ArrayList<>();
     public Collection<Room> listOfRooms = new ArrayList<>();
 
     public String npcDialog(String npcName){
-        for (NPCFactory NPC : listOfNpcs) {
-            if (NPC.getName().equals(npcName)) {
+        for (NPCFactory NPC : listOfNPCs) {
+            if (NPC.getName().toLowerCase().equals(npcName)) {
                 return NPC.getDialog();
             }
         }
@@ -49,11 +49,11 @@ public class InitXML {
 
                 Node npc = npcList.item(temp);
 
-                //downcasting, getting element we want, then recasting to node, then getting the text .... what
+                //downcast, getting element we want, then recasting to node, then getting the text .... what
                 Element npcEle = (Element) npc;
                 String npcName = npcEle.getElementsByTagName("name").item(0).getTextContent();
                 String npcDialog = npcEle.getElementsByTagName("dialog").item(0).getTextContent();
-                listOfNpcs.add(new NPCFactory(npcName,npcDialog));
+                listOfNPCs.add(new NPCFactory(npcName,npcDialog));
 
             }
         }
@@ -71,22 +71,29 @@ public class InitXML {
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document doc = dBuilder.parse(inputFile);
             doc.getDocumentElement().normalize();
-            NodeList roomList = doc.getElementsByTagName("room"); //npcList now contains all the nodes in the file with tag NPC
+            NodeList roomList = doc.getElementsByTagName("room"); //roomList now contains all the nodes in the file with tag NPC
 
             for (int temp = 0; temp < roomList.getLength(); temp++) { //iterating over all the nodes in npcList
 
                 Node room = roomList.item(temp);
 
-                //downcasting, getting element we want, then recasting to node, then getting the text .... what
+                //downcast, getting element we want, then recasting to node, then getting the text .... what
                 Element roomEle = (Element) room;
                 String roomName = roomEle.getElementsByTagName("name").item(0).getTextContent();
+
                 String roomDescription = roomEle.getElementsByTagName("description").item(0).getTextContent();
+
+                //If the string "nothing" is returned from any of the adjacent rooms, that means you cannot navigate to them.
                 String roomAdjNorth = roomEle.getElementsByTagName("adjacent_north").item(0).getTextContent();
                 String roomAdjSouth = roomEle.getElementsByTagName("adjacent_south").item(0).getTextContent();
                 String roomAdjEast = roomEle.getElementsByTagName("adjacent_east").item(0).getTextContent();
                 String roomAdjWest = roomEle.getElementsByTagName("adjacent_west").item(0).getTextContent();
 
-                listOfRooms.add(new Room(roomName,roomDescription,roomAdjNorth,roomAdjSouth,roomAdjEast,roomAdjWest));
+                //roomNPC and roomInteractable holds the value from the rooms.txt xml with the npc and interactable tags.
+                String roomNPC = roomEle.getElementsByTagName("npc").item(0).getTextContent();
+                String roomInteractable = roomEle.getElementsByTagName("interactable").item(0).getTextContent();
+
+                listOfRooms.add(new Room(roomName,roomDescription,roomAdjNorth,roomAdjSouth,roomAdjEast,roomAdjWest, roomNPC, roomInteractable));
 
             }
         }

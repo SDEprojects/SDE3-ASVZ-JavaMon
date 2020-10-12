@@ -20,11 +20,30 @@ public class InitXML {
     //basically a getter for the dialog field for the NPC that gets passed to it
     public String npcDialog(String npcName){
         for (NPCFactory NPC : listOfNPCs) {
-            if (NPC.getName().toLowerCase().equals(npcName)) {
+            if (NPC.getName().toLowerCase().equals(npcName.toLowerCase())) {
                 return NPC.getDialog();
             }
         }
         return null;
+    }
+
+    //used as a getter for the list of items an npc has
+    public Collection<String> npcItem(String npcName){
+        for (NPCFactory NPC : listOfNPCs) {
+            if (NPC.getName().toLowerCase().equals(npcName.toLowerCase())) {
+                return NPC.getInventory();
+            }
+        }
+        return null;
+    }
+
+    //used to clear the npcs' inventories after we receive their items
+    public void clearNPCInventory(String npcName) {
+        for (NPCFactory NPC : listOfNPCs) {
+            if (NPC.getName().toLowerCase().equals(npcName.toLowerCase())) {
+                NPC.clearInventory();
+            }
+        }
     }
 
     //getter to return the actual Room object for the room name that gets passed to it
@@ -55,7 +74,19 @@ public class InitXML {
                 Element npcEle = (Element) npc;
                 String npcName = npcEle.getElementsByTagName("name").item(0).getTextContent();
                 String npcDialog = npcEle.getElementsByTagName("dialog").item(0).getTextContent();
-                listOfNPCs.add(new NPCFactory(npcName,npcDialog));
+                String npcItems = npcEle.getElementsByTagName("item").item(0).getTextContent();
+                int npcMoney = Integer.parseInt(npcEle.getElementsByTagName("money").item(0).getTextContent());
+                listOfNPCs.add(new NPCFactory(npcName,npcDialog,npcItems,npcMoney));
+//                String npcItems = npcEle.getElementsByTagName("items").item(0).getTextContent();
+//
+//
+//                if (npcItems.equals("") || npcItems == null) {
+//                    listOfNPCs.add(new NPCFactory(npcName,npcDialog));
+//
+//                }
+//                else {
+//                    listOfNPCs.add(new NPCFactory(npcName,npcDialog,npcItems));
+//                }
 
             }
         }

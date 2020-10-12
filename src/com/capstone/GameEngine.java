@@ -1,6 +1,8 @@
 package com.capstone;
 
 
+import java.util.Collection;
+
 public class GameEngine {
 
 
@@ -43,6 +45,17 @@ public class GameEngine {
                 player1.showHelp();
             }
 
+            //for checking your inventory
+            else if ((userInput.toLowerCase().equals("check bag")) || (userInput.toLowerCase().equals("check inventory"))) {
+                player1.checkInventory();
+            }
+
+            //for checking item use
+            else if (userInput.split(" ")[0].toLowerCase().equals("use")) {
+                String item = userInput.split(" ",2)[1].toLowerCase();
+                player1.useItem(item);
+            }
+
             //for the movement
             //if the first word of the input before a space is read is "go" then execute here
             else if (userInput.split(" ")[0].toLowerCase().equals("go")) {
@@ -77,12 +90,25 @@ public class GameEngine {
             //else if the first word is "talk" then...
             else if (userInput.split(" ")[0].toLowerCase().equals("talk")) {
                 //set the second string in input after the first space to be equal to the NPC name
-                String npc = userInput.split(" ",2)[1].toLowerCase();
+                String npc = userInput.split(" ",2)[1];
+
 
                 //simple check to see if the NPC name in the input is actually in the current room
-                if (player1.getCurrentRoom().getNpcName().toLowerCase().equals(npc)) {
+                if (player1.getCurrentRoom().getNpcName().toLowerCase().equals(npc.toLowerCase())) {
                     //if they are in the room, display their dialog
                     System.out.println('"' + game.npcDialog(npc) + '"');
+
+                    //when you talk to the npc, if they have an item, they give it to you!
+                    Collection<String> npcItems = game.npcItem(npc);
+                    if (npcItems != null) {
+                        for (String item: npcItems) {
+                            System.out.println(player1.getCurrentRoom().getNpcName() + " gave you a " + item + "!");
+                            player1.addInventory(item);
+                        }
+                        //sets the NPC's inventory to null so they don't give you the items again
+                        game.clearNPCInventory(npc);
+                    }
+
                 }
                 //if npc isn't in the room... tell the user that
                 else System.out.println("Theres nobody named that here to talk to!");
@@ -94,44 +120,54 @@ public class GameEngine {
                 //check to see if the item is in the room
                 if (player1.getCurrentRoom().getInteractableItem().toLowerCase().equals(interactable)) {
                     //actual code to come... probably do something like calling a method to remove it from room after you interact with it.
-                    System.out.println("You try to interact with " + interactable);
-                    System.out.println("We need to implement an interactables class <_>");
+
+                    //shop interface! Will probably move somewhere and make it a method so that it's not so CLUNKY
+                    if (interactable.equals("shop counter")) {
+                        System.out.println("--------PokeMart--------");
+                        System.out.println("Potion              $100");
+                        System.out.println("Super Potion        $500");
+                        System.out.println("Full Heal          $1000");
+                        System.out.println("Revive             $2500");
+                        System.out.println("------------------------");
+                        System.out.println("To purchase an item: buy <item>!");
+                        System.out.println("To exit shop: exit shop!");
+                        boolean exit = false;
+                        while (!exit) {
+                            String shopInput = parser.getUserInput().toLowerCase();
+                            if (shopInput.split(" ")[0].equals("buy")) {
+                                String item = shopInput.split(" ",2)[1];
+                                switch (item) {
+                                    case "potion":
+                                        player1.buyItem("potion",100);
+                                        break;
+                                    case "super potion":
+                                        player1.buyItem("super potion",500);
+                                    case "full heal":
+                                        player1.buyItem("full heal",1000);
+                                        break;
+                                    case "revive":
+                                        player1.buyItem("revive",2500);
+                                        break;
+                                }
+                            }
+                            else if (shopInput.equals("exit shop")) {
+                                System.out.println("Thank you for your patronage!");
+                                exit = true;
+                            }
+                        }
+                    }
+                    else {
+                        System.out.println("You try to interact with " + interactable);
+                        System.out.println("We need to implement an interactables class <_>");
+                    }
                 }
                 else System.out.println("Theres no " + interactable + " here to interact with!");
 
             }
             System.out.println("=====================================================");
         }
-
-//        //everything below was hardcoded for testing
-//
-//        //for getting dialog of a npc, do these calls...
-//        System.out.println(game.listOfNpcs);
-//        System.out.println(game.npcDialog("Nurse Didi"));
-//
-//
-//        //must setCurrentRoom(room) first before calling move and other stuff)
-//
-//        System.out.println(player1.getName());
-//
-//
-//
-//        startingRoom.displayOutput();
-//
-//        //System.out.println(player1.getCurrentRoom()); //room class needs a toString to display itself... if needed, prob not needed
-//        System.out.println("===============================================");
-//
-//        if (player1.validMove("north")) {
-//            System.out.println("PLayer moved north");
-//            System.out.println("===============================================");
-//            Room roomNorth = game.getRoom(player1.getCurrentRoom().getNorthTile());
-//            player1.setCurrentRoom(roomNorth);
-//            roomNorth.displayOutput();
-//
-//
-//            //ASK TOM.... For implementation of NPCs in a Room... should we do a HAS-A relationship, or just query NPC Dialog when you interact as long as the current room contains the NPC.
-//
-//
-//        }
     }
 }
+
+
+

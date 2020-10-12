@@ -6,7 +6,10 @@ import java.util.Collection;
 public class Player {
     //fields, name and inventory
     private String name = "Emeke"; //default player name
-    private Collection<String> inventory = new ArrayList<>(); //inventory for future sprints
+    private Collection<String> inventory = new ArrayList<>(); //inventory
+    private int money = 9001; //initialize with 100 monies
+
+
 
     //current room field
     private Room currentRoom;  //to keep track of the current room the player is in
@@ -15,13 +18,12 @@ public class Player {
     public Player(){
     }
 
-    public Player(String name){
+    public Player(String name,int money){
         this.name=name;
+        this.money=money;
     }
 
-
     //methods
-
     public String getName() {
         return name;
     }
@@ -33,10 +35,6 @@ public class Player {
     public void addInventory(String item) {
         this.inventory.add(item);
     } //for later sprints
-
-   /* public void useItem(String item) {  //for later sprints
-        if (this.inventory.contains(item))
-    }*/
 
     public Room getCurrentRoom() {
         return currentRoom;
@@ -55,6 +53,45 @@ public class Player {
         System.out.println("To the West of you is: " + this.currentRoom.getWestTile());
     }
 
+    public void checkInventory(){
+        System.out.println("Items you currently have in your inventory: ");
+        for (String item: this.inventory) {
+            System.out.println(item);
+        }
+        System.out.println("You currently have " + money + " dollars.");
+    }
+
+    public void clearInventory(){
+        inventory = null;
+    }
+
+    public void buyItem(String item, int price){
+        if (this.money > price){
+            this.inventory.add(item);
+            this.money -= price;
+            System.out.println("You bought a " + item + " with " + price + " dollars! " + money + " remains in your wallet!");
+        }
+        else {
+            System.out.println("You only have " + money + " dollars! You can't afford that :<");
+        }
+    }
+
+    public void useItem(String item){
+        if (inventory.contains(item)){
+            System.out.println("You used a " + item + "!");
+            //stuff about item effects would go here later
+            inventory.remove(item);
+        }
+        else {
+            System.out.println("You don't have a " + item + " in your inventory!");
+        }
+    }
+
+    public void addMoney(int amount){
+        money += amount;
+    }
+
+
     public void showHelp(){
         //displays a help menu
         System.out.println("~~~~~ Instructions for playing the game! ~~~~~~");
@@ -62,6 +99,7 @@ public class Player {
         System.out.println("To talk: talk <NPC's name>");
         System.out.println("To interact: interact <interactable object>");
         System.out.println("To check the map: check map");
+        System.out.println("To check your inventory and wallet: check bag/inventory");
         System.out.println("To display this help prompt again: get help");
     }
 

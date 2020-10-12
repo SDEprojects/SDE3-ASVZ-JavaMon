@@ -105,4 +105,26 @@ public class GameEngine {
 //
 //        }
     }
+    //Choose pokemon starter method.
+    //TODO - complete the choose starter pokemon method.
+    private void chooseStarter(){
+
+        TextParser parser = new TextParser();
+
+        System.out.println("Professor Oak: Hey! You're finally here, I've been waiting for you. I'm going on vacation soon... and the flight I'm going on has a strict 1 Pokemon carry on limit.\nI'm going to need you to look after one while I'm gone! I'll even let you choose who you want to take!\nChoose one: (Bulbasaur (Grass-Type), Charmander (Fire-Type), Squirtle (Water-Type))");
+
+        String starter = parser.getUserInput();
+
+        if(starter.equalsIgnoreCase("Bulbasaur")){
+            //Give Player the Starter Pokemon Bulbasaur
+
+        }
+        else if(starter.equalsIgnoreCase("Charmander")){
+            //Give Player the Starter Pokemon Charmander
+
+        }
+        else if(starter.equalsIgnoreCase("Squirtle")){
+            //Give Player the Starter Pokemon Squirtle
+        }
+    }
 }

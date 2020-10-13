@@ -67,7 +67,7 @@ public class Player {
     public void checkPokemon(){
         System.out.println("You check your PokeBelt: ");
         for (Pokemon pokemon: this.playersPokemon) {
-            pokemon.displayOutPokeBelt();
+            pokemon.displayOutStatsAndAll();
         }
     }
 

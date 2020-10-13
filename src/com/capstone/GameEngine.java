@@ -55,6 +55,10 @@ public class GameEngine {
                 String item = userInput.split(" ",2)[1].toLowerCase();
                 player1.useItem(item);
             }
+            else if (userInput.equalsIgnoreCase("check Pokemon")) {
+                player1.checkPokemon();
+            }
+
 
             //for the movement
             else if (userInput.split(" ")[0].toLowerCase().equals("go")) {
@@ -112,6 +116,7 @@ public class GameEngine {
                                         break;
                                     case "super potion":
                                         player1.buyItem("super potion", 500);
+                                        break;
                                     case "full heal":
                                         player1.buyItem("full heal", 1000);
                                         break;
@@ -142,18 +147,18 @@ public class GameEngine {
 
         Scanner scanner = new Scanner(System.in);
         String starter = scanner.nextLine();
-
-        for(Pokemon pokemon: game.listOfPokemon){
-            if (pokemon.getName().equalsIgnoreCase(starter)){
-                player.playersPokemon.add(pokemon);
-                System.out.println("You chose: ");
-                for(Pokemon playersFirstPokemon: player.playersPokemon){
-                    playersFirstPokemon.displayOutPokeBelt();
+        if (!starter.equalsIgnoreCase("bulbasaur") && !starter.equalsIgnoreCase("charmander") && !starter.equalsIgnoreCase("squirtle")){
+            System.out.println("Invalid entry");
+            chooseStarter(game,player);
+        } else {
+            for(Pokemon pokemon: game.listOfPokemon) {
+                if (pokemon.getName().equalsIgnoreCase(starter)) {
+                    player.playersPokemon.add(pokemon);
+                    System.out.println("You chose: ");
+                    for (Pokemon playersFirstPokemon : player.playersPokemon) {
+                        playersFirstPokemon.displayOutPokeBelt();
+                    }
                 }
-            }
-            else {
-                System.out.println("Invalid entry.");
-                chooseStarter(game,player);
             }
         }
     }

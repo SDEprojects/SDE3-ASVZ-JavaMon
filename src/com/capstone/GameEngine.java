@@ -188,7 +188,7 @@ public class GameEngine {
                     player.playersPokemon.add(pokemon);
                     System.out.println("You chose: ");
                     for (Pokemon playersFirstPokemon : player.playersPokemon) {
-                        playersFirstPokemon.displayOutPokeBelt();
+                        playersFirstPokemon.displayOutStatsAndAll();
                     }
                 }
             }

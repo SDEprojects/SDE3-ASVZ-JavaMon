@@ -37,7 +37,7 @@
         <adjacent_east>Oak's Lab</adjacent_east>
         <adjacent_west>nothing</adjacent_west>
         <npc>Mom</npc>
-        <interactable>nothing</interactable>
+        <interactable>Shop Counter</interactable>
     </room>
     <room>
         <name>Route 1</name>
@@ -160,7 +160,7 @@
         <adjacent_east>nothing</adjacent_east>
         <adjacent_west>Viridian City Pokemon Center</adjacent_west>
         <npc>Employee Chris</npc>
-        <interactable>nothing</interactable>
+        <interactable>Shop Counter</interactable>
     </room>
 
 

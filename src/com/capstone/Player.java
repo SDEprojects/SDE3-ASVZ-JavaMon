@@ -2,6 +2,8 @@ package com.capstone;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Optional;
+import java.util.Scanner;
 
 public class Player {
     //fields, name and inventory
@@ -84,11 +86,28 @@ public class Player {
         }
     }
 
-    public void useItem(String item){
+    public void useItem(String item, GameEngine engine){
+        Scanner scanner = new Scanner(System.in);
+        boolean validPokemon = false;
+        String pokemonName = "";
+        Optional<Pokemon> actualPokemon = playersPokemon.stream().findFirst();
+        while (!validPokemon) {
+            System.out.println("Which Pokemon do you want to use " + item + " on?");
+            checkPokemon();
+            pokemonName = scanner.nextLine();
+            for (Pokemon pokeBelt: this.playersPokemon) {
+                if (pokemonName.toLowerCase().equals(pokeBelt.getName().toLowerCase())) {
+                    actualPokemon = Optional.of(pokeBelt);
+                    validPokemon = true;
+                }
+
+            }
+        }
         if (inventory.contains(item)){
-            System.out.println("You used a " + item + "!");
-            //stuff about item effects would go here later
-            inventory.remove(item);
+            System.out.println("You used a " + item + " on " + pokemonName + "!");
+            if (engine.useItem(item,actualPokemon)) {
+                inventory.remove(item);
+            }
         }
         else {
             System.out.println("You don't have a " + item + " in your inventory!");

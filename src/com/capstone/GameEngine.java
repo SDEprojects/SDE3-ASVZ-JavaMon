@@ -1,6 +1,7 @@
 package com.capstone;
 
 
+import java.util.Optional;
 import java.util.Scanner;
 
 public class GameEngine {
@@ -16,6 +17,7 @@ public class GameEngine {
         game.initNPCs();
         game.initRooms();
         game.initPokemon();
+        game.initItems();
         TextParser parser = new TextParser();
 
 
@@ -53,7 +55,7 @@ public class GameEngine {
             //for checking item use
             else if (userInput.split(" ")[0].toLowerCase().equals("use")) {
                 String item = userInput.split(" ",2)[1].toLowerCase();
-                player1.useItem(item);
+                player1.useItem(item,gameEngine);
             }
 
             //for the movement
@@ -156,5 +158,67 @@ public class GameEngine {
                 chooseStarter(game,player);
             }
         }
+    }
+
+    public boolean useItem(String item, Optional<Pokemon> pokemon) {
+        item = item.toLowerCase();
+        if (item.equals("potion")){
+            if (pokemon.getCurrentHealth != 0) {
+                pokemon.setCurrentHealth = pokemon.getCurrentHealth + 20;
+                if (pokemon.getCurrentHealth > pokemon.getMaxHealth) {
+                    pokemon.setCurrentHealth = pokemon.getMaxHealth;
+                }
+                System.out.println(pokemon.getName() + " recovered 20 hp!");
+                return true;
+            }
+            else {
+                System.out.println(pokemon.getName() + " has fainted! You can only use a revive or a PokeCenter!");
+                return false;
+            }
+
+        }
+        else if (item.equals("super potion")){
+            if (pokemon.getCurrentHealth != 0) {
+                pokemon.setCurrentHealth = pokemon.getCurrentHealth + 50;
+                if (pokemon.getCurrentHealth > pokemon.getMaxHealth) {
+                    pokemon.setCurrentHealth = pokemon.getMaxHealth;
+                }
+                System.out.println(pokemon.getName() + " recovered 50 hp!");
+                return true;
+            }
+            else {
+                System.out.println(pokemon.getName() + " has fainted! You can only use a revive or a PokeCenter!");
+                return false;
+            }
+
+        }
+        else if (item.equals("full heal")){
+            if (pokemon.getCurrentHealth != 0) {
+                pokemon.setCurrentHealth = pokemon.getMaxHealth;
+                System.out.println(pokemon.getName() + " recovered to max hp!");
+                return true;
+            }
+            else {
+                System.out.println(pokemon.getName() + " has fainted! You can only use a revive or a PokeCenter!");
+                return false;
+            }
+
+        }
+        else if (item.equals("revive")){
+            if (pokemon.getCurrentHealth = 0) {
+                pokemon.setCurrentHealth = pokemon.getMaxHealth / 2;
+                System.out.println(pokemon.getName() + " revived with 1/2 Max HP!");
+                return true;
+            }
+            else {
+                System.out.println(pokemon.getName() + " isn't fainted! You can't use a revive!");
+                return false;
+            }
+        }
+        else {
+            System.out.println(item + " hasn't been implemented yet :<");
+            return false;
+        }
+
     }
 }

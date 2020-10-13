@@ -17,6 +17,7 @@ public class InitXML {
     public Collection<NPCFactory> listOfNPCs = new ArrayList<>();
     public Collection<Room> listOfRooms = new ArrayList<>();
     public Collection<Pokemon> listOfPokemon = new ArrayList<>();
+    public Collection<Items> listOfItems = new ArrayList<>();
 
     //basically a getter for the dialog field for the NPC that gets passed to it
     public String npcDialog(String npcName){
@@ -78,16 +79,35 @@ public class InitXML {
                 String npcItems = npcEle.getElementsByTagName("item").item(0).getTextContent();
                 int npcMoney = Integer.parseInt(npcEle.getElementsByTagName("money").item(0).getTextContent());
                 listOfNPCs.add(new NPCFactory(npcName,npcDialog,npcItems,npcMoney));
-//                String npcItems = npcEle.getElementsByTagName("items").item(0).getTextContent();
-//
-//
-//                if (npcItems.equals("") || npcItems == null) {
-//                    listOfNPCs.add(new NPCFactory(npcName,npcDialog));
-//
-//                }
-//                else {
-//                    listOfNPCs.add(new NPCFactory(npcName,npcDialog,npcItems));
-//                }
+            }
+        }
+        catch (Exception e) {
+            System.out.println("there was an error initializing the NPCs list.");
+        }
+
+    }
+
+    //same thing as npc but with items
+    public void initItems() {
+        try {
+
+            File inputFile = new File(String.valueOf(Path.of("data", "Item.txt")));
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.parse(inputFile);
+            doc.getDocumentElement().normalize();
+            NodeList itemList = doc.getElementsByTagName("item");
+
+            for (int temp = 0; temp < itemList.getLength(); temp++) {
+                Node item = itemList.item(temp);
+
+
+                Element itemEle = (Element) item;
+                String itemName = itemEle.getElementsByTagName("name").item(0).getTextContent();
+                String itemEffect = itemEle.getElementsByTagName("effect").item(0).getTextContent();
+                String itemDescription = itemEle.getElementsByTagName("description").item(0).getTextContent();
+                int itemPrice = Integer.parseInt(itemEle.getElementsByTagName("price").item(0).getTextContent());
+                listOfItems.add(new Items(itemName,itemEffect,itemDescription,itemPrice));
 
             }
         }

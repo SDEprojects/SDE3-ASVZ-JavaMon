@@ -73,20 +73,20 @@ public class Pokemon {
     //Class methods
 
     public void displayOutPokeBelt(){
-        System.out.println("========================================");
+        System.out.println("=====================================================");
         System.out.println("Pokemon: " + getName());
         System.out.println("Pokemon Type: " + getType());
-        System.out.println("========================================");
+        System.out.println("=====================================================");
     }
     //Temp method for demo purpose. May be used as main implementation of displayOutput for all pokemon stats
     public void displayOutStatsAndAll(){
-        System.out.println("========================================");
+        System.out.println("=====================================================");
         System.out.println("Pokemon: " + getName());
         System.out.println("Pokemon Type: " + getType());
         System.out.println("Pokemon Level: " + getLevel());
         System.out.println("Pokemon HP: " + "[" + getCurrentHealth() + "/" + getMaxHealth() + "]" );
         System.out.println("Pokemon Attack: " + getAttack());
-        System.out.println("========================================");
+        System.out.println("=====================================================");
 
     }
 

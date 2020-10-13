@@ -1,6 +1,7 @@
 package com.capstone;
 
 
+import java.util.Collection;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -63,10 +64,14 @@ public class GameEngine {
 
 
             //for the movement
+            //if the first word of the input before a space is read is "go" then execute here
             else if (userInput.split(" ")[0].toLowerCase().equals("go")) {
+                //splits the input string into TWO string, split between the FIRST space... and set the direction variable to be the second word
                 String direction = userInput.split(" ",2)[1].toLowerCase();
 
+                //calls the validMove method from the player class to check if it's a valid move
                 if (player1.validMove(direction)) {
+                    //if move is valid, then let user know they moved, set their current room to the new room, and display the output
                     System.out.println("You moved " + direction);
                     switch (direction) {
                         case "north":
@@ -84,16 +89,39 @@ public class GameEngine {
                     }
                     player1.getCurrentRoom().displayOutput();
                 }
+                //TO DO: if its not valid, then print this out... there is already a sout in validMoves so this is redundant! Maybe just delete for future sprints
                 else System.out.println("You can't go in that direction!");
 
 
-            } else if (userInput.split(" ")[0].toLowerCase().equals("talk")) {
-                String npc = userInput.split(" ",2)[1].toLowerCase();
-                if (player1.getCurrentRoom().getNpcName().toLowerCase().equals(npc)) {
+            }
+            //else if the first word is "talk" then...
+            else if (userInput.split(" ")[0].toLowerCase().equals("talk")) {
+                //set the second string in input after the first space to be equal to the NPC name
+                String npc = userInput.split(" ",2)[1];
+
+
+                //simple check to see if the NPC name in the input is actually in the current room
+                if (player1.getCurrentRoom().getNpcName().toLowerCase().equals(npc.toLowerCase())) {
+                    //if they are in the room, display their dialog
                     System.out.println('"' + game.npcDialog(npc) + '"');
+
+                    //when you talk to the npc, if they have an item, they give it to you!
+                    Collection<String> npcItems = game.npcItem(npc);
+                    if (npcItems != null) {
+                        for (String item: npcItems) {
+                            System.out.println(player1.getCurrentRoom().getNpcName() + " gave you a " + item + "!");
+                            player1.addInventory(item);
+                        }
+                        //sets the NPC's inventory to null so they don't give you the items again
+                        game.clearNPCInventory(npc);
+                    }
+
                 }
+                //if npc isn't in the room... tell the user that
                 else System.out.println("Theres nobody named that here to talk to!");
-            } else if (userInput.split(" ")[0].toLowerCase().equals("interact")) {
+            }
+            //else if the first word is "interact" then...
+            else if (userInput.split(" ")[0].toLowerCase().equals("interact")) {
                 String interactable = userInput.split(" ",2)[1].toLowerCase();
                 if (player1.getCurrentRoom().getInteractableItem().toLowerCase().equals(interactable)) {
 
@@ -132,8 +160,10 @@ public class GameEngine {
                             }
                         }
                     }
-                    System.out.println("You try to interact with " + interactable);
-                    System.out.println("We need to implement an interactables class <_>");
+                    else {
+                        System.out.println("You try to interact with " + interactable);
+                        System.out.println("We need to implement an interactables class <_>");
+                    }
                 }
                 else System.out.println("Theres no " + interactable + " here to interact with!");
 
@@ -165,13 +195,13 @@ public class GameEngine {
         }
     }
 
-    public boolean useItem(String item, Optional<Pokemon> pokemon) {
+    public boolean useItem(String item, Pokemon pokemon) {
         item = item.toLowerCase();
         if (item.equals("potion")){
-            if (pokemon.getCurrentHealth != 0) {
-                pokemon.setCurrentHealth = pokemon.getCurrentHealth + 20;
-                if (pokemon.getCurrentHealth > pokemon.getMaxHealth) {
-                    pokemon.setCurrentHealth = pokemon.getMaxHealth;
+            if (pokemon.getCurrentHealth() != 0) {
+                pokemon.setCurrentHealth(pokemon.getCurrentHealth() + 20);
+                if (pokemon.getCurrentHealth() > pokemon.getMaxHealth()) {
+                    pokemon.setCurrentHealth(pokemon.getMaxHealth());
                 }
                 System.out.println(pokemon.getName() + " recovered 20 hp!");
                 return true;
@@ -183,10 +213,10 @@ public class GameEngine {
 
         }
         else if (item.equals("super potion")){
-            if (pokemon.getCurrentHealth != 0) {
-                pokemon.setCurrentHealth = pokemon.getCurrentHealth + 50;
-                if (pokemon.getCurrentHealth > pokemon.getMaxHealth) {
-                    pokemon.setCurrentHealth = pokemon.getMaxHealth;
+            if (pokemon.getCurrentHealth() != 0) {
+                pokemon.setCurrentHealth(pokemon.getCurrentHealth() + 50);
+                if (pokemon.getCurrentHealth() > pokemon.getMaxHealth()) {
+                    pokemon.setCurrentHealth(pokemon.getMaxHealth());
                 }
                 System.out.println(pokemon.getName() + " recovered 50 hp!");
                 return true;
@@ -198,8 +228,8 @@ public class GameEngine {
 
         }
         else if (item.equals("full heal")){
-            if (pokemon.getCurrentHealth != 0) {
-                pokemon.setCurrentHealth = pokemon.getMaxHealth;
+            if (pokemon.getCurrentHealth() != 0) {
+                pokemon.setCurrentHealth(pokemon.getMaxHealth());
                 System.out.println(pokemon.getName() + " recovered to max hp!");
                 return true;
             }
@@ -210,8 +240,8 @@ public class GameEngine {
 
         }
         else if (item.equals("revive")){
-            if (pokemon.getCurrentHealth = 0) {
-                pokemon.setCurrentHealth = pokemon.getMaxHealth / 2;
+            if (pokemon.getCurrentHealth() == 0) {
+                pokemon.setCurrentHealth(pokemon.getMaxHealth() / 2);
                 System.out.println(pokemon.getName() + " revived with 1/2 Max HP!");
                 return true;
             }

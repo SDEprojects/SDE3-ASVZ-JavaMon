@@ -10,7 +10,7 @@ public class Player {
     private String name = "Emeke"; //default player name
     private Collection<String> inventory = new ArrayList<>(); //inventory
     private int money = 9001; //initialize with 100 monies
-    public Collection<Pokemon> playersPokemon = new ArrayList<>(); //This collection is where the player's pokemon is saved.
+    public ArrayList<Pokemon> playersPokemon = new ArrayList<>(); //This collection is where the player's pokemon is saved.
 
 
 
@@ -90,14 +90,14 @@ public class Player {
         Scanner scanner = new Scanner(System.in);
         boolean validPokemon = false;
         String pokemonName = "";
-        Optional<Pokemon> actualPokemon = playersPokemon.stream().findFirst();
+        Pokemon actualPokemon = playersPokemon.get(0);
         while (!validPokemon) {
             System.out.println("Which Pokemon do you want to use " + item + " on?");
             checkPokemon();
             pokemonName = scanner.nextLine();
             for (Pokemon pokeBelt: this.playersPokemon) {
                 if (pokemonName.toLowerCase().equals(pokeBelt.getName().toLowerCase())) {
-                    actualPokemon = Optional.of(pokeBelt);
+                    actualPokemon = pokeBelt;
                     validPokemon = true;
                 }
 

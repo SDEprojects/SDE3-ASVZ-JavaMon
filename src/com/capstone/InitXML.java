@@ -184,9 +184,9 @@ public class InitXML {
                 //the strings into int.
 
                 //TODO: implement String to int try parse conversion.
-                String pokeHealth = pokeEle.getElementsByTagName("health").item(0).getTextContent();
-                String pokeAttack = pokeEle.getElementsByTagName("attack").item(0).getTextContent();
-                String startingExp = pokeEle.getElementsByTagName("startingExp").item(0).getTextContent();
+                int pokeHealth = Integer.parseInt(pokeEle.getElementsByTagName("health").item(0).getTextContent());
+                int pokeAttack = Integer.parseInt(pokeEle.getElementsByTagName("attack").item(0).getTextContent());
+                int startingExp = Integer.parseInt(pokeEle.getElementsByTagName("startingExp").item(0).getTextContent());
 
                 //TODO: Need implementation for moves. The moves in the Pokemon xml are in the form of a dictionary
 
@@ -209,7 +209,8 @@ public class InitXML {
 
                 //roomNPC and roomInteractable holds the value from the rooms.txt xml with the npc and interactable tags.
                 //TODO: implement constructor with stats.
-                listOfPokemon.add(new Pokemon(pokemonName, pokemonType));
+                listOfPokemon.add(new Pokemon(pokemonName, pokemonType, pokeHealth, 5, pokeAttack)); //Pokelevel is hardcoded here.
+                //TODO: implement a way of associating level to room/area/or npc. For now it is hard coded to five.
 
             }
         }

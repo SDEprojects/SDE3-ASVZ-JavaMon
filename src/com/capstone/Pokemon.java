@@ -51,7 +51,12 @@ public class Pokemon {
         return attack;
     }
 
+    //Class methods
 
+    public void displayOutPokeBelt(){
+        System.out.println("Pokemon: " + getName());
+        System.out.println("Pokemon Type: " + getType());
+    }
 
 
 }

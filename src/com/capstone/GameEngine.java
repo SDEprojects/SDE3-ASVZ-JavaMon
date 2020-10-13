@@ -1,17 +1,27 @@
 package com.capstone;
 
 
+import java.util.Scanner;
+
 public class GameEngine {
 
+    public GameEngine() {
+    }
 
     public static void main(String[] args) {
+        GameEngine gameEngine = new GameEngine();
+
+
         InitXML game = new InitXML();
         game.initNPCs();
         game.initRooms();
+        game.initPokemon();
         TextParser parser = new TextParser();
 
 
         Player player1 = new Player();
+
+        gameEngine.chooseStarter(game, player1);//This method takes the game(initXML for access to the pokemon list, and player1 for access to their pokemon invite.)
         Room startingRoom = game.getRoom("Oak's Lab");
         player1.setCurrentRoom(startingRoom);
 
@@ -107,24 +117,25 @@ public class GameEngine {
     }
     //Choose pokemon starter method.
     //TODO - complete the choose starter pokemon method.
-    private void chooseStarter(){
+    void chooseStarter(InitXML game, Player player){
 
-        TextParser parser = new TextParser();
+        System.out.println("Professor Oak: Hey! You're finally here, I've been waiting for you.\nI'm going on vacation soon... and the flight I'm going on has a strict 1 Pokemon carry on limit.\nI'm going to need you to look after one while I'm gone! I'll even let you choose who you want to take!\nChoose one: (Bulbasaur (Grass-Type), Charmander (Fire-Type), Squirtle (Water-Type))");
 
-        System.out.println("Professor Oak: Hey! You're finally here, I've been waiting for you. I'm going on vacation soon... and the flight I'm going on has a strict 1 Pokemon carry on limit.\nI'm going to need you to look after one while I'm gone! I'll even let you choose who you want to take!\nChoose one: (Bulbasaur (Grass-Type), Charmander (Fire-Type), Squirtle (Water-Type))");
+        Scanner scanner = new Scanner(System.in);
+        String starter = scanner.nextLine();
 
-        String starter = parser.getUserInput();
-
-        if(starter.equalsIgnoreCase("Bulbasaur")){
-            //Give Player the Starter Pokemon Bulbasaur
-
-        }
-        else if(starter.equalsIgnoreCase("Charmander")){
-            //Give Player the Starter Pokemon Charmander
-
-        }
-        else if(starter.equalsIgnoreCase("Squirtle")){
-            //Give Player the Starter Pokemon Squirtle
+        for(Pokemon pokemon: game.listOfPokemon){
+            if (pokemon.getName().equalsIgnoreCase(starter)){
+                player.playersPokemon.add(pokemon);
+                System.out.println("You chose: ");
+                for(Pokemon playersFirstPokemon: player.playersPokemon){
+                    playersFirstPokemon.displayOutPokeBelt();
+                }
+            }
+            else {
+                System.out.println("Invalid entry.");
+                chooseStarter(game,player);
+            }
         }
     }
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class Player {
+
     //fields, name and inventory
     private String name = "Emeke";
     private Collection<String> inventory = new ArrayList<>();
@@ -14,16 +15,17 @@ public class Player {
     //current room field
     private Room currentRoom;
 
-    //ctors
+    //Constructors
     public Player(){
     }
 
     public Player(String name){
+
         this.name=name;
     }
 
 
-    //methods
+    //Getter and Setter Method
 
     public String getName() {
         return name;
@@ -34,10 +36,14 @@ public class Player {
 //    }
 
     public Collection<String> getInventory() {
+
         return inventory;
     }
 
+    // Business Method
+
     public void addInventory(String item) {
+
         this.inventory.add(item);
     }
 

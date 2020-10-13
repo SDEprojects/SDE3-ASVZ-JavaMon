@@ -1,15 +1,33 @@
 package com.capstone;
 
 
+import javax.swing.*;
+import java.awt.*;
+
 public class GameEngine {
 
 
+    /*
+    * Main method that runs the Game. Allows for user input and prints.
+    * Print out information when given any input.
+    *
+     */
     public static void main(String[] args) {
-        InitXML game = new InitXML();
+
+
+
+
+
+
+
+
+    InitXML game = new InitXML();
         game.initNPCs();
         game.initRooms();
         TextParser parser = new TextParser();
 
+
+        //Instance of Player
 
         Player player1 = new Player();
         Room startingRoom = game.getRoom("Oak's Lab");
@@ -18,7 +36,10 @@ public class GameEngine {
         player1.getCurrentRoom().displayOutput();
         System.out.println("=====================================================");
 
-        //actual loop for gamez
+
+
+        //Actual loop for Game. Allows player to repeatedly enter input
+
         while (true) {
             //promp user for input
 

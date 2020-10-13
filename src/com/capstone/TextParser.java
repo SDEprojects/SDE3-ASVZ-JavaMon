@@ -1,6 +1,5 @@
 package com.capstone;
 
-import java.lang.reflect.Array;
 import java.util.Scanner;
 
 public class TextParser {
@@ -12,12 +11,16 @@ public class TextParser {
 
     public String getUserInput() {
         String inputString = "";
+
+        // Exception Handling
         try {
             System.out.println("Enter a command: ");
+
+            // Create a Scanner object
             Scanner scanner = new Scanner(System.in);
             inputString = scanner.nextLine();
 
-            //input validation
+            //Input Validation
             while (!inputValidation(inputString)) {
                 System.out.println("=====================================================");
                 System.out.println("Enter a command: ");

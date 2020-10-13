@@ -20,7 +20,7 @@ public class GameEngine {
 
         //actual loop for gamez
         while (true) {
-            //promp user for input
+            //prompt user for input
 
             String userInput = parser.getUserInput();
             System.out.println("=====================================================");

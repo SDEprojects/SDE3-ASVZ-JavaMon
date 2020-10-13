@@ -7,7 +7,8 @@ public class Pokemon {
     //Class fields
     private String name;
     private String type;
-    private int health;
+    private int currentHealth;
+    private int maxHealth;
     private int level;
     private int attack; //attack is the damage threshold. calculated by RNG range between (base attack from move) and (attack stat).
     private int currentExp; //Current exp until the next level up
@@ -22,7 +23,7 @@ public class Pokemon {
     }
     public Pokemon(String pokeName, String pokeType, int hp, int pokeLevel, int attackStat){
         this(pokeName,pokeType);
-        health = hp;
+        maxHealth = hp;
         level = pokeLevel;
         attack = attackStat;
     }
@@ -39,8 +40,8 @@ public class Pokemon {
         return type;
     }
 
-    public int getHealth() {
-        return health;
+    public int getMaxHealth() {
+        return maxHealth;
     }
 
     public int getLevel() {
@@ -51,11 +52,35 @@ public class Pokemon {
         return attack;
     }
 
+    public int getCurrentHealth() {
+        return currentHealth;
+    }
+
+    public int getCurrentExp() {
+        return currentExp;
+    }
+
+    public void setCurrentHealth(int currentHealth) {
+        this.currentHealth = currentHealth;
+    }
+
+    public void setMaxHealth(int maxHealth) {
+        this.maxHealth = maxHealth;
+    }
+
     //Class methods
 
     public void displayOutPokeBelt(){
         System.out.println("Pokemon: " + getName());
         System.out.println("Pokemon Type: " + getType());
+    }
+
+    //Stat Generator Method, gets called upon instantiation of Pokemon.
+    public void generateStats(){
+        attack += level; //ex level = 5, attack = 3 -> new attack = 8
+        maxHealth += level * 2; //ex level = 5, maxHealth = 12 -> new maxHealth = 22 or ex level = 10, maxHealth = 22 -> new maxHealth = 32.
+
+
     }
 
 

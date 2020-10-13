@@ -162,11 +162,13 @@ public class InitXML {
                 //If the string "nothing" is returned from any of the adjacent rooms, that means you cannot navigate to them.
                 //As of now health attack and startingexp are strings. May need a different way of getting values or need to tryparse
                 //the strings into int.
+
+                //TODO: implement String to int try parse conversion.
                 String pokeHealth = pokeEle.getElementsByTagName("health").item(0).getTextContent();
                 String pokeAttack = pokeEle.getElementsByTagName("attack").item(0).getTextContent();
                 String startingExp = pokeEle.getElementsByTagName("startingExp").item(0).getTextContent();
 
-                //Need implementation for moves. The moves in the Pokemon xml are in the form of a dictionary
+                //TODO: Need implementation for moves. The moves in the Pokemon xml are in the form of a dictionary
 
                 //it looks like this in the xml:
 
@@ -186,7 +188,7 @@ public class InitXML {
 
 
                 //roomNPC and roomInteractable holds the value from the rooms.txt xml with the npc and interactable tags.
-
+                //TODO: implement constructor with stats.
                 listOfPokemon.add(new Pokemon(pokemonName, pokemonType));
 
             }

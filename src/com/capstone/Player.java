@@ -8,6 +8,7 @@ public class Player {
     private String name = "Emeke"; //default player name
     private Collection<String> inventory = new ArrayList<>(); //inventory
     private int money = 9001; //initialize with 100 monies
+    public Collection<Pokemon> playersPokemon = new ArrayList<>(); //This collection is where the player's pokemon is saved.
 
 
 
@@ -59,6 +60,13 @@ public class Player {
             System.out.println(item);
         }
         System.out.println("You currently have " + money + " dollars.");
+    }
+
+    public void checkPokemon(){
+        System.out.println("You check your PokeBelt: ");
+        for (Pokemon pokemon: this.playersPokemon) {
+            pokemon.displayOutPokeBelt();
+        }
     }
 
     public void clearInventory(){

@@ -92,7 +92,7 @@ public class InitXML {
             }
         }
         catch (Exception e) {
-            System.out.println("there was an error :<");
+            System.out.println("there was an error initializing the NPCs list.");
         }
 
     }
@@ -133,7 +133,7 @@ public class InitXML {
             }
         }
         catch (Exception e) {
-            System.out.println("there was an error");
+            System.out.println("there was an error initializing the rooms list.");
         }
 
     }
@@ -186,15 +186,13 @@ public class InitXML {
 
 
                 //roomNPC and roomInteractable holds the value from the rooms.txt xml with the npc and interactable tags.
-                String roomNPC = pokeEle.getElementsByTagName("npc").item(0).getTextContent();
-                String roomInteractable = pokeEle.getElementsByTagName("interactable").item(0).getTextContent();
 
                 listOfPokemon.add(new Pokemon(pokemonName, pokemonType));
 
             }
         }
         catch (Exception e) {
-            System.out.println("there was an error");
+            System.out.println("there was an error with initializing the Pokemon list.");
         }
 
     }

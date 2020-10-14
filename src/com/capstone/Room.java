@@ -69,6 +69,10 @@ public class Room {
 
     //Business Methods
 
+    public String getDescription(){
+        return description;
+    }
+
     //This method displays room information to the user.
     void displayOutput(){
         //Prints out the name and description of the room.

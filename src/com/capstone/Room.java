@@ -32,7 +32,6 @@ public class Room {
         this(roomName, roomDescription, adjNorthTile,adjSouthTile,adjEastTile,adjWestTile);
         npcName = roomNPC;
         interactableItem = roomInteractable;
-
     }
 
     //Getters and Setters

@@ -1,22 +1,19 @@
 <?xml version = "1.0"?>
 <keywords>
    <action activity = "01">
-      <engage>interact</engage>
-      <communicate>talk</communicate>
-      <utilize>use</utilize>
-      <purchase>buy</purchase>
+      <engage>interact touch</engage>
+      <communicate>talk speak</communicate>
+      <utilize>use utilize</utilize>
+      <check>check look</check>
+      <get>get</get>
       <go>move go proceed jump walk run leap dance</go>
-
       <up>north</up>
       <down>south</down>
       <left>west</left>
       <right>east</right>
+      <bag>bag</bag>
+      <map>map</map>
+      <pokemon>pokemon</pokemon>
+      <help>help</help>
    </action>
-
-   <direction movement = "go">
-      <up>north</up>
-      <down>south</down>
-      <left>west</left>
-      <right>east</right>
-   </direction>
 </keywords>

@@ -7,6 +7,8 @@ import java.util.Scanner;
 
 public class GameEngine {
 
+    private GUI gui;
+
     public GameEngine() {
     }
 
@@ -23,9 +25,10 @@ public class GameEngine {
 
 
         Player player1 = new Player();
-
         gameEngine.chooseStarter(game, player1);//This method takes the game(initXML for access to the pokemon list, and player1 for access to their pokemon invite.)
-        Room startingRoom = game.getRoom("Oak's Lab");
+
+        String roomName = "Oak's Lab";
+        Room startingRoom = game.getRoom(roomName);
         player1.setCurrentRoom(startingRoom);
 
         player1.getCurrentRoom().displayOutput();
@@ -193,6 +196,11 @@ public class GameEngine {
                 }
             }
         }
+    }
+
+    //TODO find out where this is called
+    void chooseStarterGUI(InitXML game, Player player){
+        gui.chooseStarter(game, player);
     }
 
     public boolean useItem(String item, Pokemon pokemon) {

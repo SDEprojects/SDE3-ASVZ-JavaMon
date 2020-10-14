@@ -26,6 +26,14 @@ public class Player {
         this.money=money;
     }
 
+    public ArrayList<Pokemon> getPlayersPokemon() {
+        return playersPokemon;
+    }
+
+    public int getMoney() {
+        return money;
+    }
+
     //methods
     public String getName() {
         return name;

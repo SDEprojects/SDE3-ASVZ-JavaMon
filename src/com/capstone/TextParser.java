@@ -50,7 +50,7 @@ public class TextParser {
 
     }
 
-    public void checkPlayerCommand() {
+    public String checkPlayerCommand() {
         try {
             String userInput = getUserInput();
             String userActions = userInput.split(" ")[0];
@@ -63,7 +63,7 @@ public class TextParser {
             doc.getDocumentElement().normalize();
 
             // prints the root element of the file which is "keyWords" using getNodeName()
-            System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
+            // System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
 
                 /* Insert if statement for "action item by checking if the first word corresponds to items in
                 action group - need to initialize reference"*/
@@ -75,30 +75,38 @@ public class TextParser {
             for (int temp = 0; temp < nList.getLength(); temp++) {
                 // fetches node item from list by their index position
                 Node nNode = nList.item(temp);
-                System.out.println("Node list length is: " + nList.getLength());
+                // System.out.println("Node list length is: " + nList.getLength());
                 // prints current node name
-                System.out.println("\nCurrent Element :" + nNode.getNodeName());
+                // System.out.println("\nCurrent Element :" + nNode.getNodeName());
 
                 if (nNode.getNodeType() == Node.ELEMENT_NODE) {
                     Element eElement = (Element) nNode;
                     // for(int a = 0; a < userActions.length; a++)
                     if (eElement.getElementsByTagName("engage").item(0).getTextContent().contains(userActions)) {
                         System.out.println("Player interacts");
+                        return userActions;
                     } else if (eElement.getElementsByTagName("communicate").item(0).getTextContent().contains(userActions)) {
                         System.out.println("Player talks");
+                        return userActions;
                     } else if (eElement.getElementsByTagName("utilize").item(0).getTextContent().contains(userActions)) {
                         System.out.println("Player uses");
+                        return userActions;
                     } else if (eElement.getElementsByTagName("purchase").item(0).getTextContent().contains(userActions)) {
                         System.out.println("Player buys");
+                        return userActions;
                     } else if (eElement.getElementsByTagName("go").item(0).getTextContent().contains(userActions)) {
                         if (eElement.getElementsByTagName("up").item(0).getTextContent().contains(userArgument)) {
                             System.out.println("Player goes north");
+                            return eElement.getNodeName().concat(" ").concat(eElement.getElementsByTagName("up").item(0).getTextContent());
                         } else if (eElement.getElementsByTagName("down").item(0).getTextContent().contains(userArgument)) {
                             System.out.println("Player goes south");
+                            return eElement.getNodeName().concat(" ").concat(eElement.getElementsByTagName("down").item(0).getTextContent());
                         } else if (eElement.getElementsByTagName("left").item(0).getTextContent().contains(userArgument)) {
                             System.out.println("Player goes west");
+                            return eElement.getNodeName().concat(" ").concat(eElement.getElementsByTagName("left").item(0).getTextContent());
                         } else if (eElement.getElementsByTagName("right").item(0).getTextContent().contains(userArgument)) {
                             System.out.println("Player goes east");
+                            return eElement.getNodeName().concat(" ").concat(eElement.getElementsByTagName("right").item(0).getTextContent());
                         } else {
                             System.out.println("Invalid command");
                             checkPlayerCommand();
@@ -108,7 +116,9 @@ public class TextParser {
             }
         } catch (Exception e) {
             e.printStackTrace();
+            checkPlayerCommand();
         }
+        return checkPlayerCommand();
     }
 
     // change to package private?

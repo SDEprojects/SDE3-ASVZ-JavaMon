@@ -2,7 +2,6 @@ package com.capstone;
 
 
 import java.util.Collection;
-import java.util.Optional;
 import java.util.Scanner;
 
 public class GameEngine {
@@ -38,7 +37,7 @@ public class GameEngine {
         while (true) {
             //prompt user for input
 
-            String userInput = parser.getUserInput();
+            String userInput = parser.checkPlayerCommand();
             System.out.println("=====================================================");
 
             //for checking the map
@@ -140,7 +139,7 @@ public class GameEngine {
                         System.out.println("To exit shop: exit shop!");
                         boolean exit = false;
                         while (!exit) {
-                            String shopInput = parser.getUserInput().toLowerCase();
+                            String shopInput = parser.checkPlayerCommand().toLowerCase();
                             if (shopInput.split(" ")[0].equals("buy")) {
                                 String item = shopInput.split(" ", 2)[1];
                                 switch (item) {

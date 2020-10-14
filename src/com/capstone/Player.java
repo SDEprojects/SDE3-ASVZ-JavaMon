@@ -2,12 +2,15 @@ package com.capstone;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Optional;
+import java.util.Scanner;
 
 public class Player {
     //fields, name and inventory
     private String name = "Emeke"; //default player name
     private Collection<String> inventory = new ArrayList<>(); //inventory
     private int money = 9001; //initialize with 100 monies
+    public ArrayList<Pokemon> playersPokemon = new ArrayList<>(); //This collection is where the player's pokemon is saved.
 
 
 
@@ -61,6 +64,13 @@ public class Player {
         System.out.println("You currently have " + money + " dollars.");
     }
 
+    public void checkPokemon(){
+        System.out.println("You check your PokeBelt: ");
+        for (Pokemon pokemon: this.playersPokemon) {
+            pokemon.displayOutStatsAndAll();
+        }
+    }
+
     public void clearInventory(){
         inventory = null;
     }
@@ -76,11 +86,28 @@ public class Player {
         }
     }
 
-    public void useItem(String item){
+    public void useItem(String item, GameEngine engine){
+        Scanner scanner = new Scanner(System.in);
+        boolean validPokemon = false;
+        String pokemonName = "";
+        Pokemon actualPokemon = playersPokemon.get(0);
+        while (!validPokemon) {
+            System.out.println("Which Pokemon do you want to use " + item + " on?");
+            checkPokemon();
+            pokemonName = scanner.nextLine();
+            for (Pokemon pokeBelt: this.playersPokemon) {
+                if (pokemonName.toLowerCase().equals(pokeBelt.getName().toLowerCase())) {
+                    actualPokemon = pokeBelt;
+                    validPokemon = true;
+                }
+
+            }
+        }
         if (inventory.contains(item)){
-            System.out.println("You used a " + item + "!");
-            //stuff about item effects would go here later
-            inventory.remove(item);
+            System.out.println("You used a " + item + " on " + pokemonName + "!");
+            if (engine.useItem(item,actualPokemon)) {
+                inventory.remove(item);
+            }
         }
         else {
             System.out.println("You don't have a " + item + " in your inventory!");

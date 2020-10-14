@@ -2,40 +2,43 @@ package com.capstone;
 
 
 import java.util.Collection;
+import java.util.Optional;
+import java.util.Scanner;
 
 public class GameEngine {
 
+    public GameEngine() {
+    }
 
     public static void main(String[] args) {
-        // instantiate the InitXML class so we can have persistant rooms and npcs
+        GameEngine gameEngine = new GameEngine();
+
+
         InitXML game = new InitXML();
         game.initNPCs();
         game.initRooms();
-
-        // instantiate TextParser class so we can use the method in it to prompt user for input and validate
+        game.initPokemon();
+        game.initItems();
         TextParser parser = new TextParser();
 
-        //instantiate the Player... so you can play... and start off in "Oak's Lab"
+
         Player player1 = new Player();
+
+        gameEngine.chooseStarter(game, player1);//This method takes the game(initXML for access to the pokemon list, and player1 for access to their pokemon invite.)
         Room startingRoom = game.getRoom("Oak's Lab");
         player1.setCurrentRoom(startingRoom);
 
-        //prints out instructions context for playing the game
-        player1.showHelp();
-        System.out.println("=====================================================");
-
-        //first call to displayOutput to give the player a sense of what is in the room
         player1.getCurrentRoom().displayOutput();
         System.out.println("=====================================================");
 
-        //actual loop for the game
+        //actual loop for gamez
         while (true) {
+            //prompt user for input
 
-            //promp user for input
             String userInput = parser.getUserInput();
             System.out.println("=====================================================");
 
-            //for checking the map (Fix input parser to allow for map as a single input later)
+            //for checking the map
             if ((userInput.toLowerCase().equals("check map")) || (userInput.toLowerCase().equals("map"))) {
                 player1.checkMap();
             }
@@ -53,8 +56,12 @@ public class GameEngine {
             //for checking item use
             else if (userInput.split(" ")[0].toLowerCase().equals("use")) {
                 String item = userInput.split(" ",2)[1].toLowerCase();
-                player1.useItem(item);
+                player1.useItem(item,gameEngine);
             }
+            else if (userInput.equalsIgnoreCase("check Pokemon")) {
+                player1.checkPokemon();
+            }
+
 
             //for the movement
             //if the first word of the input before a space is read is "go" then execute here
@@ -115,11 +122,8 @@ public class GameEngine {
             }
             //else if the first word is "interact" then...
             else if (userInput.split(" ")[0].toLowerCase().equals("interact")) {
-                //set the second string in input after the first space to be equal to interactable item
                 String interactable = userInput.split(" ",2)[1].toLowerCase();
-                //check to see if the item is in the room
                 if (player1.getCurrentRoom().getInteractableItem().toLowerCase().equals(interactable)) {
-                    //actual code to come... probably do something like calling a method to remove it from room after you interact with it.
 
                     //shop interface! Will probably move somewhere and make it a method so that it's not so CLUNKY
                     if (interactable.equals("shop counter")) {
@@ -135,22 +139,22 @@ public class GameEngine {
                         while (!exit) {
                             String shopInput = parser.getUserInput().toLowerCase();
                             if (shopInput.split(" ")[0].equals("buy")) {
-                                String item = shopInput.split(" ",2)[1];
+                                String item = shopInput.split(" ", 2)[1];
                                 switch (item) {
                                     case "potion":
-                                        player1.buyItem("potion",100);
+                                        player1.buyItem("potion", 100);
                                         break;
                                     case "super potion":
-                                        player1.buyItem("super potion",500);
+                                        player1.buyItem("super potion", 500);
+                                        break;
                                     case "full heal":
-                                        player1.buyItem("full heal",1000);
+                                        player1.buyItem("full heal", 1000);
                                         break;
                                     case "revive":
-                                        player1.buyItem("revive",2500);
+                                        player1.buyItem("revive", 2500);
                                         break;
                                 }
-                            }
-                            else if (shopInput.equals("exit shop")) {
+                            } else if (shopInput.equals("exit shop")) {
                                 System.out.println("Thank you for your patronage!");
                                 exit = true;
                             }
@@ -167,7 +171,89 @@ public class GameEngine {
             System.out.println("=====================================================");
         }
     }
+    //Choose pokemon starter method.
+    //TODO - complete the choose starter pokemon method.
+    void chooseStarter(InitXML game, Player player){
+
+        System.out.println("Professor Oak: Hey! You're finally here, I've been waiting for you.\nI'm going on vacation soon... and the flight I'm going on has a strict 1 Pokemon carry on limit.\nI'm going to need you to look after one while I'm gone! I'll even let you choose who you want to take!\nChoose one: (Bulbasaur (Grass-Type), Charmander (Fire-Type), Squirtle (Water-Type))");
+
+        Scanner scanner = new Scanner(System.in);
+        String starter = scanner.nextLine();
+        if (!starter.equalsIgnoreCase("bulbasaur") && !starter.equalsIgnoreCase("charmander") && !starter.equalsIgnoreCase("squirtle")){
+            System.out.println("Invalid entry");
+            chooseStarter(game,player);
+        } else {
+            for(Pokemon pokemon: game.listOfPokemon) {
+                if (pokemon.getName().equalsIgnoreCase(starter)) {
+                    player.playersPokemon.add(pokemon);
+                    System.out.println("You chose: ");
+                    for (Pokemon playersFirstPokemon : player.playersPokemon) {
+                        playersFirstPokemon.displayOutStatsAndAll();
+                    }
+                }
+            }
+        }
+    }
+
+    public boolean useItem(String item, Pokemon pokemon) {
+        item = item.toLowerCase();
+        if (item.equals("potion")){
+            if (pokemon.getCurrentHealth() != 0) {
+                pokemon.setCurrentHealth(pokemon.getCurrentHealth() + 20);
+                if (pokemon.getCurrentHealth() > pokemon.getMaxHealth()) {
+                    pokemon.setCurrentHealth(pokemon.getMaxHealth());
+                }
+                System.out.println(pokemon.getName() + " recovered 20 hp!");
+                return true;
+            }
+            else {
+                System.out.println(pokemon.getName() + " has fainted! You can only use a revive or a PokeCenter!");
+                return false;
+            }
+
+        }
+        else if (item.equals("super potion")){
+            if (pokemon.getCurrentHealth() != 0) {
+                pokemon.setCurrentHealth(pokemon.getCurrentHealth() + 50);
+                if (pokemon.getCurrentHealth() > pokemon.getMaxHealth()) {
+                    pokemon.setCurrentHealth(pokemon.getMaxHealth());
+                }
+                System.out.println(pokemon.getName() + " recovered 50 hp!");
+                return true;
+            }
+            else {
+                System.out.println(pokemon.getName() + " has fainted! You can only use a revive or a PokeCenter!");
+                return false;
+            }
+
+        }
+        else if (item.equals("full heal")){
+            if (pokemon.getCurrentHealth() != 0) {
+                pokemon.setCurrentHealth(pokemon.getMaxHealth());
+                System.out.println(pokemon.getName() + " recovered to max hp!");
+                return true;
+            }
+            else {
+                System.out.println(pokemon.getName() + " has fainted! You can only use a revive or a PokeCenter!");
+                return false;
+            }
+
+        }
+        else if (item.equals("revive")){
+            if (pokemon.getCurrentHealth() == 0) {
+                pokemon.setCurrentHealth(pokemon.getMaxHealth() / 2);
+                System.out.println(pokemon.getName() + " revived with 1/2 Max HP!");
+                return true;
+            }
+            else {
+                System.out.println(pokemon.getName() + " isn't fainted! You can't use a revive!");
+                return false;
+            }
+        }
+        else {
+            System.out.println(item + " hasn't been implemented yet :<");
+            return false;
+        }
+
+    }
 }
-
-
-

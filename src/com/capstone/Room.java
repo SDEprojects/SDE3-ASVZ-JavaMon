@@ -38,7 +38,12 @@ public class Room {
     //Getters and Setters
 
     public String getName() {
+
         return name;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
 
@@ -102,5 +107,7 @@ public class Room {
 
         }*/
     }
+
+
 }
 

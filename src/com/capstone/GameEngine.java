@@ -15,6 +15,7 @@ public class GameEngine {
     public static void main(String[] args) {
         GameEngine gameEngine = new GameEngine();
 
+
         InitXML game = new InitXML();
         game.initNPCs();
         game.initRooms();
@@ -24,16 +25,14 @@ public class GameEngine {
 
 
         Player player1 = new Player();
-//copied
         gameEngine.chooseStarter(game, player1);//This method takes the game(initXML for access to the pokemon list, and player1 for access to their pokemon invite.)
-        // gameEngine.chooseStarterGUI(game, player1);//This method takes the game(initXML for access to the pokemon list, and player1 for access to their pokemon invite.)
 
         String roomName = "Oak's Lab";
         Room startingRoom = game.getRoom(roomName);
         player1.setCurrentRoom(startingRoom);
+
         player1.getCurrentRoom().displayOutput();
         System.out.println("=====================================================");
-
 
         //actual loop for gamez
         while (true) {
@@ -175,8 +174,6 @@ public class GameEngine {
             System.out.println("=====================================================");
         }
     }
-
-
     //Choose pokemon starter method.
     //TODO - complete the choose starter pokemon method.
     void chooseStarter(InitXML game, Player player){
@@ -201,6 +198,7 @@ public class GameEngine {
         }
     }
 
+    //TODO find out where this is called
     void chooseStarterGUI(InitXML game, Player player){
         gui.chooseStarter(game, player);
     }

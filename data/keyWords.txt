@@ -6,17 +6,9 @@
       <utilize>use</utilize>
       <purchase>buy</purchase>
       <go>move go proceed jump walk run leap dance</go>
-
       <up>north</up>
       <down>south</down>
       <left>west</left>
       <right>east</right>
    </action>
-
-   <direction movement = "go">
-      <up>north</up>
-      <down>south</down>
-      <left>west</left>
-      <right>east</right>
-   </direction>
 </keywords>

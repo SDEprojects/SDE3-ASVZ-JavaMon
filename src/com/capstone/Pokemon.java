@@ -12,9 +12,9 @@ public class Pokemon {
     private int level;
     private int attack; //attack is the damage threshold. calculated by RNG range between (base attack from move) and (attack stat).
     private int currentExp; //Current exp until the next level up
+    private PokeAttack move1;
+    private PokeAttack move2;
 
-
-    Hashtable<String, Integer> movesDict = new Hashtable<String, Integer>();
 
     //Constructors
     public Pokemon(String pokeName, String pokeType){
@@ -70,6 +70,22 @@ public class Pokemon {
         this.maxHealth = maxHealth;
     }
 
+    public PokeAttack getMove1() {
+        return move1;
+    }
+
+    public void setMove1(PokeAttack move1) {
+        this.move1 = move1;
+    }
+
+    public PokeAttack getMove2() {
+        return move2;
+    }
+
+    public void setMove2(PokeAttack move2) {
+        this.move2 = move2;
+    }
+
     //Class methods
 
     public void displayOutPokeBelt(){
@@ -96,6 +112,10 @@ public class Pokemon {
         maxHealth += level * 2; //ex level = 5, maxHealth = 12 -> new maxHealth = 22 or ex level = 10, maxHealth = 22 -> new maxHealth = 32.
 
 
+    }
+
+    private void takeDamage(int incomingDamage){
+        currentHealth = currentHealth - incomingDamage;
     }
 
 

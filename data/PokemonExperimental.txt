@@ -6,89 +6,61 @@
         <health>10</health>
         <attack>5</attack>
         <startingExp>50</startingExp>
-	    <!-- <moves>
-	        <move1= "Tackle" basedmg= 2 energy= 10/>
-            <move2= "Vine Whip" basedmg= 3 energy= 5/>
-	        <move3= "nothing" basedmg = 0 energy = 0/>
-	        <move4= "nothing" basedmg = 0 energy = 0/>
-	    </moves> -->
+        <move1>Tackle</move1>
+        <move2>Vine Whip</move2>
     </pokemon>
     <pokemon>
         <name>Charmander</name>
-        <type>Grass</type>
+        <type>Fire</type>
         <health>10</health>
         <attack>5</attack>
         <startingExp>50</startingExp>
-	    <!-- <moves>
-	        <move1= "Scratch" basedmg= 2 energy= 10/>
-            <move2= "Ember" basedmg= 3 energy= 5/>
-	        <move3= "nothing" basedmg = 0 energy = 0/>
-	        <move4= "nothing" basedmg = 0 energy = 0/>
-	    </moves> -->
+	    <move1>Scratch</move1>
+        <move2>Ember</move2>
     </pokemon>
     <pokemon>
         <name>Squirtle</name>
-        <type>Grass</type>
+        <type>Water</type>
         <health>12</health>
         <attack>3</attack>
         <startingExp>50</startingExp>
-	    <!-- <moves>
-	        <move1= "Tackle" basedmg= 2 energy= 10/>
-            <move2= "Water Gun" basedmg= 3 energy= 5/>
-	        <move3= "nothing" basedmg = 0 energy = 0/>
-	        <move4= "nothing" basedmg = 0 energy = 0/>
-	    </moves> -->
+	    <move1>Tackle</move1>
+        <move2>Water Gun</move2>
     </pokemon>
     <pokemon>
         <name>Rattata</name>
-        <type>Grass</type>
+        <type>Normal</type>
         <health>8</health>
         <attack>4</attack>
         <startingExp>50</startingExp>
-	    <!-- <moves>
-	        <move1= "Tackle" basedmg= 2 energy= 10/>
-            <move2= "nothing" basedmg= 0 energy= 0/>
-	        <move3= "nothing" basedmg = 0 energy = 0/>
-	        <move4= "nothing" basedmg = 0 energy = 0/>
-	    </moves> -->
+	    <move1>Tackle</move1>
+	    <move2>Bite</move2>
     </pokemon>
     <pokemon>
         <name>Pidgey</name>
-        <type>Grass</type>
+        <type>Flying</type>
         <health>9</health>
         <attack>3</attack>
         <startingExp>50</startingExp>
-	    <!-- <moves>
-	        <move1= "Tackle" basedmg= 2 energy= 10/>
-            <move2= "Gust" basedmg= 3 energy= 5/>
-	        <move3= "nothing" basedmg = 0 energy = 0/>
-	        <move4= "nothing" basedmg = 0 energy = 0/>
-	    </moves> -->
+	    <move1>Tackle</move1>
+	    <move2>Peck</move2>
     </pokemon>
     <pokemon>
-        <name>Caterpie</name>
-        <type>Grass</type>
+        <name>Weedle</name>
+        <type>Bug</type>
         <health>9</health>
         <attack>3</attack>
         <startingExp>50</startingExp>
-	    <!-- <moves>
-	        <move1= "Tackle" basedmg= 2 energy= 10/>
-            <move2= "nothing" basedmg= 0 energy= 0/>
-	        <move3= "nothing" basedmg = 0 energy = 0/>
-	        <move4= "nothing" basedmg = 0 energy = 0/>
-	    </moves> -->
+	    <move1>Tackle</move1>
+	    <move2>Sting</move2>
     </pokemon>
     <pokemon>
         <name>Zubat</name>
-        <type>Grass</type>
+        <type>Flying</type>
         <health>8</health>
         <attack>4</attack>
         <startingExp>50</startingExp>
-	    <!-- <moves>
-	        <move1= "Tackle" basedmg= 2 energy= 10/>
-            <move2= "Bite" basedmg= 3 energy= 5/>
-	        <move3= "nothing" basedmg = 0 energy = 0/>
-	        <move4= "nothing" basedmg = 0 energy = 0/>
-	    </moves> -->
+	    <move1>Tackle</move1>
+        <move2>Bite</move2>
     </pokemon>
 </class>

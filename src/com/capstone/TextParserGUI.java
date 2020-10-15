@@ -145,7 +145,7 @@ public class TextParserGUI {
     }
 
     private void playerInteracts(Player player1, String interactable) {
-        if (player1.getCurrentRoom().getInteractableItem().toLowerCase().equals(interactable)) {
+        if (player1.getCurrentRoom().getInteractableItem().toLowerCase().equals(interactable) && interactable.toLowerCase().equals("shop counter")) {
             //shop interface! Will probably move somewhere and make it a method so that it's not so CLUNKY
             if (interactable.equals("shop counter")) {
                 System.out.println("--------PokeMart--------");
@@ -161,6 +161,14 @@ public class TextParserGUI {
                 System.out.println("We need to implement an interactables class <_>");
             }
         }
+        //for pokecenter healz
+        else if (player1.getCurrentRoom().getInteractableItem().toLowerCase().equals(interactable) && interactable.toLowerCase().equals("healing station")) {
+            for (Pokemon pokemon:player1.getPlayersPokemon()) {
+                pokemon.setCurrentHealth(pokemon.getMaxHealth());
+            }
+            System.out.println("All your Pokemon are healed to full HP! Thank you for visiting!");
+        }
+
         else System.out.println("Theres no " + interactable + " here to interact with!");
     }
 

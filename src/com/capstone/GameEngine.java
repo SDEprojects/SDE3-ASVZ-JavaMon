@@ -205,7 +205,11 @@ public class GameEngine {
     public boolean useItem(String item, Pokemon pokemon) {
         item = item.toLowerCase();
         if (item.equals("potion")){
-            if (pokemon.getCurrentHealth() != 0) {
+            if (pokemon.getCurrentHealth() == pokemon.getMaxHealth()) {
+                System.out.println(pokemon.getName() + " is already at max hp! It won't have any effect!");
+                return false;
+            }
+            else if (pokemon.getCurrentHealth() != 0) {
                 pokemon.setCurrentHealth(pokemon.getCurrentHealth() + 20);
                 if (pokemon.getCurrentHealth() > pokemon.getMaxHealth()) {
                     pokemon.setCurrentHealth(pokemon.getMaxHealth());
@@ -220,10 +224,15 @@ public class GameEngine {
 
         }
         else if (item.equals("super potion")){
-            if (pokemon.getCurrentHealth() != 0) {
+            if (pokemon.getCurrentHealth() == pokemon.getMaxHealth()) {
+                System.out.println(pokemon.getName() + " is already at max hp! It won't have any effect!");
+                return false;
+            }
+            else if (pokemon.getCurrentHealth() != 0) {
                 pokemon.setCurrentHealth(pokemon.getCurrentHealth() + 50);
                 if (pokemon.getCurrentHealth() > pokemon.getMaxHealth()) {
                     pokemon.setCurrentHealth(pokemon.getMaxHealth());
+                    return false;
                 }
                 System.out.println(pokemon.getName() + " recovered 50 hp!");
                 return true;
@@ -235,7 +244,11 @@ public class GameEngine {
 
         }
         else if (item.equals("full heal")){
-            if (pokemon.getCurrentHealth() != 0) {
+            if (pokemon.getCurrentHealth() == pokemon.getMaxHealth()) {
+                System.out.println(pokemon.getName() + " is already at max hp! It won't have any effect!");
+                return false;
+            }
+            else if (pokemon.getCurrentHealth() != 0) {
                 pokemon.setCurrentHealth(pokemon.getMaxHealth());
                 System.out.println(pokemon.getName() + " recovered to max hp!");
                 return true;

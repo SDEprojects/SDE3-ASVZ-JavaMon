@@ -30,6 +30,15 @@ public class InitXML {
         return null;
     }
 
+    public NPCFactory getNPC(String npcName) {
+        for (NPCFactory NPC : listOfNPCs) {
+            if (NPC.getName().toLowerCase().equals(npcName.toLowerCase())) {
+                return NPC;
+            }
+        }
+        return null;
+    }
+
     //used as a getter for the list of items an npc has
     public Collection<String> npcItem(String npcName){
         for (NPCFactory NPC : listOfNPCs) {
@@ -163,7 +172,7 @@ public class InitXML {
         try {
 
             //big formatting block for taking XML from the provided txt doc "Rooms.txt" in data
-            File inputFile = new File(String.valueOf(Path.of("data", "Pokemon.txt")));
+            File inputFile = new File(String.valueOf(Path.of("data", "PokemonExperimental.txt")));
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document doc = dBuilder.parse(inputFile);

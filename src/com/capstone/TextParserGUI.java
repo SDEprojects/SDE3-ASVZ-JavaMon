@@ -16,7 +16,7 @@ import java.util.Scanner;
 /*The TextParser class parses and validates the user (console) inputs*/
 public class TextParserGUI {
 
-    public void checkPlayerCommand(InitXML game, GameEngine gameEngine, Player player1, String userInput) {
+    public void checkPlayerCommand(InitXML game, GameEngine gameEngine, Player player1, String userInput, CombatEngine combatEngine) {
         try {
                 if (inputValidation(userInput)) {
                     String userActions = userInput.split(" ")[0];
@@ -47,6 +47,10 @@ public class TextParserGUI {
                         if (nNode.getNodeType() == Node.ELEMENT_NODE) {
                             Element eElement = (Element) nNode;
                             // for(int a = 0; a < userActions.length; a++)
+                            if (userActions.equals("combat")) {
+
+                            }
+
                             if (eElement.getElementsByTagName("buy").item(0).getTextContent().contains(userActions)) {
                                 if (player1.getCurrentRoom().getInteractableItem().toLowerCase().equals("shop counter")) {
                                     switch (userArgument) {

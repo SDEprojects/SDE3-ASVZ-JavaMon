@@ -110,7 +110,7 @@
         <adjacent_east>Viridian City PokeMart</adjacent_east>
         <adjacent_west>Viridian City Gym Room 1</adjacent_west>
         <npc>Nurse Didi</npc>
-        <interactable>nothing</interactable>
+        <interactable>Healing Station</interactable>
     </room>
     <room>
         <name>Viridian City Gym Room 1</name>

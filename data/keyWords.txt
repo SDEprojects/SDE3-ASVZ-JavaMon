@@ -5,15 +5,16 @@
       <communicate>talk speak</communicate>
       <utilize>use utilize</utilize>
       <check>check look</check>
+      <buy>buy purchase</buy>
       <get>get</get>
       <go>move go proceed jump walk run leap dance</go>
-      <up>north</up>
-      <down>south</down>
-      <left>west</left>
-      <right>east</right>
-      <bag>bag</bag>
-      <map>map</map>
-      <pokemon>pokemon</pokemon>
-      <help>help</help>
+      <up>north up</up>
+      <down>south down</down>
+      <left>west left</left>
+      <right>east right</right>
+      <bag>bag backpack pack</bag>
+      <map>map atlas</map>
+      <pokemon>pokemon monster</pokemon>
+      <help>help hel hep</help>
    </action>
 </keywords>

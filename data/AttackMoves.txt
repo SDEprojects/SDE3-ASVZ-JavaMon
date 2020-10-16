@@ -40,5 +40,32 @@
         <damage>3</damage>
         <energy>10</energy>
     </attack>
+    <attack>
+        <name>Confusion</name>
+        <damage>3</damage>
+        <energy>10</energy>
+    </attack>
+    <attack>
+        <name>Rock Tomb</name>
+        <damage>4</damage>
+        <energy>10</energy>
+    </attack>
+    <attack>
+        <name>Thunder Shock</name>
+        <damage>4</damage>
+        <energy>10</energy>
+    </attack>
+    <attack>
+        <name>Rock Throw</name>
+        <damage>4</damage>
+        <energy>10</energy>
+    </attack>
+    <attack>
+        <name>Karate Chop</name>
+        <damage>4</damage>
+        <energy>10</energy>
+    </attack>
+
+
 
 <class>

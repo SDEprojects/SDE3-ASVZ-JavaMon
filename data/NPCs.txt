@@ -100,7 +100,7 @@
         <dialog>All these Rock-Type Pokemon around here! Im glad I have Plant (Grass-Type) with me!.</dialog>
         <item>none</item>
         <money>0</money>
-        <pokemon>Belsprout</pokemon>
+        <pokemon>Bellsprout</pokemon>
     </npc>
 
     <npc>

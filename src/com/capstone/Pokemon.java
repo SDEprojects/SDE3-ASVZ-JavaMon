@@ -1,5 +1,7 @@
 package com.capstone;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Hashtable;
 
 public class Pokemon {
@@ -13,21 +15,32 @@ public class Pokemon {
     private int attack; //attack is the damage threshold. calculated by RNG range between (base attack from move) and (attack stat).
     private int currentExp; //Current exp until the next level up
 
+    public ArrayList<PokeAttack> attacksList = new ArrayList<>();
 
-    Hashtable<String, Integer> movesDict = new Hashtable<String, Integer>();
+    private String move1Name;
+    private String move2Name;
+
+    private PokeAttack move1;
+    private PokeAttack move2;
+
 
     //Constructors
     public Pokemon(String pokeName, String pokeType){
         name = pokeName;
         type = pokeType;
     }
-    public Pokemon(String pokeName, String pokeType, int hp, int pokeLevel, int attackStat){
+    public Pokemon(String pokeName, String pokeType, int hp, int pokeLevel, int attackStat, String move1, String move2, Collection<PokeAttack> attacksList){
         this(pokeName,pokeType);
         maxHealth = hp;
         level = pokeLevel;
         attack = attackStat;
+        move1Name = move1;
+        move2Name = move2;
         generateStats();
         currentHealth = maxHealth;
+        processMoves(attacksList);
+
+
     }
 
 
@@ -70,6 +83,22 @@ public class Pokemon {
         this.maxHealth = maxHealth;
     }
 
+    public PokeAttack getMove1() {
+        return move1;
+    }
+
+    public void setMove1(PokeAttack move1) {
+        this.move1 = move1;
+    }
+
+    public PokeAttack getMove2() {
+        return move2;
+    }
+
+    public void setMove2(PokeAttack move2) {
+        this.move2 = move2;
+    }
+
     //Class methods
 
     public void displayOutPokeBelt(){
@@ -98,5 +127,21 @@ public class Pokemon {
 
     }
 
+    public void takeDamage(int incomingDamage){
+        currentHealth = currentHealth - incomingDamage;
+    }
+
+    void processMoves(Collection<PokeAttack> dataList){
+
+        for(PokeAttack attacks : dataList){
+            if (attacks.getAttackName().equalsIgnoreCase(move1Name)){
+                move1 = attacks;
+            } else if (attacks.getAttackName().equalsIgnoreCase(move2Name)){
+                move2 = attacks;
+            } else {
+                System.out.println("Finished processing.");
+            }
+        }
+    }
 
 }

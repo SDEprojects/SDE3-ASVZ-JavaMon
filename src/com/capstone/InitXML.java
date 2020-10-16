@@ -18,12 +18,22 @@ public class InitXML {
     public Collection<Room> listOfRooms = new ArrayList<>();
     public Collection<Pokemon> listOfPokemon = new ArrayList<>();
     public Collection<Items> listOfItems = new ArrayList<>();
+    public Collection<PokeAttack> listOfAttacks = new ArrayList<>();
 
     //basically a getter for the dialog field for the NPC that gets passed to it
     public String npcDialog(String npcName){
         for (NPCFactory NPC : listOfNPCs) {
             if (NPC.getName().toLowerCase().equals(npcName.toLowerCase())) {
                 return NPC.getDialog();
+            }
+        }
+        return null;
+    }
+
+    public NPCFactory getNPC(String npcName) {
+        for (NPCFactory NPC : listOfNPCs) {
+            if (NPC.getName().toLowerCase().equals(npcName.toLowerCase())) {
+                return NPC;
             }
         }
         return null;
@@ -162,7 +172,7 @@ public class InitXML {
         try {
 
             //big formatting block for taking XML from the provided txt doc "Rooms.txt" in data
-            File inputFile = new File(String.valueOf(Path.of("data", "Pokemon.txt")));
+            File inputFile = new File(String.valueOf(Path.of("data", "PokemonExperimental.txt")));
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document doc = dBuilder.parse(inputFile);
@@ -187,35 +197,55 @@ public class InitXML {
                 int pokeHealth = Integer.parseInt(pokeEle.getElementsByTagName("health").item(0).getTextContent());
                 int pokeAttack = Integer.parseInt(pokeEle.getElementsByTagName("attack").item(0).getTextContent());
                 int startingExp = Integer.parseInt(pokeEle.getElementsByTagName("startingExp").item(0).getTextContent());
-
-                //TODO: Need implementation for moves. The moves in the Pokemon xml are in the form of a dictionary
-
-                //it looks like this in the xml:
-
-                /*<pokemon>
-                    <name>Squirtle</name>
-                    <type>Grass</type>
-                    <health>12</health>
-                    <attack>3</attack>
-                    <startingExp>50</startingExp>
-	                <moves>
-	                    <move1= "Tackle" basedmg= 2 energy= 10/>
-                        <move2= "Water Gun" basedmg= 3 energy= 5/>
-	                    <move3= "nothing" basedmg = 0 energy = 0/>
-	                    <move4= "nothing" basedmg = 0 energy = 0/>
-	                </moves>
-                </pokemon>*/
+                String move1 = pokeEle.getElementsByTagName("move1").item(0).getTextContent();
+                String move2 = pokeEle.getElementsByTagName("move2").item(0).getTextContent();
 
 
                 //roomNPC and roomInteractable holds the value from the rooms.txt xml with the npc and interactable tags.
                 //TODO: implement constructor with stats.
-                listOfPokemon.add(new Pokemon(pokemonName, pokemonType, pokeHealth, 5, pokeAttack)); //Pokelevel is hardcoded here.
+                listOfPokemon.add(new Pokemon(pokemonName, pokemonType, pokeHealth, 5, pokeAttack, move1, move2, listOfAttacks)); //Pokelevel is hardcoded here.
                 //TODO: implement a way of associating level to room/area/or npc. For now it is hard coded to five.
 
             }
         }
         catch (Exception e) {
             System.out.println("there was an error with initializing the Pokemon list.");
+        }
+
+    }
+    //Always initAttacks() method before Pokemon.
+    //This method initializes a Pokemon attack moves list
+    public void initAttacks(){
+        try {
+
+            //big formatting block for taking XML from the provided txt doc "Rooms.txt" in data
+            File inputFile = new File(String.valueOf(Path.of("data", "AttackMoves.txt")));
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.parse(inputFile);
+            doc.getDocumentElement().normalize();
+            NodeList attackMovesList = doc.getElementsByTagName("attack"); //roomList now contains all the nodes in the file with tag NPC
+
+            for (int temp = 0; temp < attackMovesList.getLength(); temp++) { //iterating over all the nodes in npcList
+
+                Node attackMoves = attackMovesList.item(temp);
+
+                //downcast, getting element we want, then recasting to node, then getting the text .... what
+                Element attackEle = (Element) attackMoves;
+
+                //Getting the Attack moves data from the AttackMoves.txt xml
+                String attackName = attackEle.getElementsByTagName("name").item(0).getTextContent();
+                int attackDamage = Integer.parseInt(attackEle.getElementsByTagName("damage").item(0).getTextContent());
+                int attackEnergy = Integer.parseInt(attackEle.getElementsByTagName("energy").item(0).getTextContent());
+
+
+                //Add each move into the listOfAttacks list.
+                listOfAttacks.add(new PokeAttack(attackName,attackDamage,attackEnergy));
+
+            }
+        }
+        catch (Exception e) {
+            System.out.println("there was an error with initializing the Attack Moves list.");
         }
 
     }

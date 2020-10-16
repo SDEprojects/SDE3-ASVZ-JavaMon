@@ -1,9 +1,6 @@
 package com.capstone;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Font;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.PrintStream;
@@ -12,6 +9,8 @@ import java.util.Collection;
 import java.util.Scanner;
 
 import javax.swing.*;
+
+//javax.swing.JComponent#isOptimizedDrawingEnabled << used so the repainting works right
 
 
 public class GUI2nd {
@@ -35,6 +34,7 @@ public class GUI2nd {
 
 
     private GameEngine gameEngine = new GameEngine();
+    private CombatEngine combatEngine = new CombatEngine();
     private String starter;
     private String roomName;
     private Player player1 = new Player();
@@ -48,7 +48,7 @@ public class GUI2nd {
         gui.game.initNPCs();
         gui.game.initPokemon();
         gui.initFrame();
-        gui.chooseStarter(gui.game, gui.player1);
+        gui.chooseStarter(gui.game, gui.player1, gui.combatEngine);
     }
     private void initFrame() {
 
@@ -94,8 +94,101 @@ public class GUI2nd {
 
     }
 
+    public JTabbedPane combatPanel() {
+        JTabbedPane combatPanel = new JTabbedPane();
+        //combatPanel.setLayout(new BoxLayout(combatPanel, BoxLayout.PAGE_AXIS));
+        combatPanel.setSize(200,200);
 
-    public void chooseStarter(InitXML game, Player player) {
+        NPCFactory currentNPC = game.getNPC(player1.getCurrentRoom().getNpcName());
+
+
+        //ATTACK CARD CODE
+        JPanel attackCard = new JPanel() {
+            //Make the panel wider than it really needs, so
+            //the window's wide enough for the tabs to stay
+            //in one row.
+            public Dimension getPreferredSize() {
+                Dimension size = super.getPreferredSize();
+                size.width += 50;
+                return size;
+            }
+        };
+//        JButton attackButton1 = new JButton(player1.playersPokemon.get(0).attacksList.get(0).getAttackName());
+//        JButton attackButton2 = new JButton(player1.playersPokemon.get(0).attacksList.get(1).getAttackName());
+//        attackButton1.set
+        ActionListener attackButtonListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent event) {
+                event.getActionCommand();
+                combatEngine.processActionPhase("attack " + event.getActionCommand(),player1, currentNPC, gameEngine);
+            }
+        };
+
+        for (PokeAttack attack :player1.playersPokemon.get(0).attacksList) {
+            JButton attackButton = new JButton(attack.getAttackName());
+            attackButton.setActionCommand(attack.getAttackName());
+            attackButton.addActionListener(attackButtonListener);
+            attackCard.add(attackButton);
+        }
+
+        //Item CARD CODE
+        JPanel itemCard = new JPanel() {
+            //Make the panel wider than it really needs, so
+            //the window's wide enough for the tabs to stay
+            //in one row.
+            public Dimension getPreferredSize() {
+                Dimension size = super.getPreferredSize();
+                size.width += 50;
+                return size;
+            }
+        };
+
+        ActionListener itemButtonListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent event) {
+                combatEngine.processActionPhase("use " + event.getActionCommand(),player1, currentNPC, gameEngine);
+            }
+        };
+
+        for (String item : player1.getInventory()) {
+            JButton itemButton = new JButton(item);
+            itemButton.setActionCommand(item);
+            itemButton.addActionListener(itemButtonListener);
+            itemCard.add(itemButton);
+        }
+
+        //Run CARD CODE
+        JPanel runCard = new JPanel() {
+            //Make the panel wider than it really needs, so
+            //the window's wide enough for the tabs to stay
+            //in one row.
+            public Dimension getPreferredSize() {
+                Dimension size = super.getPreferredSize();
+                size.width += 50;
+                return size;
+            }
+        };
+
+        ActionListener runButtonListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent event) {
+                combatEngine.processActionPhase("run",player1, currentNPC, gameEngine);
+            }
+        };
+        JButton runButton = new JButton("Run away like a coward");
+        runButton.addActionListener(runButtonListener);
+
+        //adding tabs to tabbed panel
+        combatPanel.addTab("Attack",attackCard);
+        combatPanel.addTab("Use Item",itemCard);
+        combatPanel.addTab("Run",runCard);
+
+        return combatPanel;
+    }
+
+
+
+    public void chooseStarter(InitXML game, Player player, CombatEngine combatEngine) {
         JPanel starterPokemonPanel = new JPanel();
         starterPokemonPanel.setLayout(new BoxLayout(starterPokemonPanel, BoxLayout.PAGE_AXIS)); //center the layout here later
         starterPokemonPanel.add(new JLabel("You're in OakRoom"));
@@ -138,7 +231,7 @@ public class GUI2nd {
                         System.out.println("You chose: " + starter);
                         for (Pokemon playersFirstPokemon : player.playersPokemon) {
 //	    					playersFirstPokemon.displayOutStatsAndAll();
-                            displayOutStatsAndAll(playersFirstPokemon, player);
+                            displayOutStatsAndAll(playersFirstPokemon, player, combatEngine);
                         }
                     }
                 }
@@ -152,7 +245,7 @@ public class GUI2nd {
         window.revalidate();
     }
 
-    public void displayOutStatsAndAll(Pokemon pokemon, Player player) {
+    public void displayOutStatsAndAll(Pokemon pokemon, Player player, CombatEngine combatEngine) {
 
         output.setText("");
         output.append("=====================================================" + "\n");
@@ -191,7 +284,7 @@ public class GUI2nd {
             public void actionPerformed(ActionEvent e) {
                 PrintStream printStream = new PrintStream(new CustomOutputStream(output));
                 System.setOut(printStream);
-                parser.checkPlayerCommand(game, gameEngine, player1, inputTF.getText());
+                parser.checkPlayerCommand(game, gameEngine, player1, inputTF.getText(), combatEngine);
                 System.setOut(System.out);
                 setCurrentRoomDetails(player.getCurrentRoom());
             }

@@ -1,10 +1,12 @@
 package com.capstone;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 public class NPCFactory extends Player {
     //fields
     private String dialog = "I got nothing to say to you :<";
+    public ArrayList<Pokemon> npcPokemon = new ArrayList<>();
 
     //ctors
 //    public NPCFactory(String name, String dialog){  //outdates, going with full constructor

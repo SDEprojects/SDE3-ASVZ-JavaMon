@@ -425,7 +425,7 @@ public class GUI {
     public void chooseStarter(InitXML game, Player player){
         JPanel vboxP = new JPanel();
         vboxP.setLayout(new BoxLayout(vboxP, BoxLayout.PAGE_AXIS));
-        vboxP.add(new JLabel("You're in OakRoom"));
+        vboxP.add(new JLabel("You're in Professor Oak's Lab"));
         vboxP.add(new JLabel("Professor Oak: Hey! You're finally here, I've been waiting for you.\nI'm going on vacation soon... and the flight I'm going on has a strict 1 Pokemon carry on limit.\nI'm going to need you to look after one while I'm gone! I'll even let you choose who you want to take!\n"));
 
         //Group the radio buttons.

@@ -18,8 +18,10 @@ public class GameEngine {
         InitXML game = new InitXML();
         game.initNPCs();
         game.initRooms();
+        game.initAttacks();
         game.initPokemon();
         game.initItems();
+
         TextParser parser = new TextParser();
 
 

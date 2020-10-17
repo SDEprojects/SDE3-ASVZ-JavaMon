@@ -67,7 +67,7 @@ public class CombatEngine {
             if(player.playersPokemon.get(0).getCurrentHealth() <= 0){
                 result = "Player Lost";
                 break;
-            } else if (npc.npcPokemon.get(0).getCurrentHealth() <= 0){
+            } else if (npc.npcPokemonList.get(0).getCurrentHealth() <= 0){
                 result = "NPC Lost";
                 break;
             } else {
@@ -76,7 +76,7 @@ public class CombatEngine {
                 //This processes user choice and applies attack from user's choice
                 processActionPhase(userChoice,player,npc,game);
                 //If opponent's pokemon's hp reaches 0, break out of combat loop.
-                if (npc.npcPokemon.get(0).getCurrentHealth() <= 0){
+                if (npc.npcPokemonList.get(0).getCurrentHealth() <= 0){
                     System.out.println("The opponent's Pokemon fainted!");
                     result = "NPC Lost";
                     break;
@@ -104,7 +104,7 @@ public class CombatEngine {
 
         //Set the arrayList to equal to the current player's pokemon
         playersPokemon = player.playersPokemon;
-        npcPokemon = npc.npcPokemon;
+        npcPokemon = npc.npcPokemonList;
 
         //Get the first Pokemon from the arrayList
         Pokemon playerFirstPoke = playersPokemon.get(0);
@@ -145,7 +145,7 @@ public class CombatEngine {
 
         //Set the arrayList to equal to the current player's pokemon
         playersPokemon = player.playersPokemon;
-        npcPokemon = npc.npcPokemon;
+        npcPokemon = npc.npcPokemonList;
 
         //Get the first Pokemon from the arrayList
         Pokemon playerFirstPoke = playersPokemon.get(0);

@@ -1,5 +1,7 @@
 package com.capstone;
 
+import java.util.Collection;
+
 public class Room {
 
     //Class Fields
@@ -12,6 +14,9 @@ public class Room {
     private String southTile; //uses the data from <adjacent_south> in Rooms.txt XML
     private String eastTile; //uses the data from <adjacent_east> in Rooms.txt XML
     private String westTile; //uses the data from <adjacent_west> in Rooms.txt XML
+
+    private NPCFactory npcObj; //NPC object here is the npc that is in this room.
+
 
 
     //Constructor(s)
@@ -28,10 +33,11 @@ public class Room {
     }
 
     //Constructor that allows for npc and interactable instantiation.
-    public Room(String roomName, String roomDescription, String adjNorthTile, String adjSouthTile, String adjEastTile, String adjWestTile, String roomNPC, String roomInteractable) {
+    public Room(String roomName, String roomDescription, String adjNorthTile, String adjSouthTile, String adjEastTile, String adjWestTile, String roomNPC, String roomInteractable , Collection<NPCFactory> dataList) {
         this(roomName, roomDescription, adjNorthTile,adjSouthTile,adjEastTile,adjWestTile);
         npcName = roomNPC;
         interactableItem = roomInteractable;
+        processNPC(dataList);
     }
 
     //Getters and Setters
@@ -40,7 +46,9 @@ public class Room {
         return name;
     }
 
-
+    public NPCFactory getNpcObj() {
+        return npcObj;
+    }
 
     public String getNorthTile() {
         return northTile;
@@ -70,6 +78,14 @@ public class Room {
 
     public String getDescription(){
         return description;
+    }
+
+    void processNPC(Collection<NPCFactory> dataList){
+        for(NPCFactory npc : dataList){
+            if (npc.getName() == npcName){
+                npcObj = npc;
+            }
+        }
     }
 
     //This method displays room information to the user.

@@ -13,6 +13,7 @@ public class GameEngine {
 
     public static void main(String[] args) {
         GameEngine gameEngine = new GameEngine();
+        CombatEngine combatEngine = new CombatEngine();
 
 
         InitXML game = new InitXML();
@@ -41,6 +42,30 @@ public class GameEngine {
 
             parser.checkPlayerCommand(game,gameEngine,player1);
             System.out.println("=====================================================");
+
+            String userInput = parser.getUserInput();
+            if (userInput.split(" ")[0].toLowerCase().equals("interact")) {
+                String npc = userInput.split(" ", 2)[1];
+
+
+                //simple check to see if the NPC name in the input is actually in the current room
+                if (player1.getCurrentRoom().getNpcName().toLowerCase().equals(npc.toLowerCase())) {
+                    //if they are in the room, display their dialog
+
+                    NPCFactory newEncounterNPC = null;
+                    System.out.println('"' + game.npcDialog(npc) + '"');
+                    for (NPCFactory encounterNPC : game.listOfNPCs){
+                        if (encounterNPC.getName().equalsIgnoreCase(npc)){
+                            System.out.println("Found the NPC it is: " + encounterNPC.getName());
+                            newEncounterNPC = encounterNPC;
+                            combatEngine.combatLoopTrainer(player1,newEncounterNPC,gameEngine);
+                        }
+                    }
+
+
+
+                }
+            }
 
 //            //for checking the map
 //            if ((userInput.toLowerCase().equals("check map")) || (userInput.toLowerCase().equals("map"))) {

@@ -6,7 +6,11 @@ import java.util.Collection;
 public class NPCFactory extends Player {
     //fields
     private String dialog = "I got nothing to say to you :<";
-    public ArrayList<Pokemon> npcPokemon = new ArrayList<>();
+    private String pokemonName;
+
+
+    public ArrayList<Pokemon> npcPokemonList = new ArrayList<>();
+
 
     //ctors
 //    public NPCFactory(String name, String dialog){  //outdates, going with full constructor
@@ -15,7 +19,7 @@ public class NPCFactory extends Player {
 //
 //    };
 
-    public NPCFactory(String name, String dialog, String items, int money){
+    public NPCFactory(String name, String dialog, String items, int money, String pokemonsName, Collection<Pokemon> dataList){
         super(name,money);
         this.dialog = dialog;
         String[] itemList = items.split(",");
@@ -24,6 +28,8 @@ public class NPCFactory extends Player {
                 this.addInventory(item);
             }
         }
+        pokemonName = pokemonsName;
+        processPokemon(dataList);
     }
 
     //methods
@@ -38,6 +44,14 @@ public class NPCFactory extends Player {
                 "name='" + getName() + '\'' +
                 "dialog='" + getDialog() + '\'' +
                 '}';
+    }
+
+    void processPokemon(Collection<Pokemon> dataList){
+        for(Pokemon pokemon : dataList){
+            if (pokemon.getName().equalsIgnoreCase(pokemonName)){
+                npcPokemonList.add(pokemon);
+            }
+        }
     }
 
 }

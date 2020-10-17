@@ -79,7 +79,8 @@ public class InitXML {
                 String npcDialog = npcEle.getElementsByTagName("dialog").item(0).getTextContent();
                 String npcItems = npcEle.getElementsByTagName("item").item(0).getTextContent();
                 int npcMoney = Integer.parseInt(npcEle.getElementsByTagName("money").item(0).getTextContent());
-                listOfNPCs.add(new NPCFactory(npcName,npcDialog,npcItems,npcMoney));
+                String npcPokemonName = npcEle.getElementsByTagName("pokemon").item(0).getTextContent();
+                listOfNPCs.add(new NPCFactory(npcName,npcDialog,npcItems,npcMoney,npcPokemonName,listOfPokemon));
             }
         }
         catch (Exception e) {
@@ -149,7 +150,7 @@ public class InitXML {
                 String roomNPC = roomEle.getElementsByTagName("npc").item(0).getTextContent();
                 String roomInteractable = roomEle.getElementsByTagName("interactable").item(0).getTextContent();
 
-                listOfRooms.add(new Room(roomName,roomDescription,roomAdjNorth,roomAdjSouth,roomAdjEast,roomAdjWest, roomNPC, roomInteractable));
+                listOfRooms.add(new Room(roomName,roomDescription,roomAdjNorth,roomAdjSouth,roomAdjEast,roomAdjWest, roomNPC, roomInteractable, listOfNPCs));
 
             }
         }
@@ -163,7 +164,7 @@ public class InitXML {
         try {
 
             //big formatting block for taking XML from the provided txt doc "Rooms.txt" in data
-            File inputFile = new File(String.valueOf(Path.of("data", "Pokemon.txt")));
+            File inputFile = new File(String.valueOf(Path.of("data", "PokemonExperimental.txt")));
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document doc = dBuilder.parse(inputFile);

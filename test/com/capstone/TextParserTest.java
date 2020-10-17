@@ -1,3 +1,4 @@
+/*
 package com.capstone;
 
 import org.junit.jupiter.api.Test;
@@ -16,4 +17,4 @@ class TextParserTest {
     @Test
     void checkPlayerCommand() {
     }
-}
+}*/

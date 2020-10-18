@@ -72,6 +72,8 @@ public class CombatEngine {
             } else if (npc.npcPokemonList.get(0).getCurrentHealth() <= 0){
                 double expReward = npc.npcPokemonList.get(0).getLevel() * 10; //Current xp reward scales with level and is hard coded.
                 player.playersPokemon.get(0).rewardEXP(expReward);
+                System.out.println("You received: 1000 for winning!"); //hard coded
+                player.addMoney(1000); //hard coded 1000 money to add as reward.
                 result = "NPC Lost";
                 break;
             } else {
@@ -87,6 +89,8 @@ public class CombatEngine {
                     System.out.println("The opponent's Pokemon fainted!");
                     double expReward = npc.npcPokemonList.get(0).getLevel() * 10; //Current xp reward scales with level and is hard coded.
                     player.playersPokemon.get(0).rewardEXP(expReward);
+                    System.out.println("You received: 1000 for winning!"); //hard coded
+                    player.addMoney(1000); //hard coded 1000 money to add as reward.
                     result = "NPC Lost";
                     break;
                 }
@@ -210,4 +214,5 @@ public class CombatEngine {
 
 
     }
+
 }

@@ -195,7 +195,7 @@ public class InitXML {
 
                 //roomNPC and roomInteractable holds the value from the rooms.txt xml with the npc and interactable tags.
                 //TODO: implement constructor with stats.
-                listOfPokemon.add(new Pokemon(pokemonName, pokemonType, pokeHealth, 5, pokeAttack, move1, move2, listOfAttacks)); //Pokelevel is hardcoded here.
+                listOfPokemon.add(new Pokemon(pokemonName, pokemonType, pokeHealth, 5, pokeAttack, move1, move2, listOfAttacks,startingExp)); //Pokelevel is hardcoded here.
                 //TODO: implement a way of associating level to room/area/or npc. For now it is hard coded to five.
 
             }

@@ -70,6 +70,8 @@ public class CombatEngine {
                 result = "Player Lost";
                 break;
             } else if (npc.npcPokemonList.get(0).getCurrentHealth() <= 0){
+                double expReward = npc.npcPokemonList.get(0).getLevel() * 10; //Current xp reward scales with level and is hard coded.
+                player.playersPokemon.get(0).rewardEXP(expReward);
                 result = "NPC Lost";
                 break;
             } else {
@@ -83,6 +85,8 @@ public class CombatEngine {
                 //If opponent's pokemon's hp reaches 0, break out of combat loop.
                 if (npc.npcPokemonList.get(0).getCurrentHealth() <= 0){
                     System.out.println("The opponent's Pokemon fainted!");
+                    double expReward = npc.npcPokemonList.get(0).getLevel() * 10; //Current xp reward scales with level and is hard coded.
+                    player.playersPokemon.get(0).rewardEXP(expReward);
                     result = "NPC Lost";
                     break;
                 }

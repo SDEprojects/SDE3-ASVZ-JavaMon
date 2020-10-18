@@ -12,8 +12,11 @@ public class Pokemon {
     private int currentHealth;
     private int maxHealth;
     private int level;
+    private int initialEXPtoLevel;
     private int attack; //attack is the damage threshold. calculated by RNG range between (base attack from move) and (attack stat).
-    private int currentExp; //Current exp until the next level up
+    private double currentExp; //Current exp until the next level up
+    private double expToLevelUp;
+    private final double expToLevelMultiplier = 1.05;
 
     public ArrayList<PokeAttack> attacksList = new ArrayList<>();
 
@@ -29,16 +32,19 @@ public class Pokemon {
         name = pokeName;
         type = pokeType;
     }
-    public Pokemon(String pokeName, String pokeType, int hp, int pokeLevel, int attackStat, String move1, String move2, Collection<PokeAttack> attacksList){
+    public Pokemon(String pokeName, String pokeType, int hp, int pokeLevel, int attackStat, String move1, String move2, Collection<PokeAttack> attacksList, int startingEXP){
         this(pokeName,pokeType);
         maxHealth = hp;
         level = pokeLevel;
         attack = attackStat;
+        initialEXPtoLevel = startingEXP;
         move1Name = move1;
         move2Name = move2;
         generateStats();
         currentHealth = maxHealth;
         processMoves(attacksList);
+        currentExp = 0;
+        expToLevelUp = initialEXPtoLevel;
 
 
     }
@@ -71,7 +77,7 @@ public class Pokemon {
         return currentHealth;
     }
 
-    public int getCurrentExp() {
+    public double getCurrentExp() {
         return currentExp;
     }
 
@@ -99,7 +105,36 @@ public class Pokemon {
         this.move2 = move2;
     }
 
-    //Class methods
+    public double getExpToLevelUp() {
+        return expToLevelUp;
+    }
+//Class methods
+
+    //Call this method when you win the pokemon battle.
+    public void rewardEXP(double expGain){
+        System.out.println("You Pokemon gained: " + expGain + " experience.");
+        double tempExp; //This is for the overflow carry over experience.
+        currentExp += expGain;
+        if (currentExp >= expToLevelUp){
+            tempExp = currentExp - expToLevelUp;
+            //increment the current Pokemon's level
+            level++;
+            //call generate stats to update the stats of the pokemon
+            generateStats();
+            //Set new current xp to 0
+            currentExp = 0;
+            //Add currentExp with the temp carried over.
+            currentExp += tempExp;
+            //New EXP multiplier applied
+            applyNewExpMultiplier();
+
+
+        }
+    }
+
+    void applyNewExpMultiplier(){
+        expToLevelUp = expToLevelUp * expToLevelMultiplier;
+    }
 
     public void displayOutPokeBelt(){
         System.out.println("=====================================================");
@@ -115,6 +150,7 @@ public class Pokemon {
         System.out.println("Pokemon Level: " + getLevel());
         System.out.println("Pokemon HP: " + "[" + getCurrentHealth() + "/" + getMaxHealth() + "]" );
         System.out.println("Pokemon Attack: " + getAttack());
+        System.out.println("Pokemon Current Experience: [" + getCurrentExp() + "/" + getExpToLevelUp() + "]");
         System.out.println("=====================================================");
 
     }
@@ -126,6 +162,8 @@ public class Pokemon {
 
 
     }
+
+
 
     public void takeDamage(int incomingDamage){
         currentHealth = currentHealth - incomingDamage;

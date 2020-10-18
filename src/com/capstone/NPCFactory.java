@@ -9,7 +9,7 @@ public class NPCFactory extends Player {
     private String pokemonName;
 
 
-    public ArrayList<Pokemon> npcPokemonList = new ArrayList<>();
+    public ArrayList<Pokemon> npcPokemonList = new ArrayList<>(); //NPC's pokemon list
 
 
     //ctors
@@ -46,6 +46,7 @@ public class NPCFactory extends Player {
                 '}';
     }
 
+    //If the npc has a pokemon listed in the xml doc, they will get the pokemon added to their pokemonlist.
     void processPokemon(Collection<Pokemon> dataList){
         for(Pokemon pokemon : dataList){
             if (pokemon.getName().equalsIgnoreCase(pokemonName)){

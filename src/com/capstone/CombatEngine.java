@@ -8,27 +8,16 @@ public class CombatEngine {
     //Class Fields
 
 
-
-    //TODO Initiate combat from grass or trainer
-
-    //TODO Enemy Pokemon level varies depending on location.
-
-    //TODO Action Phase, Player Choice Phase, Player
-
-    //TODO Win/Lose
-
     //Constructor
-
 
     public CombatEngine() {
 
     }
 
-
     //Class Methods
 
     //Action Phase - this is the phase where the player gets to choose between fight, use item, or run (They cant run from trainer battles)
-
+    //This method is not yet used. Stubbed out and reserved for the wild pokemon encounter.
     String actionPhaseChoiceWildPoke(){
         //The userChoice here is what the user chooses to do
         Scanner scanner = new Scanner(System.in);
@@ -40,14 +29,13 @@ public class CombatEngine {
         }
         return userChoice;
     }
-
+    //This method is for taking in user input if they want to attack or use item.
+    //Basic input validation is used here to limit choices to attack or item.
     String actionPhaseChoiceTrainerBattle(){
         //The userChoice here is what the user chooses to do
         Scanner scanner = new Scanner(System.in);
         System.out.println("What would you like to do? <attack> or <item>");
         String userChoice = scanner.nextLine();
-
-
         if (!userChoice.equalsIgnoreCase("attack") && !userChoice.equalsIgnoreCase("item")){
             System.out.println("You can't do that.");
             actionPhaseChoiceTrainerBattle();
@@ -55,7 +43,7 @@ public class CombatEngine {
         return userChoice;
     }
 
-    //Combat loop : encounter with trainer
+    //Combat loop : encounter with trainer - this is the main combat loop that is called in the game engine.
 
     String combatLoopTrainer(Player player, NPCFactory npc, GameEngine game){
 
@@ -70,8 +58,12 @@ public class CombatEngine {
                 result = "Player Lost";
                 break;
             } else if (npc.npcPokemonList.get(0).getCurrentHealth() <= 0){
+
+                //Reward exp to player's pokemon when the enemy pokemon is defeated.
                 double expReward = npc.npcPokemonList.get(0).getLevel() * 10; //Current xp reward scales with level and is hard coded.
                 player.playersPokemon.get(0).rewardEXP(expReward);
+
+                //Reward Player money for winning.
                 System.out.println("You received: 1000 for winning!"); //hard coded
                 player.addMoney(1000); //hard coded 1000 money to add as reward.
                 result = "NPC Lost";
@@ -108,7 +100,7 @@ public class CombatEngine {
         return result;
     }
 
-
+    //This method is used in the main combat loop , runs after your attack move
     void opponentAttack(Player player, NPCFactory npc, GameEngine game){
         int opponentAttack;
         int opponentAttackChoice;
@@ -130,6 +122,7 @@ public class CombatEngine {
 
         Random random = new Random();
 
+        //Randomize opponent's move choice.
         opponentAttackChoice = random.nextInt(2);
 
         System.out.println("Opponent attacks!");
@@ -149,7 +142,7 @@ public class CombatEngine {
         }
 
     }
-
+    //used in the main combat loop to process the action phase. does the damage calc, energy usage etc etc.
     void processActionPhase(String userChoice, Player player, NPCFactory npc, GameEngine game){
 
         Scanner scanner = new Scanner(System.in);

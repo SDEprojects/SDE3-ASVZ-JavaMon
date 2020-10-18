@@ -15,7 +15,7 @@ public class Pokemon {
     private int initialEXPtoLevel;
     private int attack; //attack is the damage threshold. calculated by RNG range between (base attack from move) and (attack stat).
     private double currentExp; //Current exp until the next level up
-    private double expToLevelUp;
+    private double expToLevelUp; //This is the exp required to level up to the next level
     private final double expToLevelMultiplier = 1.05;
 
     public ArrayList<PokeAttack> attacksList = new ArrayList<>();

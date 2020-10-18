@@ -73,6 +73,9 @@ public class CombatEngine {
                 result = "NPC Lost";
                 break;
             } else {
+                player.playersPokemon.get(0).displayOutStatsAndAll();
+                npc.npcPokemonList.get(0).displayOutStatsAndAll();
+
                 String userChoice = actionPhaseChoiceTrainerBattle();
 
                 //This processes user choice and applies attack from user's choice
@@ -85,6 +88,7 @@ public class CombatEngine {
                 }
                 //If player's pokemon's hp reaches 0, break out of combat loop
                 opponentAttack(player,npc,game);
+
                 if (player.playersPokemon.get(0).getCurrentHealth() <= 0){
                     System.out.println("Your Pokemon fainted!");
                     result = "Player Lost";
@@ -118,16 +122,21 @@ public class CombatEngine {
 
         Random random = new Random();
 
-        opponentAttackChoice = random.nextInt(1) - 1;
+        opponentAttackChoice = random.nextInt(2);
+
+        System.out.println("Opponent attacks!");
+
 
         if (opponentAttackChoice == 0){
 
             opponentAttack = npcFirstPoke.getMove1().attack(npcFirstPoke.getAttack());
+            System.out.println("The opposing " + npcFirstPoke.getName() + " uses " + npcFirstPoke.getMove1().getAttackName());
             playerFirstPoke.takeDamage(opponentAttack);
 
         } else if (opponentAttackChoice == 1){
 
             opponentAttack = npcFirstPoke.getMove2().attack(npcFirstPoke.getAttack());
+            System.out.println("The opposing " + npcFirstPoke.getName() + " uses " + npcFirstPoke.getMove2().getAttackName());
             playerFirstPoke.takeDamage(opponentAttack);
         }
 
@@ -165,10 +174,14 @@ public class CombatEngine {
             String attackChoice = scanner.nextLine();
             //If user between attack move one or two
             if (attackChoice.equalsIgnoreCase(playerFirstPoke.getMove1().getAttackName())){
+                System.out.println(playerFirstPoke.getName() + " use " + playerFirstPoke.getMove1().getAttackName());
                 playerPokeAttack = playerFirstPoke.getMove1().attack(playerFirstPoke.getAttack());
+                playerFirstPoke.getMove1().attackUsed();
                 npcFirstPoke.takeDamage(playerPokeAttack);
             } else if (attackChoice.equalsIgnoreCase(playerFirstPoke.getMove2().getAttackName())){
+                System.out.println(playerFirstPoke.getName() + " use " + playerFirstPoke.getMove2().getAttackName());
                 playerPokeAttack = playerFirstPoke.getMove2().attack(playerFirstPoke.getAttack());
+                playerFirstPoke.getMove1().attackUsed();
                 npcFirstPoke.takeDamage(playerPokeAttack);
 
             } else if (userChoice.equalsIgnoreCase("back")){

@@ -16,6 +16,7 @@ public class PokeAttack {
         this.attackName = attackName;
         this.damage = damage;
         this.maxEnergy = maxEnergy;
+        this.currentEnergy = maxEnergy;
     }
 
     //Getters and Setters -----------------------------------------------------------------------
@@ -61,6 +62,7 @@ public class PokeAttack {
     //This method calculates the amount of damage to be dealt.
     int attack(int attackStat){
         int potentialDamage = damage + attackStat;
+
         return (int)(Math.random() * (potentialDamage - damage + 1) + damage);
     }
 

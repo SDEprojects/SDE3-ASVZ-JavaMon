@@ -49,6 +49,8 @@ public class GameEngine {
             if (userInput.split(" ")[0].toLowerCase().equals("interact")) {
                 String npc = userInput.split(" ", 2)[1];
                 System.out.println('"' + game.npcDialog(npc) + '"');
+                System.out.println(npc + " challenges you to a Pokemon Battle!");
+
 
                 NPCFactory newEncounterNPC = null;
 

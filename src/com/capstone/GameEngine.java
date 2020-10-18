@@ -17,10 +17,12 @@ public class GameEngine {
 
 
         InitXML game = new InitXML();
-        game.initNPCs();
+
+        //The order of initialization is important!
+        game.initAttacks(); //must be initialized before pokemon
+        game.initPokemon(); //must be initialized before npcs
+        game.initNPCs(); //must be initialized before rooms
         game.initRooms();
-        game.initAttacks();
-        game.initPokemon();
         game.initItems();
 
         TextParser parser = new TextParser();
@@ -46,25 +48,18 @@ public class GameEngine {
             String userInput = parser.getUserInput();
             if (userInput.split(" ")[0].toLowerCase().equals("interact")) {
                 String npc = userInput.split(" ", 2)[1];
+                System.out.println('"' + game.npcDialog(npc) + '"');
 
+                NPCFactory newEncounterNPC = null;
 
-                //simple check to see if the NPC name in the input is actually in the current room
-                if (player1.getCurrentRoom().getNpcName().toLowerCase().equals(npc.toLowerCase())) {
-                    //if they are in the room, display their dialog
-
-                    NPCFactory newEncounterNPC = null;
-                    System.out.println('"' + game.npcDialog(npc) + '"');
-                    for (NPCFactory encounterNPC : game.listOfNPCs){
-                        if (encounterNPC.getName().equalsIgnoreCase(npc)){
-                            System.out.println("Found the NPC it is: " + encounterNPC.getName());
-                            newEncounterNPC = encounterNPC;
-                            combatEngine.combatLoopTrainer(player1,newEncounterNPC,gameEngine);
-                        }
+                for (NPCFactory encounterNPC : game.listOfNPCs){
+                    if (encounterNPC.getName().equalsIgnoreCase(npc)){
+                        newEncounterNPC = encounterNPC;
                     }
-
-
-
                 }
+
+                combatEngine.combatLoopTrainer(player1,newEncounterNPC,gameEngine);
+
             }
 
 //            //for checking the map

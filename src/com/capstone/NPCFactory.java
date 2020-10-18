@@ -53,5 +53,4 @@ public class NPCFactory extends Player {
             }
         }
     }
-
 }

@@ -65,7 +65,4 @@
         <damage>4</damage>
         <energy>10</energy>
     </attack>
-
-
-
-<class>
+</class>

@@ -44,7 +44,9 @@ public class CombatEngine {
     String actionPhaseChoiceTrainerBattle(){
         //The userChoice here is what the user chooses to do
         Scanner scanner = new Scanner(System.in);
+        System.out.println("What would you like to do? <attack> or <item>");
         String userChoice = scanner.nextLine();
+
 
         if (!userChoice.equalsIgnoreCase("attack") && !userChoice.equalsIgnoreCase("item")){
             System.out.println("You can't do that.");

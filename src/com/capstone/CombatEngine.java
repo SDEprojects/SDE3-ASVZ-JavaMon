@@ -189,7 +189,7 @@ public class CombatEngine {
             } else if (attackChoice.equalsIgnoreCase(playerFirstPoke.getMove2().getAttackName())){
                 System.out.println(playerFirstPoke.getName() + " use " + playerFirstPoke.getMove2().getAttackName());
                 playerPokeAttack = playerFirstPoke.getMove2().attack(playerFirstPoke.getAttack());
-                playerFirstPoke.getMove1().attackUsed();
+                playerFirstPoke.getMove2().attackUsed();
                 npcFirstPoke.takeDamage(playerPokeAttack);
 
             } else if (userChoice.equalsIgnoreCase("back")){

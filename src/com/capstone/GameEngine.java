@@ -44,23 +44,24 @@ public class GameEngine {
 
             parser.checkPlayerCommand(game,gameEngine,player1);
             System.out.println("=====================================================");
-
+            //This is the start of the implementation for the game loop when player interacts with NPC
             String userInput = parser.getUserInput();
             if (userInput.split(" ")[0].toLowerCase().equals("interact")) {
                 String npc = userInput.split(" ", 2)[1];
-                System.out.println('"' + game.npcDialog(npc) + '"');
-                System.out.println(npc + " challenges you to a Pokemon Battle!");
 
+
+                System.out.println('"' + game.npcDialog(npc) + '"');
 
                 NPCFactory newEncounterNPC = null;
 
                 for (NPCFactory encounterNPC : game.listOfNPCs){
-                    if (encounterNPC.getName().equalsIgnoreCase(npc)){
+                    if (encounterNPC.getName().equalsIgnoreCase(npc) && !encounterNPC.npcPokemonList.isEmpty()){
                         newEncounterNPC = encounterNPC;
+                        System.out.println(npc + " challenges you to a Pokemon Battle!");
+                        combatEngine.combatLoopTrainer(player1,newEncounterNPC,gameEngine);
                     }
                 }
 
-                combatEngine.combatLoopTrainer(player1,newEncounterNPC,gameEngine);
 
             }
 

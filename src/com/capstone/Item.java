@@ -1,7 +1,6 @@
 package com.capstone;
 
-public class Items {
-
+public class Item {
     //fields
     private String name;
     private String effect;
@@ -9,7 +8,7 @@ public class Items {
     private int price;
 
     //ctors
-    public Items(String name, String effect, String description, int price) {
+    public Item(String name, String effect, String description, int price) {
         this.name = name;
         this.effect = effect;
         this.description = description;

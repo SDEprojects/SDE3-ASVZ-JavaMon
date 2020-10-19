@@ -2,8 +2,7 @@
 <class>
     <npc>
         <name>Professor Oak</name>
-        <dialog>Hey! You're finally here, I've been waiting for you. I'm going on vacation soon... and the flight I'm going on has a strict 1 Pokemon carry on limit. I'm going to need you to look after one while I'm gone! I'll even let you choose who you want to take!
-        Choose one: (Bulbasaur (Grass-Type), Charmander (Fire-Type), Squirtle (Water-Type))</dialog>
+        <dialog>My PokeUber should be getting here soon.. what do you want from me? Here take a potion.</dialog>
         <item>potion</item>
         <money>0</money>
         <pokemon>none</pokemon>
@@ -21,7 +20,7 @@
         <dialog>Have you seen the northern lights?</dialog>
         <item>none</item>
         <money>0</money>
-        <pokemon>none</pokemon>
+        <pokemon>Onix</pokemon>
     </npc>
 
     <npc>
@@ -29,7 +28,7 @@
         <dialog>Why you beefing? Wanna Fight?</dialog>
         <item>none</item>
         <money>0</money>
-        <pokemon>none</pokemon>
+        <pokemon>Pikachu</pokemon>
     </npc>
 
     <npc>
@@ -37,7 +36,7 @@
         <dialog>Dude, Pikachu is bomb.</dialog>
         <item>Rock</item>
         <money>0</money>
-        <pokemon>none</pokemon>
+        <pokemon>Squirtle</pokemon>
     </npc>
 
     <npc>
@@ -53,7 +52,7 @@
         <dialog>I will TRY to CATCH all of the bug Pokemons! No EXCEPTIONS!</dialog>
         <item>none</item>
         <money>0</money>
-        <pokemon>none</pokemon>
+        <pokemon>Weedle</pokemon>
     </npc>
 
     <npc>
@@ -61,7 +60,7 @@
         <dialog>This forest is nothing! I have mastered the art of mapping and navigating all labyrinths!</dialog>
         <item>none</item>
         <money>0</money>
-        <pokemon>none</pokemon>
+        <pokemon>Pidgey</pokemon>
     </npc>
 
     <npc>
@@ -69,7 +68,7 @@
         <dialog>Take a BREAK, let's have a battle!</dialog>
         <item>none</item>
         <money>0</money>
-        <pokemon>none</pokemon>
+        <pokemon>Oddish</pokemon>
     </npc>
 
     <npc>
@@ -77,7 +76,7 @@
         <dialog>Why are you acting sus?</dialog>
         <item>none</item>
         <money>0</money>
-        <pokemon>none</pokemon>
+        <pokemon>Charmander</pokemon>
     </npc>
 
     <npc>
@@ -93,7 +92,7 @@
         <dialog>I love the outdoors!</dialog>
         <item>none</item>
         <money>0</money>
-        <pokemon>none</pokemon>
+        <pokemon>Geodude</pokemon>
     </npc>
 
     <npc>
@@ -101,7 +100,7 @@
         <dialog>All these Rock-Type Pokemon around here! Im glad I have Plant (Grass-Type) with me!.</dialog>
         <item>none</item>
         <money>0</money>
-        <pokemon>none</pokemon>
+        <pokemon>Bellsprout</pokemon>
     </npc>
 
     <npc>
@@ -109,7 +108,7 @@
         <dialog>You shall not pass!</dialog>
         <item>none</item>
         <money>0</money>
-        <pokemon>none</pokemon>
+        <pokemon>Machop</pokemon>
     </npc>
 
     <npc>
@@ -117,7 +116,7 @@
         <dialog>Have you heard of the tale of the siren head?</dialog>
         <item>none</item>
         <money>0</money>
-        <pokemon>none</pokemon>
+        <pokemon>Psyduck</pokemon>
     </npc>
 
     <npc>
@@ -125,7 +124,7 @@
         <dialog>My Pokemon will ROCK your socks!</dialog>
         <item>none</item>
         <money>0</money>
-        <pokemon>none</pokemon>
+        <pokemon>Jigglypuff</pokemon>
     </npc>
 
     <npc>
@@ -133,7 +132,7 @@
         <dialog>I can speak to Pokemon.</dialog>
         <item>none</item>
         <money>0</money>
-        <pokemon>none</pokemon>
+        <pokemon>Meowth</pokemon>
     </npc>
 
     <npc>
@@ -141,7 +140,7 @@
         <dialog>I didn't know what a Pokemon was until on this week!</dialog>
         <item>none</item>
         <money>0</money>
-        <pokemon>none</pokemon>
+        <pokemon>Bulbasaur</pokemon>
     </npc>
 
     <npc>
@@ -149,6 +148,6 @@
         <dialog>I cant wait to Sous Vide some tuna steak for dinner!</dialog>
         <item>none</item>
         <money>0</money>
-        <pokemon>none</pokemon>
+        <pokemon>Goldeen</pokemon>
     </npc>
 </class>

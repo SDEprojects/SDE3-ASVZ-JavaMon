@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class Player {
     //fields, name and inventory
     private String name = "Emeke"; //default player name
-    private Collection<String> inventory = new ArrayList<>(); //inventory
+    private ArrayList<String> inventory = new ArrayList<>(); //inventory
     private int money = 9001; //initialize with 100 monies
     public ArrayList<Pokemon> playersPokemon = new ArrayList<>(); //This collection is where the player's pokemon is saved.
 
@@ -26,12 +26,20 @@ public class Player {
         this.money=money;
     }
 
+    public ArrayList<Pokemon> getPlayersPokemon() {
+        return playersPokemon;
+    }
+
+    public int getMoney() {
+        return money;
+    }
+
     //methods
     public String getName() {
         return name;
     }
 
-    public Collection<String> getInventory() {
+    public ArrayList<String> getInventory() {
         return inventory;
     }
 
@@ -45,6 +53,15 @@ public class Player {
 
     public void setCurrentRoom(Room currentRoom) {
         this.currentRoom = currentRoom;
+    }
+
+    /*
+    *Displays the current room Details
+     */
+
+    public void showRoomDetails() {
+        String roomDetails = currentRoom.getRoomDetails();
+        System.out.println(roomDetails);
     }
 
     public void checkMap(){

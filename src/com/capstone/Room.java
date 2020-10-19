@@ -1,5 +1,7 @@
 package com.capstone;
 
+import java.util.Collection;
+
 public class Room {
 
     //Class Fields
@@ -12,6 +14,9 @@ public class Room {
     private String southTile; //uses the data from <adjacent_south> in Rooms.txt XML
     private String eastTile; //uses the data from <adjacent_east> in Rooms.txt XML
     private String westTile; //uses the data from <adjacent_west> in Rooms.txt XML
+
+    private NPCFactory npcObj; //NPC object here is the npc that is in this room.
+
 
 
     //Constructor(s)
@@ -28,11 +33,11 @@ public class Room {
     }
 
     //Constructor that allows for npc and interactable instantiation.
-    public Room(String roomName, String roomDescription, String adjNorthTile, String adjSouthTile, String adjEastTile, String adjWestTile, String roomNPC, String roomInteractable) {
+    public Room(String roomName, String roomDescription, String adjNorthTile, String adjSouthTile, String adjEastTile, String adjWestTile, String roomNPC, String roomInteractable , Collection<NPCFactory> dataList) {
         this(roomName, roomDescription, adjNorthTile,adjSouthTile,adjEastTile,adjWestTile);
         npcName = roomNPC;
         interactableItem = roomInteractable;
-
+        processNPC(dataList);
     }
 
     //Getters and Setters
@@ -41,7 +46,9 @@ public class Room {
         return name;
     }
 
-
+    public NPCFactory getNpcObj() {
+        return npcObj;
+    }
 
     public String getNorthTile() {
         return northTile;
@@ -68,6 +75,18 @@ public class Room {
     }
 
     //Business Methods
+
+    public String getDescription(){
+        return description;
+    }
+
+    void processNPC(Collection<NPCFactory> dataList){
+        for(NPCFactory npc : dataList){
+            if (npc.getName() == npcName){
+                npcObj = npc;
+            }
+        }
+    }
 
     //This method displays room information to the user.
     void displayOutput(){
@@ -101,6 +120,31 @@ public class Room {
         if (itemList.isEmpty()){
 
         }*/
+    }
+
+    public String getRoomDetails() {
+
+        StringBuffer sb = new StringBuffer();
+
+        sb.append("Your current location: " + this.getName()).append("\n");
+
+        sb.append("Location Description: " + this.getDescription()).append("\n");
+
+        // Check if npcName is null or empty, if not print out the npc name.
+        String npcName = this.getNpcName();
+        if (npcName != null && !npcName.trim().isEmpty()) {
+            sb.append("You see " + npcName).append("\n");
+        } else {
+            sb.append("No one is here.").append("\n");
+        }
+        // Check if itemList is empty
+        String interactableItem = this.getInteractableItem();
+        if (interactableItem != null && !interactableItem.trim().isEmpty()) {
+            sb.append("You observe the area and see " + interactableItem).append("\n");
+        } else {
+            sb.append("You look around and find nothing of interest here.").append("\n");
+        }
+        return sb.toString();
     }
 }
 

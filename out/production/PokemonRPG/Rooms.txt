@@ -54,8 +54,8 @@
         <description>A somewhat dense forest!</description>
         <adjacent_north>Dark Forest</adjacent_north>
         <adjacent_south>Route 1</adjacent_south>
-        <adjacent_east>Cave Entrance</adjacent_east>
-        <adjacent_west>Clearing</adjacent_west>
+        <adjacent_east>Clearing</adjacent_east>
+        <adjacent_west>Cave Entrance</adjacent_west>
         <npc>Bug Catcher Sanju</npc>
         <interactable>Tall Grass</interactable>
     </room>
@@ -108,9 +108,9 @@
         <adjacent_north>nothing</adjacent_north>
         <adjacent_south>Route 2</adjacent_south>
         <adjacent_east>Viridian City PokeMart</adjacent_east>
-        <adjacent_west>Viridian City Gym</adjacent_west>
+        <adjacent_west>Viridian City Gym Room 1</adjacent_west>
         <npc>Nurse Didi</npc>
-        <interactable>nothing</interactable>
+        <interactable>Healing Station</interactable>
     </room>
     <room>
         <name>Viridian City Gym Room 1</name>
@@ -154,7 +154,7 @@
     </room>
     <room>
         <name>Viridian City PokeMart</name>
-        <description>Gym Leader: Subash Pokemon Type: Rock</description>
+        <description>A place where you can buy items!</description>
         <adjacent_north>nothing</adjacent_north>
         <adjacent_south>nothing</adjacent_south>
         <adjacent_east>nothing</adjacent_east>

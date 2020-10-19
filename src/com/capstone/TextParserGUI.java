@@ -10,123 +10,148 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.awt.*;
 import java.io.File;
+import java.io.PrintStream;
 import java.util.Collection;
 import java.util.Scanner;
 
 /*The TextParser class parses and validates the user (console) inputs*/
 public class TextParserGUI {
 
-    public void checkPlayerCommand(InitXML game, GameEngine gameEngine, Player player1, String userInput) {
-        try {
-                if (inputValidation(userInput)) {
-                    String userActions = userInput.split(" ")[0];
-                    String userArgument = userInput.split(" ", 2)[1];
+    public void checkPlayerCommand(InitXML game, GameEngine gameEngine, Player player1, String userInput, PrintStream commonDisplayOut, PrintStream mapDisplayOut, PrintStream roomDisplayOut) {
+    System.setOut(commonDisplayOut);
+    try {
+        if (inputValidation(userInput)) {
+            String userActions = userInput.split(" ")[0];
+            String userArgument = userInput.split(" ", 2)[1];
 
-                    File inputFile = new File("data", "keyWords.txt");
-                    DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-                    DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-                    Document doc = dBuilder.parse(inputFile);
-                    doc.getDocumentElement().normalize();
-                    // prints the root element of the file which is "keyWords" using getNodeName()
-                    // System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
+            File inputFile = new File("data", "keyWords.txt");
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.parse(inputFile);
+            doc.getDocumentElement().normalize();
+            // prints the root element of the file which is "keyWords" using getNodeName()
+            // System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
 
                     /* Insert if statement for "action item by checking if the first word corresponds to items in
                     action group - need to initialize reference"*/
-                    // creates and populates a list of nodes tag items by the tag name "action"
-                    NodeList nList = doc.getElementsByTagName("action");
-                    System.out.println("----------------------------");
+            // creates and populates a list of nodes tag items by the tag name "action"
+            NodeList nList = doc.getElementsByTagName("action");
+            //System.out.println("----------------------------");
 
-                    // iterates over node list of tag names "action"
-                    for (int temp = 0; temp < nList.getLength(); temp++) {
-                        // fetches node item from list by their index position
-                        Node nNode = nList.item(temp);
-                        // System.out.println("Node list length is: " + nList.getLength());
-                        // prints current node name
-                        // System.out.println("\nCurrent Element :" + nNode.getNodeName());
+            // iterates over node list of tag names "action"
+            for (int temp = 0; temp < nList.getLength(); temp++) {
+                // fetches node item from list by their index position
+                Node nNode = nList.item(temp);
+                // System.out.println("Node list length is: " + nList.getLength());
+                // prints current node name
+                // System.out.println("\nCurrent Element :" + nNode.getNodeName());
 
-                        if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-                            Element eElement = (Element) nNode;
-                            // for(int a = 0; a < userActions.length; a++)
-                            if (eElement.getElementsByTagName("buy").item(0).getTextContent().contains(userActions)) {
-                                if (player1.getCurrentRoom().getInteractableItem().toLowerCase().equals("shop counter")) {
-                                    switch (userArgument) {
-                                        case "potion":
-                                            player1.buyItem("potion", 100);
-                                            break;
-                                        case "super potion":
-                                            player1.buyItem("super potion", 500);
-                                            break;
-                                        case "full heal":
-                                            player1.buyItem("full heal", 1000);
-                                            break;
-                                        case "revive":
-                                            player1.buyItem("revive", 2500);
-                                            break;
-                                        default:
-                                            System.out.println("No such item here to buy!");
-                                    }
-                                }
-                                else {
-                                    System.out.println("There's no shop here! You can't buy anything!");
-                                }
-                            }
-                            else if (eElement.getElementsByTagName("engage").item(0).getTextContent().contains(userActions)) {
-                                playerInteracts(player1, userArgument);
-                            } else if (eElement.getElementsByTagName("communicate").item(0).getTextContent().contains(userActions)) {
-                                playerTalks(player1, game, userArgument);
-                            } else if (eElement.getElementsByTagName("utilize").item(0).getTextContent().contains(userActions)) {
-                                if (userInput.split(" ").length <= 2) {
-                                    System.out.println("Please include which Pokemon you want to use it on");
-                                }
-                                else {
-                                    String pokemon = userArgument.substring(userArgument.lastIndexOf(" ") + 1);
-                                    String item = userArgument.substring(0,userArgument.lastIndexOf(" "));
-                                    useItem(player1, gameEngine, item,pokemon);
-                                }
-                            } else if (eElement.getElementsByTagName("check").item(0).getTextContent().contains(userActions)) {
-                                if (eElement.getElementsByTagName("bag").item(0).getTextContent().contains(userArgument)) {
-                                    player1.checkInventory();
-                                } else if (eElement.getElementsByTagName("pokemon").item(0).getTextContent().contains(userArgument)) {
-                                    player1.checkPokemon();
-                                } else if (eElement.getElementsByTagName("map").item(0).getTextContent().contains(userArgument)) {
-                                    player1.checkMap();
-                                } else {
-                                    System.out.println("You don't have that... you can't check it!");
-                                }
-                            } else if (eElement.getElementsByTagName("get").item(0).getTextContent().contains(userActions)) {
-                                if (eElement.getElementsByTagName("help").item(0).getTextContent().contains(userArgument)) {
-                                    player1.showHelp();
-                                } else {
-                                    System.out.println("Did you mean to type: get help?");
-                                }
-                            } else if (eElement.getElementsByTagName("go").item(0).getTextContent().contains(userActions)) {
-                                if (eElement.getElementsByTagName("up").item(0).getTextContent().contains(userArgument) && player1.validMove("north")) {
-                                    System.out.println("You go North");
-                                    player1.setCurrentRoom(game.getRoom(player1.getCurrentRoom().getNorthTile()));
-                                } else if (eElement.getElementsByTagName("down").item(0).getTextContent().contains(userArgument) && player1.validMove("south")) {
-                                    System.out.println("You go South");
-                                    player1.setCurrentRoom(game.getRoom(player1.getCurrentRoom().getSouthTile()));
-                                } else if (eElement.getElementsByTagName("left").item(0).getTextContent().contains(userArgument) && player1.validMove("west")) {
-                                    System.out.println("You go West");
-                                    player1.setCurrentRoom(game.getRoom(player1.getCurrentRoom().getWestTile()));
-                                } else if (eElement.getElementsByTagName("right").item(0).getTextContent().contains(userArgument) && player1.validMove("east")) {
-                                    System.out.println("You go East");
-                                    player1.setCurrentRoom(game.getRoom(player1.getCurrentRoom().getEastTile()));
-                                } else {
-                                    System.out.println("Invalid direction, please try again :<");
-                                }
+                if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+                    Element eElement = (Element) nNode;
+                    // for(int a = 0; a < userActions.length; a++)
+                    if (eElement.getElementsByTagName("buy").item(0).getTextContent().contains(userActions)) {
+                        if (player1.getCurrentRoom().getInteractableItem().toLowerCase().equals("shop counter")) {
+                            switch (userArgument) {
+                                case "potion":
+                                    player1.buyItem("potion", 100);
+                                    break;
+                                case "super potion":
+                                    player1.buyItem("super potion", 500);
+                                    break;
+                                case "full heal":
+                                    player1.buyItem("full heal", 1000);
+                                    break;
+                                case "revive":
+                                    player1.buyItem("revive", 2500);
+                                    break;
+                                default:
+                                    System.out.println("No such item here to buy!");
                             }
                         }
+                        else {
+                            System.out.println("There's no shop here! You can't buy anything!");
+                        }
+                    }
+                    else if (eElement.getElementsByTagName("engage").item(0).getTextContent().contains(userActions)) {
+                        playerInteracts(player1, userArgument);
+                    } else if (eElement.getElementsByTagName("communicate").item(0).getTextContent().contains(userActions)) {
+                        playerTalks(player1, game, userArgument);
+                    } else if (eElement.getElementsByTagName("utilize").item(0).getTextContent().contains(userActions)) {
+                        if (userInput.split(" ").length <= 2) {
+                            System.out.println("Please include which Pokemon you want to use it on");
+                        }
+                        else {
+                            String pokemon = userArgument.substring(userArgument.lastIndexOf(" ") + 1);
+                            String item = userArgument.substring(0,userArgument.lastIndexOf(" "));
+                            useItem(player1, gameEngine, item,pokemon);
+                        }
+                    } else if (eElement.getElementsByTagName("check").item(0).getTextContent().contains(userActions)) {
+                        if (eElement.getElementsByTagName("bag").item(0).getTextContent().contains(userArgument)) {
+                            player1.checkInventory();
+                        } else if (eElement.getElementsByTagName("pokemon").item(0).getTextContent().contains(userArgument)) {
+                            player1.checkPokemon();
+                        } else if (eElement.getElementsByTagName("map").item(0).getTextContent().contains(userArgument)) {
+                            mapDisplayOut.flush();
+                            System.setOut(mapDisplayOut);
+                            player1.checkMap();
+                            System.setOut(commonDisplayOut);
+                        } else {
+                            System.out.println("You don't have that... you can't check it!");
+                            //System.out.println("----------------------------");
+                        }
+                    } else if (eElement.getElementsByTagName("get").item(0).getTextContent().contains(userActions)) {
+                        if (eElement.getElementsByTagName("help").item(0).getTextContent().contains(userArgument)) {
+                            player1.showHelp();
+                        } else {
+                            System.out.println("Did you mean to type: get help?");
+                            //System.out.println("----------------------------");
+                        }
+                    } else if (eElement.getElementsByTagName("go").item(0).getTextContent().contains(userActions)) {
+                        if (eElement.getElementsByTagName("up").item(0).getTextContent().contains(userArgument) && player1.validMove("north")) {
+                            System.out.println("You go North");
+                            //System.out.println("----------------------------");
+                            System.setOut(roomDisplayOut);
+                            player1.setCurrentRoom(game.getRoom(player1.getCurrentRoom().getNorthTile()));
+                            player1.showRoomDetails();
+                        } else if (eElement.getElementsByTagName("down").item(0).getTextContent().contains(userArgument) && player1.validMove("south")) {
+                            System.out.println("You go South");
+                            //System.out.println("----------------------------");
+                            System.setOut(roomDisplayOut);
+                            player1.setCurrentRoom(game.getRoom(player1.getCurrentRoom().getSouthTile()));
+                            player1.showRoomDetails();
+                        } else if (eElement.getElementsByTagName("left").item(0).getTextContent().contains(userArgument) && player1.validMove("west")) {
+                            System.out.println("You go West");
+                            //System.out.println("----------------------------");
+                            System.setOut(roomDisplayOut);
+                            player1.setCurrentRoom(game.getRoom(player1.getCurrentRoom().getWestTile()));
+                            player1.showRoomDetails();
+                        } else if (eElement.getElementsByTagName("right").item(0).getTextContent().contains(userArgument) && player1.validMove("east")) {
+                            System.out.println("You go East");
+                            //System.out.println("----------------------------");
+                            System.setOut(roomDisplayOut);
+                            player1.setCurrentRoom(game.getRoom(player1.getCurrentRoom().getEastTile()));
+                            player1.showRoomDetails();
+                        } else {
+//                                	System.setOut(commonDisplayOut);
+                            System.out.println("Invalid direction, please try again :<");
+                            //System.out.println("----------------------------");
+                        }
+                        System.setOut(System.out);
                     }
                 }
-                else {
-                }
-
-        } catch (Exception e) {
-            System.out.println("There was an error :< ");
+            }
+        }
+        else {
+            System.out.println("Invalid input.");
             System.out.println("----------------------------");
         }
+
+    } catch (Exception e) {
+        System.out.println("There was an error :< ");
+        System.out.println("----------------------------");
     }
+    System.setOut(System.out);
+}
     // change to package private?
     // make public for unit-testing purpose? APIs available to text private methods but may not be best practice
     private boolean inputValidation(String input) {
@@ -209,7 +234,5 @@ public class TextParserGUI {
         else {
             System.out.println("You don't own that Pokemon!");
         }
-
-
     }
 }

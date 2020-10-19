@@ -1,9 +1,6 @@
 package com.capstone;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Font;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.PrintStream;
@@ -12,35 +9,53 @@ import java.util.Collection;
 import java.util.Scanner;
 
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.CompoundBorder;
 
+/*
+*The GUI class for the Pokemon Game.
+ */
 
 public class GUI2nd {
-    private ActionListener titleScreenHandler;
 
     private JFrame window;
     private JPanel titleNamePanel;
-    private JPanel startButtonPanel;
-    private JTextArea mainTextArea;
     private final Font normalFont = new Font("Times New Roman", Font.PLAIN, 28);
 
     private String[] choiceDisplayArr = {"Bulbasaur (Grass-Type)", "Charmander (Fire-Type)", "Squirtle (Water-Type)"};
     private String[] choiceActionCommandArr = {"bulbasaur", "charmander", "squirtle"};
-    private JComboBox<String> choiceCombo = new JComboBox(choiceDisplayArr);
-    private String selectedChoice = null;
 
-    JTextArea output = new JTextArea(20,25);
+    // Creates and Initializes the text area.
+    JTextArea commonDisplay = new JTextArea(20,25);
     JTextArea pokemonDisplay = new JTextArea(20,10);
     JTextArea mapDisplay = new JTextArea(20,10);
+    JTextArea roomDisplay = new JTextArea(6,50);
 
-
+    private PrintStream roomDisplayOut = new PrintStream(new CustomOutputStream(roomDisplay));
+    private PrintStream commonDisplayOut = new PrintStream(new CustomOutputStream(commonDisplay));
+    private PrintStream mapDisplayOut = new PrintStream(new CustomOutputStream(mapDisplay));
+    private PrintStream pokemonDisplayOut = new PrintStream(new CustomOutputStream(pokemonDisplay));
 
     private GameEngine gameEngine = new GameEngine();
+    //private CombatEngine combatEngine = new CombatEngine();
     private String starter;
-    private String roomName;
     private Player player1 = new Player();
     private InitXML game = new InitXML();
     private TextParserGUI parser = new TextParserGUI();
+    private JPanel mainPanel;
 
+    //Pokemon Image Icons
+    private ImageIcon balbasaurIcon;
+    private ImageIcon charmanderIcon;
+    private ImageIcon squirtleIcon;
+
+    //Pokemon Image Label
+    private JLabel pokemonImageLabel;
+
+    //Path of the starting screen image
+    private String startPageImagePath = "images/pokemon.gif";
+
+    //main method.
     public static void main(String[] args) {
         GUI2nd gui = new GUI2nd();
         gui.game.initRooms();
@@ -50,14 +65,19 @@ public class GUI2nd {
         gui.initFrame();
         gui.chooseStarter(gui.game, gui.player1);
     }
+
+    //initialize the frame components
     private void initFrame() {
+
+        setDisplayNonEditable();
+        createPokemonTypeImages();
 
         // Initializing JFrame Window
         window = new JFrame();
-        window.setSize(800, 600);
+        window.setSize(1200, 600);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //window.setResizable(false);
         window.getContentPane().setBackground(Color.BLACK);
-//        window.setLayout(null);
 
 
         //Initializing Title Name Panel
@@ -65,41 +85,71 @@ public class GUI2nd {
         titleNamePanel.setBounds(100, 100, 600, 150);
         titleNamePanel.setBackground(Color.BLACK);
 
-
         JLabel titleNameLabel = new JLabel("");
         titleNameLabel.setForeground(Color.WHITE);
         titleNameLabel.setFont(new Font("Times New Roman", Font.PLAIN, 60));
 
         titleNamePanel.add(titleNameLabel);
 
-        //Initializing Start Button Panel
-        startButtonPanel = new JPanel();
-        startButtonPanel.setBounds(300, 400, 200, 100);
-        startButtonPanel.setBackground(Color.BLACK);
-
-
-        JButton startButton = new JButton("START");
-        startButton.setBackground(Color.BLACK);
-        startButton.setForeground(Color.RED);
-        startButton.setFont(normalFont);
-        startButton.addActionListener(titleScreenHandler);
-
-        startButtonPanel.add(startButton);
-
         window.add(titleNamePanel);
-//        window.add(startButtonPanel);
-
         window.setVisible(true);
-
-
     }
 
+    /**
+     * Create images for various Pokemon types.
+     */
+    private void createPokemonTypeImages() {
+        String balbasaurPath = "images/Balbasaur-Pokemon.png";
+        String charmanderPath = "images/Charmander-Pokemon.png";
+        String squirtlePath = "images/Squirtle-Pokemon.png";
+
+        Image balbasaurImg = transformImage(createImageIcon(balbasaurPath, ""), 120, 120);
+        Image charmanderImg = transformImage(createImageIcon(charmanderPath, ""), 120, 120);
+        Image squirtleImg = transformImage(createImageIcon(squirtlePath, ""), 120, 120);
+
+        balbasaurIcon = new ImageIcon(balbasaurImg);
+        charmanderIcon = new ImageIcon(charmanderImg);
+        squirtleIcon = new ImageIcon(squirtleImg);
+    }
+
+    /**
+     * Transforms the given icon's image to scaled instance based on the given width and height.
+     * @param icon
+     * @param width
+     * @param height
+     * @return
+     */
+
+    private Image transformImage(ImageIcon icon, int width, int height) {
+        Image image = icon.getImage(); // transform it
+        Image newimg = image.getScaledInstance(width, height,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
+        return newimg;
+    }
+
+    //Make all the display text area non editable.
+    private void setDisplayNonEditable() {
+        roomDisplay.setEditable(false);
+        commonDisplay.setEditable(false);
+        mapDisplay.setEditable(false);
+        pokemonDisplay.setEditable(false);
+    }
+    /**
+     * Select the Pokemon type.
+     */
 
     public void chooseStarter(InitXML game, Player player) {
         JPanel starterPokemonPanel = new JPanel();
         starterPokemonPanel.setLayout(new BoxLayout(starterPokemonPanel, BoxLayout.PAGE_AXIS)); //center the layout here later
+
+        JLabel pokemonImageLabel = getPokemonImageLabel();
+        starterPokemonPanel.add(pokemonImageLabel);
+
         starterPokemonPanel.add(new JLabel("You're in OakRoom"));
-        starterPokemonPanel.add(new JLabel("Professor Oak: Hey! You're finally here, I've been waiting for you.\nI'm going on vacation soon... and the flight I'm going on has a strict 1 Pokemon carry on limit.\nI'm going to need you to look after one while I'm gone! I'll even let you choose who you want to take!\n"));
+        starterPokemonPanel.add(new JLabel("..."));
+        starterPokemonPanel.add(new JLabel("Professor Oak: Hey! You're finally here, I've been waiting for you."));
+        starterPokemonPanel.add(new JLabel("I'm going on vacation soon... and the flight I'm going on has a strict 1 Pokemon carry on limit."));
+        starterPokemonPanel.add(new JLabel("I'm going to need you to look after one while I'm gone! I'll even let you choose who you want to take!"));
+        starterPokemonPanel.add(new JLabel("..."));
 
         //Group the radio buttons.
         ButtonGroup group = new ButtonGroup();
@@ -112,6 +162,7 @@ public class GUI2nd {
             }
         };
 
+        starterPokemonPanel.add(new JLabel("..."));
         starterPokemonPanel.add(new JLabel("Choose One:"));
         for (int i = 0; i < choiceDisplayArr.length; i++) {
             JRadioButton radio = new JRadioButton(choiceDisplayArr[i]);
@@ -137,34 +188,75 @@ public class GUI2nd {
                         player.playersPokemon.add(pokemon);
                         System.out.println("You chose: " + starter);
                         for (Pokemon playersFirstPokemon : player.playersPokemon) {
-//	    					playersFirstPokemon.displayOutStatsAndAll();
+                            System.setOut(pokemonDisplayOut);
+                            playersFirstPokemon.displayOutStatsAndAll();
+                            System.setOut(System.out);
+
                             displayOutStatsAndAll(playersFirstPokemon, player);
+                            setPokemonImageLabel(playersFirstPokemon);
                         }
                     }
                 }
             }
-        });
 
+        });
 
         window.getContentPane().removeAll();
         window.setLayout(new BorderLayout());
-        window.getContentPane().add(starterPokemonPanel);
+        window.getContentPane().add(getBorderedPanel(starterPokemonPanel), BorderLayout.CENTER);
         window.revalidate();
     }
 
+    /*
+     * Changes the pokemon image label based on the given pokemon's name
+     */
+
+    protected void setPokemonImageLabel(Pokemon pokemon) {
+        switch(pokemon.getName()) {
+            case "Balbasaur":
+                pokemonImageLabel.setIcon(balbasaurIcon);
+                break;
+            case "Charmander":
+                pokemonImageLabel.setIcon(charmanderIcon);
+                break;
+            case "Squirtle":
+                pokemonImageLabel.setIcon(squirtleIcon);
+                break;
+        }
+    }
+
+    /**
+     * Create Pokemon image label
+     */
+
+    private JLabel getPokemonImageLabel() {
+        Image img = transformImage(createImageIcon(startPageImagePath, ""), 120, 120);
+        ImageIcon icon = new ImageIcon(img);  // transform it back
+        JLabel imageLabel = new JLabel("", icon, JLabel.CENTER);
+        return imageLabel;
+    }
+
+    /**
+     * Returns an ImageIcon, or null if the path was invalid.
+     *
+     */
+    private ImageIcon createImageIcon(String path, String description) {
+        java.net.URL imgURL = getClass().getResource(path);
+        if (imgURL != null) {
+            return new ImageIcon(imgURL, description);
+        } else {
+            System.err.println("Couldn't find file: " + path);
+            return null;
+        }
+    }
+
+    /**
+     * Display details of the player.
+     */
+
     public void displayOutStatsAndAll(Pokemon pokemon, Player player) {
 
-        output.setText("");
-        output.append("=====================================================" + "\n");
-        output.append("You're in OakRoom" + "\n");
-        output.append("Pokemon: " + pokemon.getName() + "\n");
-        output.append("Pokemon Type: " + pokemon.getType() + "\n");
-        output.append("Pokemon Level: " + pokemon.getLevel() + "\n");
-        output.append("Pokemon HP: " + "[" + pokemon.getCurrentHealth() + "/" + pokemon.getMaxHealth() + "]" + "\n");
-        output.append("Pokemon Attack: " + pokemon.getAttack() + "\n");
-        output.append("=====================================================" + "\n");
-
-        JScrollPane scroll = new JScrollPane (output,
+        JScrollPane scroll = new JScrollPane (commonDisplay,
                 JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scroll.setAlignmentX(Component.CENTER_ALIGNMENT);
 
@@ -172,116 +264,96 @@ public class GUI2nd {
         Room startingRoom = game.getRoom(roomName);
         player1.setCurrentRoom(startingRoom);
 
-//        player1.getCurrentRoom().displayOutput();
-        Room currentRoom = player1.getCurrentRoom();
-        JPanel roomP = getRoomDetailsPanel(currentRoom);
+        //Display room details
+        showRoomDetails(player);
 
-
-        JPanel southP = new JPanel();
-        southP.setLayout(new BoxLayout(southP, BoxLayout.PAGE_AXIS));
+        //Create input panel
+        JPanel inputP = new JPanel();
+        inputP.setLayout(new BoxLayout(inputP, BoxLayout.PAGE_AXIS));
         JTextField inputTF = new JTextField(20);
-        southP.add(new JLabel("Enter your command: "));
-        southP.add(inputTF);
+        inputP.add(new JLabel("Enter your command: "));
+        inputP.add(inputTF);
 
         JButton submitB = new JButton("Submit");
-        southP.add(submitB);
+        inputP.add(submitB);
         submitB.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                PrintStream printStream = new PrintStream(new CustomOutputStream(output));
-                System.setOut(printStream);
-                parser.checkPlayerCommand(game, gameEngine, player1, inputTF.getText());
-                System.setOut(System.out);
-                setCurrentRoomDetails(player.getCurrentRoom());
+                commonDisplay.setText("");
+                parser.checkPlayerCommand(game, gameEngine, player1, inputTF.getText(), commonDisplayOut, mapDisplayOut, roomDisplayOut);
+                showRoomDetails(player);
+                parser.checkPlayerCommand(game, gameEngine, player1, "check map", commonDisplayOut, mapDisplayOut, roomDisplayOut);
+                inputTF.setText("");
             }
+
         });
 
-        //this is for the static displays of pokemon status and map
-        pokemonDisplay = getPokemonDisplay();
-        mapDisplay = getMapDisplay();
+        //Create room Panel with room details display
+        JPanel roomPanel = new JPanel();
+        roomPanel.setLayout(new BorderLayout());
+        roomPanel.add(getBorderedPanel(roomDisplay), BorderLayout.CENTER);
 
-//        JPanel leftPokemonDisplayPanel = new JPanel();
-//        //leftPokemonDisplayPanel.setLayout(new BoxLayout(pokemonDisplay, BoxLayout.PAGE_AXIS));
-//        leftPokemonDisplayPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
-//
-//        JPanel rightMapDisplay = new JPanel();
-//        //rightMapDisplay.setLayout(new BoxLayout(mapDisplay, BoxLayout.PAGE_AXIS));
-//        rightMapDisplay.setAlignmentX(Component.RIGHT_ALIGNMENT);
+        //the pokemon Details Panel
+        JPanel pokemonPanel = new JPanel();
+        pokemonPanel.setLayout(new BoxLayout(pokemonPanel, BoxLayout.PAGE_AXIS));
+        pokemonPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        pokemonImageLabel = new JLabel("", balbasaurIcon, JLabel.CENTER);
+        pokemonPanel.add(pokemonImageLabel);
+        pokemonPanel.add(pokemonDisplay);
 
+        //Create Middle Panel with
+        //the pokemon Details Panel,
+        //the Output Display Panel and the Bag Panel.
+
+        JPanel middlePanel = new JPanel();
+        middlePanel.setLayout(new BorderLayout());
+
+        middlePanel.add(getBorderedPanel(pokemonPanel), BorderLayout.WEST);
+        middlePanel.add(getBorderedPanel(commonDisplay), BorderLayout.CENTER);
+        middlePanel.add(getBorderedPanel(mapDisplay), BorderLayout.EAST);
+
+        //Setup Main Panel with
+        //RoomDetails Panel, the Middle Panel and the Input Panel.
+        mainPanel = new JPanel();
+        mainPanel.setLayout(new BorderLayout());
+
+        //Add RoomDetails Panel
+        mainPanel.add(roomPanel, BorderLayout.NORTH);
+        mainPanel.add(middlePanel, BorderLayout.CENTER);
+        mainPanel.add(getBorderedPanel(inputP), BorderLayout.SOUTH);
+
+        //Add the mainPanel to the window.
         window.getContentPane().removeAll();
         window.setLayout(new BorderLayout());
-        window.getContentPane().add(roomP, BorderLayout.NORTH);
-//        window.getContentPane().add(leftPokemonDisplayPanel, BorderLayout.LINE_START);
-        window.getContentPane().add(scroll, BorderLayout.CENTER);
-//        window.getContentPane().add(rightMapDisplay, BorderLayout.LINE_END);
-        window.getContentPane().add(southP, BorderLayout.SOUTH);
-        window.revalidate();
+        window.getContentPane().add(mainPanel);
 
-
-    }
-
-    public JTextArea getMapDisplay() {
-        JTextArea mapDisplay = new JTextArea();
-        PrintStream printStream = new PrintStream(new CustomOutputStream(mapDisplay));
-        System.setOut(printStream);
-        player1.checkMap();
-        System.setOut(System.out);
-        return  mapDisplay;
-    }
-
-    public JTextArea getPokemonDisplay() {
-        JTextArea pokemonDisplay = new JTextArea();
-        PrintStream printStream = new PrintStream(new CustomOutputStream(pokemonDisplay));
-        System.setOut(printStream);
-        player1.checkPokemon();
-        System.setOut(System.out);
-        return  pokemonDisplay;
-    }
-
-    private void setCurrentRoomDetails(Room currentRoom) {
-        JPanel roomP = getRoomDetailsPanel(currentRoom);
-//        JTextArea pokemonDisplay = getPokemonDisplay();
-//        JTextArea mapDisplay = getMapDisplay();
-        window.getContentPane().add(roomP, BorderLayout.NORTH);
-//        window.getContentPane().add(pokemonDisplay, BorderLayout.LINE_START);
-//        window.getContentPane().add(mapDisplay, BorderLayout.LINE_END);
-//        window.repaint();
+        //Revalidate to make sure that the newly added components are shown.
         window.revalidate();
     }
 
-    private void getDisplayPokemonPanel() {
+    /**
+     * Adds the given component to a JPanel with border.
+     */
 
-    }
-
-    private JPanel getRoomDetailsPanel(Room room) {
-        JPanel vboxP = new JPanel();
-        vboxP.setLayout(new BoxLayout(vboxP, BoxLayout.PAGE_AXIS));
-        vboxP.setAlignmentX(Component.CENTER_ALIGNMENT);
-
-        vboxP.add(new JLabel("Your current location: " +  room.getName()));
-        vboxP.add(new JLabel("Location Description: " + room.getDescription()));
-
-        //Check if npcName is null or empty, if not print out the npc name.
-        String npcName = room.getNpcName();
-        if(npcName != null && !npcName.trim().isEmpty()){
-            vboxP.add(new JLabel("You see " + npcName));
-        } else {
-            vboxP.add(new JLabel("No one is here."));
-        }
-        //Check if itemList is empty
-        String interactableItem = room.getInteractableItem();
-        if(interactableItem != null && !interactableItem.trim().isEmpty()){
-            vboxP.add(new JLabel("You observe the area and see " + interactableItem)); //singular item for first iteration
-        } else {
-            vboxP.add(new JLabel("You look around and find nothing of interest here."));
-        }
-
+    private JPanel getBorderedPanel(JComponent comp) {
         JPanel p = new JPanel();
-        p.add(vboxP);
-
+        Border blueLine = BorderFactory.createLineBorder(Color.blue);
+        Border emptyBorder = BorderFactory.createEmptyBorder(10, 10, 10, 10);
+        CompoundBorder compound = BorderFactory.createCompoundBorder(blueLine, emptyBorder);
+        p.setBorder(compound);
+        //Add component to the panel
+        p.add(comp);
         return p;
     }
 
-
+    /**
+     * Show the details of the current room of the given player.
+     */
+    private void showRoomDetails(Player player) {
+        roomDisplayOut.flush();
+        System.setOut(roomDisplayOut);
+        player.showRoomDetails();
+        System.setOut(System.out);
+    }
 }

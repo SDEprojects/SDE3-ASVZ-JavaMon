@@ -55,6 +55,15 @@ public class Player {
         this.currentRoom = currentRoom;
     }
 
+    /*
+    *Displays the current room Details
+     */
+
+    public void showRoomDetails() {
+        String roomDetails = currentRoom.getRoomDetails();
+        System.out.println(roomDetails);
+    }
+
     public void checkMap(){
         //displays rooms in the 4 cardinal directions and your current room
         System.out.println("You are currently in: " + this.currentRoom.getName());
@@ -181,7 +190,4 @@ public class Player {
                 ", currentRoom=" + currentRoom +
                 '}';
     }
-
-
-
 }

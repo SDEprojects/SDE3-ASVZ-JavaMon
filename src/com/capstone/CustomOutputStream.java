@@ -24,4 +24,9 @@ public class CustomOutputStream extends OutputStream {
         // scrolls the text area to the end of data
         textArea.setCaretPosition(textArea.getDocument().getLength());
     }
+
+    @Override
+    public void flush() throws IOException {
+        textArea.setText("");
+    }
 }

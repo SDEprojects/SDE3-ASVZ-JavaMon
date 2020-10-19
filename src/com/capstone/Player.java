@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class Player {
     //fields, name and inventory
     private String name = "Emeke"; //default player name
-    private Collection<String> inventory = new ArrayList<>(); //inventory
+    private ArrayList<String> inventory = new ArrayList<>(); //inventory
     private int money = 9001; //initialize with 100 monies
     public ArrayList<Pokemon> playersPokemon = new ArrayList<>(); //This collection is where the player's pokemon is saved.
 
@@ -39,7 +39,7 @@ public class Player {
         return name;
     }
 
-    public Collection<String> getInventory() {
+    public ArrayList<String> getInventory() {
         return inventory;
     }
 

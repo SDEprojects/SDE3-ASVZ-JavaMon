@@ -34,10 +34,10 @@ public class GUI2nd {
     private PrintStream roomDisplayOut = new PrintStream(new CustomOutputStream(roomDisplay));
     private PrintStream commonDisplayOut = new PrintStream(new CustomOutputStream(commonDisplay));
     private PrintStream mapDisplayOut = new PrintStream(new CustomOutputStream(mapDisplay));
-    private PrintStream pokemonDisplayOut = new PrintStream(new CustomOutputStream(pokemonDisplay));
+    PrintStream pokemonDisplayOut = new PrintStream(new CustomOutputStream(pokemonDisplay));
 
     private GameEngine gameEngine = new GameEngine();
-    private CombatEngine combatEngine = new CombatEngine();
+    private CombatEngineGui combatEngine = new CombatEngineGui();
     private String starter;
     private Player player1 = new Player();
     private InitXML game = new InitXML();
@@ -195,7 +195,7 @@ public class GUI2nd {
 
                             displayOutStatsAndAll(playersFirstPokemon, player);
                             setPokemonImageLabel(playersFirstPokemon);
-                            parser.checkPlayerCommand(game, gameEngine,combatEngine, player1, "check map", commonDisplayOut, mapDisplayOut, roomDisplayOut);
+                            parser.checkPlayerCommand(game, gameEngine,combatEngine, player1, "check map", commonDisplayOut, mapDisplayOut, roomDisplayOut,pokemonDisplayOut, pokemonDisplay);
 
                         }
                     }
@@ -284,9 +284,14 @@ public class GUI2nd {
             @Override
             public void actionPerformed(ActionEvent e) {
                 commonDisplay.setText("");
-                parser.checkPlayerCommand(game, gameEngine,combatEngine, player1, inputTF.getText(), commonDisplayOut, mapDisplayOut, roomDisplayOut);
+                parser.checkPlayerCommand(game, gameEngine,combatEngine, player1, inputTF.getText(), commonDisplayOut, mapDisplayOut, roomDisplayOut,pokemonDisplayOut, pokemonDisplay);
                 showRoomDetails(player);
-                parser.checkPlayerCommand(game, gameEngine,combatEngine, player1, "check map", commonDisplayOut, mapDisplayOut, roomDisplayOut);
+                parser.checkPlayerCommand(game, gameEngine,combatEngine, player1, "check map", commonDisplayOut, mapDisplayOut, roomDisplayOut,pokemonDisplayOut, pokemonDisplay);
+                pokemonDisplay.setText("");
+                System.setOut(pokemonDisplayOut);
+                player1.getPlayersPokemon().get(0).displayOutStatsAndAll();
+                System.setOut(System.out);
+
                 inputTF.setText("");
             }
 
@@ -313,7 +318,8 @@ public class GUI2nd {
         middlePanel.setLayout(new BorderLayout());
 
         middlePanel.add(getBorderedPanel(pokemonPanel), BorderLayout.WEST);
-        middlePanel.add(getBorderedPanel(commonDisplay), BorderLayout.CENTER);
+        //middlePanel.add(getBorderedPanel(commonDisplay), BorderLayout.CENTER);
+        middlePanel.add(getBorderedPanel(scroll), BorderLayout.CENTER);
         middlePanel.add(getBorderedPanel(mapDisplay), BorderLayout.EAST);
 
         //Setup Main Panel with

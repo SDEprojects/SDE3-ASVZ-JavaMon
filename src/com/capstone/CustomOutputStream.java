@@ -17,6 +17,7 @@ public class CustomOutputStream extends OutputStream {
         this.textArea = textArea;
     }
 
+    // Writes the specified byte to this output stream
     @Override
     public void write(int b) throws IOException {
         // redirects data to the text area
@@ -25,6 +26,7 @@ public class CustomOutputStream extends OutputStream {
         textArea.setCaretPosition(textArea.getDocument().getLength());
     }
 
+    // Flushes this output stream and forces any buffered output bytes to be written out.
     @Override
     public void flush() throws IOException {
         textArea.setText("");

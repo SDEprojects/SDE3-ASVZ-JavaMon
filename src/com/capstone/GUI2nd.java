@@ -12,11 +12,8 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 
-
-
 /*
 *The GUI class for the Pokemon Game.
-*
  */
 
 public class GUI2nd {
@@ -28,6 +25,7 @@ public class GUI2nd {
     private String[] choiceDisplayArr = {"Bulbasaur (Grass-Type)", "Charmander (Fire-Type)", "Squirtle (Water-Type)"};
     private String[] choiceActionCommandArr = {"bulbasaur", "charmander", "squirtle"};
 
+    // Creates and Initializes the text area.
     JTextArea commonDisplay = new JTextArea(20,25);
     JTextArea pokemonDisplay = new JTextArea(20,10);
     JTextArea mapDisplay = new JTextArea(20,10);
@@ -44,7 +42,6 @@ public class GUI2nd {
     private Player player1 = new Player();
     private InitXML game = new InitXML();
     private TextParserGUI parser = new TextParserGUI();
-
     private JPanel mainPanel;
 
     //Pokemon Image Icons
@@ -79,6 +76,7 @@ public class GUI2nd {
         window = new JFrame();
         window.setSize(1200, 600);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //window.setResizable(false);
         window.getContentPane().setBackground(Color.BLACK);
 
 
@@ -86,7 +84,6 @@ public class GUI2nd {
         titleNamePanel = new JPanel();
         titleNamePanel.setBounds(100, 100, 600, 150);
         titleNamePanel.setBackground(Color.BLACK);
-
 
         JLabel titleNameLabel = new JLabel("");
         titleNameLabel.setForeground(Color.WHITE);
@@ -97,7 +94,6 @@ public class GUI2nd {
         window.add(titleNamePanel);
         window.setVisible(true);
     }
-
 
     /**
      * Create images for various Pokemon types.
@@ -123,11 +119,13 @@ public class GUI2nd {
      * @param height
      * @return
      */
+
     private Image transformImage(ImageIcon icon, int width, int height) {
         Image image = icon.getImage(); // transform it
         Image newimg = image.getScaledInstance(width, height,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
         return newimg;
     }
+
     //Make all the display text area non editable.
     private void setDisplayNonEditable() {
         roomDisplay.setEditable(false);
@@ -137,10 +135,8 @@ public class GUI2nd {
     }
     /**
      * Select the Pokemon type.
-     *
-     * @param game
-     * @param player
      */
+
     public void chooseStarter(InitXML game, Player player) {
         JPanel starterPokemonPanel = new JPanel();
         starterPokemonPanel.setLayout(new BoxLayout(starterPokemonPanel, BoxLayout.PAGE_AXIS)); //center the layout here later
@@ -214,6 +210,7 @@ public class GUI2nd {
     /*
      * Changes the pokemon image label based on the given pokemon's name
      */
+
     protected void setPokemonImageLabel(Pokemon pokemon) {
         switch(pokemon.getName()) {
             case "Balbasaur":
@@ -226,13 +223,12 @@ public class GUI2nd {
                 pokemonImageLabel.setIcon(squirtleIcon);
                 break;
         }
-
     }
 
     /**
      * Create Pokemon image label
-     * @return
      */
+
     private JLabel getPokemonImageLabel() {
         Image img = transformImage(createImageIcon(startPageImagePath, ""), 120, 120);
         ImageIcon icon = new ImageIcon(img);  // transform it back
@@ -256,9 +252,8 @@ public class GUI2nd {
 
     /**
      * Display details of the player.
-     * @param pokemon
-     * @param player
      */
+
     public void displayOutStatsAndAll(Pokemon pokemon, Player player) {
 
         JScrollPane scroll = new JScrollPane (commonDisplay,
@@ -289,13 +284,12 @@ public class GUI2nd {
                 parser.checkPlayerCommand(game, gameEngine, player1, inputTF.getText(), commonDisplayOut, mapDisplayOut, roomDisplayOut);
                 showRoomDetails(player);
                 parser.checkPlayerCommand(game, gameEngine, player1, "check map", commonDisplayOut, mapDisplayOut, roomDisplayOut);
-
                 inputTF.setText("");
             }
 
         });
 
-        //Create North Panel with room details display
+        //Create room Panel with room details display
         JPanel roomPanel = new JPanel();
         roomPanel.setLayout(new BorderLayout());
         roomPanel.add(getBorderedPanel(roomDisplay), BorderLayout.CENTER);
@@ -338,27 +332,23 @@ public class GUI2nd {
         window.revalidate();
     }
 
-
     /**
      * Adds the given component to a JPanel with border.
-     * @param comp
-     * @return
      */
+
     private JPanel getBorderedPanel(JComponent comp) {
         JPanel p = new JPanel();
-        Border blueline = BorderFactory.createLineBorder(Color.blue);
-        Border empty = BorderFactory.createEmptyBorder(10, 10, 10, 10);
-        CompoundBorder compound = BorderFactory.createCompoundBorder(blueline, empty);
+        Border blueLine = BorderFactory.createLineBorder(Color.blue);
+        Border emptyBorder = BorderFactory.createEmptyBorder(10, 10, 10, 10);
+        CompoundBorder compound = BorderFactory.createCompoundBorder(blueLine, emptyBorder);
         p.setBorder(compound);
         //Add component to the panel
         p.add(comp);
         return p;
     }
 
-
     /**
      * Show the details of the current room of the given player.
-     * @param player
      */
     private void showRoomDetails(Player player) {
         roomDisplayOut.flush();
@@ -366,6 +356,4 @@ public class GUI2nd {
         player.showRoomDetails();
         System.setOut(System.out);
     }
-
-
 }

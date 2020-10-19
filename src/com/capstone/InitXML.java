@@ -17,7 +17,7 @@ public class InitXML {
     public Collection<NPCFactory> listOfNPCs = new ArrayList<>();
     public Collection<Room> listOfRooms = new ArrayList<>();
     public Collection<Pokemon> listOfPokemon = new ArrayList<>();
-    public Collection<Items> listOfItems = new ArrayList<>();
+    public Collection<Item> listOfItems = new ArrayList<>();
     public Collection<PokeAttack> listOfAttacks = new ArrayList<>();
 
     //basically a getter for the dialog field for the NPC that gets passed to it
@@ -118,7 +118,7 @@ public class InitXML {
                 String itemEffect = itemEle.getElementsByTagName("effect").item(0).getTextContent();
                 String itemDescription = itemEle.getElementsByTagName("description").item(0).getTextContent();
                 int itemPrice = Integer.parseInt(itemEle.getElementsByTagName("price").item(0).getTextContent());
-                listOfItems.add(new Items(itemName,itemEffect,itemDescription,itemPrice));
+                listOfItems.add(new Item(itemName, itemEffect, itemDescription, itemPrice));
 
             }
         }

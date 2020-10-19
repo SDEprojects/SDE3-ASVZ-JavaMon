@@ -1,38 +1,31 @@
 package com.capstone;
 
 public class Item {
-    private String itemName;  // name of item
-    private String description; // description of item
-    private String location;     // name ot the room item located
+    //fields
+    private String name;
+    private String effect;
+    private String description;
+    private int price;
 
-
-
-    // Constructor that initializes objects name, description, and location
-    public Item(String itemName, String description, String location) {
-        itemName = itemName;
-        description = description;
-        location = location;
-
+    //ctors
+    public Item(String name, String effect, String description, int price) {
+        this.name = name;
+        this.effect = effect;
+        this.description = description;
+        this.price = price;
     }
 
-    // Getter method that returns items name, description and location
-
-
-    public String getItemName() {
-        return itemName;
+    public String getName() {
+        return name;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public String getLocation() {
-        return location;
+    public int getPrice() {
+        return price;
     }
 
-    // Accessory Method to print out the items description for player to read.
 
-    public void look() {
-        System.out.println(description + " of an object.");
-    }
 }

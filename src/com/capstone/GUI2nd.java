@@ -37,7 +37,7 @@ public class GUI2nd {
     private PrintStream pokemonDisplayOut = new PrintStream(new CustomOutputStream(pokemonDisplay));
 
     private GameEngine gameEngine = new GameEngine();
-    //private CombatEngine combatEngine = new CombatEngine();
+    private CombatEngine combatEngine = new CombatEngine();
     private String starter;
     private Player player1 = new Player();
     private InitXML game = new InitXML();
@@ -58,10 +58,11 @@ public class GUI2nd {
     //main method.
     public static void main(String[] args) {
         GUI2nd gui = new GUI2nd();
+        gui.game.initAttacks(); //must be initialized before pokemon
+        gui.game.initPokemon(); //must be initialized before npcs
+        gui.game.initNPCs(); //must be initialized before rooms
         gui.game.initRooms();
         gui.game.initItems();
-        gui.game.initNPCs();
-        gui.game.initPokemon();
         gui.initFrame();
         gui.chooseStarter(gui.game, gui.player1);
     }
@@ -194,6 +195,8 @@ public class GUI2nd {
 
                             displayOutStatsAndAll(playersFirstPokemon, player);
                             setPokemonImageLabel(playersFirstPokemon);
+                            parser.checkPlayerCommand(game, gameEngine,combatEngine, player1, "check map", commonDisplayOut, mapDisplayOut, roomDisplayOut);
+
                         }
                     }
                 }
@@ -281,9 +284,9 @@ public class GUI2nd {
             @Override
             public void actionPerformed(ActionEvent e) {
                 commonDisplay.setText("");
-                parser.checkPlayerCommand(game, gameEngine, player1, inputTF.getText(), commonDisplayOut, mapDisplayOut, roomDisplayOut);
+                parser.checkPlayerCommand(game, gameEngine,combatEngine, player1, inputTF.getText(), commonDisplayOut, mapDisplayOut, roomDisplayOut);
                 showRoomDetails(player);
-                parser.checkPlayerCommand(game, gameEngine, player1, "check map", commonDisplayOut, mapDisplayOut, roomDisplayOut);
+                parser.checkPlayerCommand(game, gameEngine,combatEngine, player1, "check map", commonDisplayOut, mapDisplayOut, roomDisplayOut);
                 inputTF.setText("");
             }
 

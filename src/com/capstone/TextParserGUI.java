@@ -17,7 +17,7 @@ import java.util.Scanner;
 /*The TextParser class parses and validates the user (console) inputs*/
 public class TextParserGUI {
 
-    public void checkPlayerCommand(InitXML game, GameEngine gameEngine, Player player1, String userInput, PrintStream commonDisplayOut, PrintStream mapDisplayOut, PrintStream roomDisplayOut) {
+    public void checkPlayerCommand(InitXML game, GameEngine gameEngine, CombatEngine combatEngine, Player player1, String userInput, PrintStream commonDisplayOut, PrintStream mapDisplayOut, PrintStream roomDisplayOut) {
     System.setOut(commonDisplayOut);
     try {
         if (inputValidation(userInput)) {
@@ -73,7 +73,9 @@ public class TextParserGUI {
                         }
                     }
                     else if (eElement.getElementsByTagName("engage").item(0).getTextContent().contains(userActions)) {
-                        playerInteracts(player1, userArgument);
+                        String npcName = player1.getCurrentRoom().getNpcName();
+                        NPCFactory npcActual = game.getNPC(npcName);
+                        playerInteracts(player1, npcActual, gameEngine, combatEngine,userArgument);
                     } else if (eElement.getElementsByTagName("communicate").item(0).getTextContent().contains(userActions)) {
                         playerTalks(player1, game, userArgument);
                     } else if (eElement.getElementsByTagName("utilize").item(0).getTextContent().contains(userActions)) {
@@ -147,8 +149,9 @@ public class TextParserGUI {
         }
 
     } catch (Exception e) {
-        System.out.println("There was an error :< ");
-        System.out.println("----------------------------");
+        System.out.println("There was an error in the text parser");
+        System.out.println(e.getMessage());
+        System.out.println(e.getStackTrace());
     }
     System.setOut(System.out);
 }
@@ -169,7 +172,8 @@ public class TextParserGUI {
         return true;
     }
 
-    private void playerInteracts(Player player1, String interactable) {
+    private void playerInteracts(Player player1, NPCFactory npc, GameEngine gameEngine, CombatEngine combatEngine, String interactable) {
+        //for the shop interface
         if (player1.getCurrentRoom().getInteractableItem().toLowerCase().equals(interactable) && interactable.toLowerCase().equals("shop counter")) {
             //shop interface! Will probably move somewhere and make it a method so that it's not so CLUNKY
             if (interactable.equals("shop counter")) {
@@ -184,6 +188,17 @@ public class TextParserGUI {
             else {
                 System.out.println("You try to interact with " + interactable);
                 System.out.println("We need to implement an interactables class <_>");
+            }
+        }
+        //for the combat with other trainers
+        else if (interactable.equalsIgnoreCase(npc.getName())) {
+            System.out.println('"' + npc.getDialog() + '"');
+            if (!npc.npcPokemonList.isEmpty()) {
+                System.out.println(npc.getName() + " challenges you to a Pokemon Battle!");
+                combatEngine.combatLoopTrainer(player1,npc,gameEngine);
+            }
+            else {
+                System.out.println(npc.getName() + " doesn't have a Pokemon to battle with.");
             }
         }
         //for pokecenter healz

@@ -121,5 +121,30 @@ public class Room {
 
         }*/
     }
+
+    public String getRoomDetails() {
+
+        StringBuffer sb = new StringBuffer();
+
+        sb.append("Your current location: " + this.getName()).append("\n");
+
+        sb.append("Location Description: " + this.getDescription()).append("\n");
+
+        // Check if npcName is null or empty, if not print out the npc name.
+        String npcName = this.getNpcName();
+        if (npcName != null && !npcName.trim().isEmpty()) {
+            sb.append("You see " + npcName).append("\n");
+        } else {
+            sb.append("No one is here.").append("\n");
+        }
+        // Check if itemList is empty
+        String interactableItem = this.getInteractableItem();
+        if (interactableItem != null && !interactableItem.trim().isEmpty()) {
+            sb.append("You observe the area and see " + interactableItem).append("\n");
+        } else {
+            sb.append("You look around and find nothing of interest here.").append("\n");
+        }
+        return sb.toString();
+    }
 }
 

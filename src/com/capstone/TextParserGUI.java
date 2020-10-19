@@ -5,13 +5,10 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import javax.swing.*;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import java.awt.*;
 import java.io.File;
 import java.util.Collection;
-import java.util.Scanner;
 
 /*The TextParser class parses and validates the user (console) inputs*/
 public class TextParserGUI {
@@ -72,7 +69,11 @@ public class TextParserGUI {
                             }
                             else if (eElement.getElementsByTagName("engage").item(0).getTextContent().contains(userActions)) {
                                 playerInteracts(player1, userArgument);
-                            } else if (eElement.getElementsByTagName("communicate").item(0).getTextContent().contains(userActions)) {
+                            }
+                            else if (eElement.getElementsByTagName("fight").item(0).getTextContent().contains(userActions)) { // here is where the game engine initiates the fight
+                                System.out.println("Implement Combat Engine");
+                            }
+                            else if (eElement.getElementsByTagName("communicate").item(0).getTextContent().contains(userActions)) {
                                 playerTalks(player1, game, userArgument);
                             } else if (eElement.getElementsByTagName("utilize").item(0).getTextContent().contains(userActions)) {
                                 if (userInput.split(" ").length <= 2) {
@@ -167,8 +168,16 @@ public class TextParserGUI {
                 pokemon.setCurrentHealth(pokemon.getMaxHealth());
             }
             System.out.println("All your Pokemon are healed to full HP! Thank you for visiting!");
-        }
 
+        // For player pokemon to encounter a wild pokemon
+        }else if (player1.getCurrentRoom().getInteractableItem().toLowerCase().equals(interactable) && interactable.toLowerCase().equals("tall grass")){
+            for (Pokemon pokemon:player1.getPlayersPokemon()){
+                InitXML wildPokemon = new InitXML();
+               Pokemon attackWildPokemon = wildPokemon.wildPokemon();
+
+                System.out.println("You are fighting wild Pokemon: " + attackWildPokemon);
+            }
+        }
         else System.out.println("Theres no " + interactable + " here to interact with!");
     }
 
@@ -212,4 +221,5 @@ public class TextParserGUI {
 
 
     }
+
 }

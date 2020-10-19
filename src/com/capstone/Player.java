@@ -2,7 +2,6 @@ package com.capstone;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Optional;
 import java.util.Scanner;
 
 public class Player {

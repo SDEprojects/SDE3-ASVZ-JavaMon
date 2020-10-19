@@ -1,7 +1,6 @@
 package com.capstone;
 
 
-import java.util.Collection;
 import java.util.Scanner;
 
 public class GameEngine {

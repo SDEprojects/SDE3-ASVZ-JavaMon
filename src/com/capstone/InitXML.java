@@ -11,12 +11,14 @@ import java.io.File;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Random;
 
 public class InitXML {
     //fields to keep the list of rooms and npc instances referencable
     public Collection<NPCFactory> listOfNPCs = new ArrayList<>();
     public Collection<Room> listOfRooms = new ArrayList<>();
-    public Collection<Pokemon> listOfPokemon = new ArrayList<>();
+    public ArrayList<Pokemon> listOfPokemon = new ArrayList<>();
     public Collection<Items> listOfItems = new ArrayList<>();
     public Collection<PokeAttack> listOfAttacks = new ArrayList<>();
 
@@ -57,6 +59,18 @@ public class InitXML {
             }
         }
         return null;
+    }
+
+    // Random Wild Pokemon Generator
+    public Pokemon wildPokemon(){
+        int arrLen = listOfPokemon.size();
+        int randPokemonIndex = 0;
+        Random randGen = new Random();
+        for(int i = 1; i <= arrLen; i++){
+            int num = + randGen.nextInt(arrLen);
+            randPokemonIndex = num;
+        }
+        return listOfPokemon.get(randPokemonIndex);
     }
 
     //initialization method for putting all the NPCs in the XML txt file into the listOfNPCS
@@ -195,7 +209,7 @@ public class InitXML {
 
                 //roomNPC and roomInteractable holds the value from the rooms.txt xml with the npc and interactable tags.
                 //TODO: implement constructor with stats.
-                listOfPokemon.add(new Pokemon(pokemonName, pokemonType, pokeHealth, 5, pokeAttack, move1, move2, listOfAttacks,startingExp)); //Pokelevel is hardcoded here.
+                listOfPokemon.add(new Pokemon(pokemonName, pokemonType, pokeHealth, 5, pokeAttack, move1, move2, listOfAttacks, startingExp)); //Pokelevel is hardcoded here.
                 //TODO: implement a way of associating level to room/area/or npc. For now it is hard coded to five.
 
             }

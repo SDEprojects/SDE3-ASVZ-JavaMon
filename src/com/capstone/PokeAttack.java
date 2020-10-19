@@ -1,7 +1,5 @@
 package com.capstone;
 
-import java.util.Random;
-
 public class PokeAttack {
 
     //Class Fields ------------------------------------------------------------------------------
@@ -65,8 +63,5 @@ public class PokeAttack {
 
         return (int)(Math.random() * (potentialDamage - damage + 1) + damage);
     }
-
-
-
 
 }

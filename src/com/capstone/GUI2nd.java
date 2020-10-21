@@ -3,14 +3,20 @@ package com.capstone;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.geom.Dimension2D;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Scanner;
 
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 
-// GUI Class (for Pokemon game).
+/*
+*The GUI class for the Pokemon Game.
+ */
 
 public class GUI2nd {
 
@@ -63,31 +69,21 @@ public class GUI2nd {
         gui.chooseStarter(gui.game, gui.player1);
     }
 
-    // *Zack* This method forces JFrame into a size that's 95% of the user's screen and centers it (nice and neat).
-    private void MakeFrameNinetyFivePercent(JFrame frame) {
-        Toolkit toolKit = Toolkit.getDefaultToolkit(); // Toolkit
-        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-        int ySize = ((int) toolKit.getScreenSize().getHeight()); // Initial height.
-        int xSize = ((int) toolKit.getScreenSize().getWidth()); // Initial width.
-        int windowHeight = (int) (Math.round(ySize * 0.95)); // Screen reduced to 95% height.
-        int windowWidth = (int) (Math.round(xSize * 0.95)); // Screen reduced to 95% width.
-        frame.setSize(new Dimension(windowWidth, windowHeight)); // Setting that screen size based on calculations.
-        frame.setLocation(dimension.width/2-frame.getSize().width/2, dimension.height/2-frame.getSize().height/2); // Set the JFrame to the center.
-    }
-
-    // Initialize the frame components.
+    //initialize the frame components
     private void initFrame() {
 
         setDisplayNonEditable();
         createPokemonTypeImages();
 
-        // *Zack* Start JFrame (game screen).
+        // Initializing JFrame Window
         window = new JFrame();
-        MakeFrameNinetyFivePercent(window); // *Zack* Insert MakeFrameNinetyFivePercent here.
+        window.setSize(1200, 600);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.setResizable(false); // *Zack* Set to false.
+        //window.setResizable(false);
+        window.getContentPane().setBackground(Color.BLACK);
 
-        // Initializing Title Name Panel
+
+        //Initializing Title Name Panel
         titleNamePanel = new JPanel();
         titleNamePanel.setBounds(100, 100, 600, 150);
         titleNamePanel.setBackground(Color.BLACK);
@@ -102,7 +98,9 @@ public class GUI2nd {
         window.setVisible(true);
     }
 
-    // Create images for various Pokemon types.
+    /**
+     * Create images for various Pokemon types.
+     */
     private void createPokemonTypeImages() {
         String balbasaurPath = "images/Balbasaur-Pokemon.png";
         String charmanderPath = "images/Charmander-Pokemon.png";
@@ -280,6 +278,19 @@ public class GUI2nd {
         JTextField inputTF = new JTextField(20);
         inputP.add(new JLabel("Enter your command: "));
         inputP.add(inputTF);
+        inputTF.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                //JOptionPane.showMessageDialog(null, "hello");
+                 //if(e.getKeyCode() == KeyEvent.VK_ENTER){​​
+                //mine
+                if (e.getKeyCode()==KeyEvent.VK_ENTER) {
+                    performAction(inputTF, player);
+
+                }
+            }
+        });
+
 
         JButton submitB = new JButton("Submit");
         inputP.add(submitB);
@@ -287,16 +298,8 @@ public class GUI2nd {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                commonDisplay.setText("");
-                parser.checkPlayerCommand(game, gameEngine,combatEngine, player1, inputTF.getText(), commonDisplayOut, mapDisplayOut, roomDisplayOut,pokemonDisplayOut, pokemonDisplay);
-                showRoomDetails(player);
-                parser.checkPlayerCommand(game, gameEngine,combatEngine, player1, "check map", commonDisplayOut, mapDisplayOut, roomDisplayOut,pokemonDisplayOut, pokemonDisplay);
-                pokemonDisplay.setText("");
-                System.setOut(pokemonDisplayOut);
-                player1.getPlayersPokemon().get(0).displayOutStatsAndAll();
-                System.setOut(System.out);
+                performAction(inputTF, player);
 
-                inputTF.setText("");
             }
 
         });
@@ -319,6 +322,8 @@ public class GUI2nd {
         //the Output Display Panel and the Bag Panel.
 
         JPanel middlePanel = new JPanel();
+
+
         middlePanel.setLayout(new BorderLayout());
 
         middlePanel.add(getBorderedPanel(pokemonPanel), BorderLayout.WEST);
@@ -343,6 +348,18 @@ public class GUI2nd {
 
         //Revalidate to make sure that the newly added components are shown.
         window.revalidate();
+    }
+    private void performAction(JTextField inputTF, Player player) {
+        commonDisplay.setText("");
+        parser.checkPlayerCommand(game, gameEngine, combatEngine, player1, inputTF.getText(), commonDisplayOut, mapDisplayOut, roomDisplayOut, pokemonDisplayOut, pokemonDisplay);
+        showRoomDetails(player);
+        parser.checkPlayerCommand(game, gameEngine, combatEngine, player1, "check map", commonDisplayOut, mapDisplayOut, roomDisplayOut, pokemonDisplayOut, pokemonDisplay);
+        pokemonDisplay.setText("");
+        System.setOut(pokemonDisplayOut);
+        player1.getPlayersPokemon().get(0).displayOutStatsAndAll();
+        System.setOut(System.out);
+
+        inputTF.setText("");
     }
 
     /**

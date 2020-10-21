@@ -3,18 +3,14 @@ package com.capstone;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.geom.Dimension2D;
 import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Scanner;
 
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 
-/*
-*The GUI class for the Pokemon Game.
- */
+// GUI Class (for Pokemon game).
 
 public class GUI2nd {
 
@@ -67,21 +63,31 @@ public class GUI2nd {
         gui.chooseStarter(gui.game, gui.player1);
     }
 
-    //initialize the frame components
+    // *Zack* This method forces JFrame into a size that's 95% of the user's screen and centers it (nice and neat).
+    private void MakeFrameNinetyFivePercent(JFrame frame) {
+        Toolkit toolKit = Toolkit.getDefaultToolkit(); // Toolkit
+        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+        int ySize = ((int) toolKit.getScreenSize().getHeight()); // Initial height.
+        int xSize = ((int) toolKit.getScreenSize().getWidth()); // Initial width.
+        int windowHeight = (int) (Math.round(ySize * 0.95)); // Screen reduced to 95% height.
+        int windowWidth = (int) (Math.round(xSize * 0.95)); // Screen reduced to 95% width.
+        frame.setSize(new Dimension(windowWidth, windowHeight)); // Setting that screen size based on calculations.
+        frame.setLocation(dimension.width/2-frame.getSize().width/2, dimension.height/2-frame.getSize().height/2); // Set the JFrame to the center.
+    }
+
+    // Initialize the frame components.
     private void initFrame() {
 
         setDisplayNonEditable();
         createPokemonTypeImages();
 
-        // Initializing JFrame Window
+        // *Zack* Start JFrame (game screen).
         window = new JFrame();
-        window.setSize(1200, 600);
+        MakeFrameNinetyFivePercent(window); // *Zack* Insert MakeFrameNinetyFivePercent here.
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //window.setResizable(false);
-        window.getContentPane().setBackground(Color.BLACK);
+        window.setResizable(false); // *Zack* Set to false.
 
-
-        //Initializing Title Name Panel
+        // Initializing Title Name Panel
         titleNamePanel = new JPanel();
         titleNamePanel.setBounds(100, 100, 600, 150);
         titleNamePanel.setBackground(Color.BLACK);
@@ -96,9 +102,7 @@ public class GUI2nd {
         window.setVisible(true);
     }
 
-    /**
-     * Create images for various Pokemon types.
-     */
+    // Create images for various Pokemon types.
     private void createPokemonTypeImages() {
         String balbasaurPath = "images/Balbasaur-Pokemon.png";
         String charmanderPath = "images/Charmander-Pokemon.png";

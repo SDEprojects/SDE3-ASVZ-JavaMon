@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class GameEngine {
 
-    private GUI gui;
+    private GUI2nd gui;
 
     public GameEngine() {
     }

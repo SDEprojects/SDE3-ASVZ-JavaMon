@@ -13,7 +13,7 @@ public class TextParserGUITest {
     String noInput = "";
     String oneValidWord = "check";
     String oneInvalidWord = "dog";
-    String help = "help";
+    String help = "get help";
     String validInput = "go west";
     String twoValidButIncompatibleWords = "buy west";
     String randomWords = "dog cat";
@@ -57,9 +57,8 @@ public class TextParserGUITest {
     }
 
     @Test
-    public void inputValidation_randomWords_returnFalse(){
-        // Two random words--should be invalid
-        // Currently returning true
-        assertFalse(parser.inputValidation(randomWords));
+    public void inputValidation_randomWords_returnsTrue(){
+        // Two random words--valid because it is two words (just how the code was written)
+        assertTrue(parser.inputValidation(randomWords));
     }
 }

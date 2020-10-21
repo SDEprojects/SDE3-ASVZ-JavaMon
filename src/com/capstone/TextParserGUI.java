@@ -160,15 +160,11 @@ public class TextParserGUI {
     public boolean inputValidation(String input) {
         if (input.isEmpty()) {
             System.out.println("You have not entered any text");
-            return false;
-            //throw new IllegalArgumentException("You have not entered a move");
+                return false;
+                //throw new IllegalArgumentException("You have not entered a move");
         } else if (input.split(" ").length < 2) {
-            if (input.equals("help")){
-                return true;
-            } else {
             System.out.println("You have entered an invalid move, what can you do with only one word?");
             return false;
-            }
         } else if (input.matches("[-+]?[0-9]*\\.?[0-9]+")) {
             System.out.println("You have entered an invalid move");
             return false;

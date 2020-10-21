@@ -3,6 +3,8 @@ package com.capstone;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -301,6 +303,19 @@ public class GUI2nd {
         JTextField inputTF = new JTextField(20);
         inputP.add(new JLabel("Enter your command: "));
         inputP.add(inputTF);
+        inputTF.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                //JOptionPane.showMessageDialog(null, "hello");
+                 //if(e.getKeyCode() == KeyEvent.VK_ENTER){​​
+                //mine
+                if (e.getKeyCode()==KeyEvent.VK_ENTER) {
+                    performAction(inputTF, player);
+
+                }
+            }
+        });
+
 
         JButton submitB = new JButton("Submit");
         inputP.add(submitB);
@@ -308,16 +323,8 @@ public class GUI2nd {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                commonDisplay.setText("");
-                parser.checkPlayerCommand(game, gameEngine,combatEngine, player1, inputTF.getText(), commonDisplayOut, mapDisplayOut, roomDisplayOut,pokemonDisplayOut, pokemonDisplay);
-                showRoomDetails(player);
-                parser.checkPlayerCommand(game, gameEngine,combatEngine, player1, "check map", commonDisplayOut, mapDisplayOut, roomDisplayOut,pokemonDisplayOut, pokemonDisplay);
-                pokemonDisplay.setText("");
-                System.setOut(pokemonDisplayOut);
-                player1.getPlayersPokemon().get(0).displayOutStatsAndAll();
-                System.setOut(System.out);
+                performAction(inputTF, player);
 
-                inputTF.setText("");
             }
 
         });
@@ -340,6 +347,8 @@ public class GUI2nd {
         //the Output Display Panel and the Bag Panel.
 
         JPanel middlePanel = new JPanel();
+
+
         middlePanel.setLayout(new BorderLayout());
 
         middlePanel.add(getBorderedPanel(pokemonPanel), BorderLayout.WEST);
@@ -364,6 +373,18 @@ public class GUI2nd {
 
         //Revalidate to make sure that the newly added components are shown.
         window.revalidate();
+    }
+    private void performAction(JTextField inputTF, Player player) {
+        commonDisplay.setText("");
+        parser.checkPlayerCommand(game, gameEngine, combatEngine, player1, inputTF.getText(), commonDisplayOut, mapDisplayOut, roomDisplayOut, pokemonDisplayOut, pokemonDisplay);
+        showRoomDetails(player);
+        parser.checkPlayerCommand(game, gameEngine, combatEngine, player1, "check map", commonDisplayOut, mapDisplayOut, roomDisplayOut, pokemonDisplayOut, pokemonDisplay);
+        pokemonDisplay.setText("");
+        System.setOut(pokemonDisplayOut);
+        player1.getPlayersPokemon().get(0).displayOutStatsAndAll();
+        System.setOut(System.out);
+
+        inputTF.setText("");
     }
 
     /**

@@ -2,19 +2,19 @@
 <keywords>
    <action activity = "01">
       <engage>interact touch</engage>
-      <communicate>talk speak</communicate>
-      <utilize>use utilize</utilize>
-      <check>check look</check>
+      <communicate>talk speak chat communicate express say tell gab contact</communicate>
+      <utilize>apply use utilize</utilize>
+      <check>check look glance see stare study view watch focus</check>
       <buy>buy purchase</buy>
-      <get>get</get>
+      <get>get grab gain procure pick take acquire attain</get>
       <go>move go proceed jump walk run leap dance</go>
       <up>north up</up>
       <down>south down</down>
       <left>west left</left>
       <right>east right</right>
-      <bag>bag backpack pack</bag>
-      <map>map atlas</map>
-      <pokemon>pokemon monster</pokemon>
+      <bag>bag backpack pack gear handbag briefcase pocket pouch sack suitcase</bag>
+      <map>map atlas picture</map>
+      <pokemon>pokemon monster poke mon</pokemon>
       <help>help hel hep</help>
    </action>
 </keywords>

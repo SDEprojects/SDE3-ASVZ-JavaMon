@@ -19,8 +19,10 @@ import javax.swing.border.CompoundBorder;
 public class GUI2nd {
 
     private JFrame window;
-    private JPanel titleNamePanel;
+    private JPanel titleNamePanel, backgroundPanel;
+    private Container con;
     private final Font normalFont = new Font("Times New Roman", Font.PLAIN, 28);
+    private final Font startLineFont = new Font("Times New Roman", Font.BOLD, 25);
 
     private String[] choiceDisplayArr = {"Bulbasaur (Grass-Type)", "Charmander (Fire-Type)", "Squirtle (Water-Type)"};
     private String[] choiceActionCommandArr = {"bulbasaur", "charmander", "squirtle"};
@@ -36,6 +38,7 @@ public class GUI2nd {
     private PrintStream mapDisplayOut = new PrintStream(new CustomOutputStream(mapDisplay));
     PrintStream pokemonDisplayOut = new PrintStream(new CustomOutputStream(pokemonDisplay));
 
+    private Typewriter  tWriter;
     private GameEngine gameEngine = new GameEngine();
     private CombatEngineGui combatEngine = new CombatEngineGui();
     private String starter;
@@ -48,10 +51,11 @@ public class GUI2nd {
     private ImageIcon balbasaurIcon;
     private ImageIcon charmanderIcon;
     private ImageIcon squirtleIcon;
+    private ImageIcon backgroundIcon;
 
     //Pokemon Image Label
     private JLabel pokemonImageLabel;
-
+    private JLabel backgroundLabel;//sanju added
     //Path of the starting screen image
     private String startPageImagePath = "images/pokemon.gif";
 
@@ -77,22 +81,19 @@ public class GUI2nd {
         window = new JFrame();
         window.setSize(1200, 600);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //window.setResizable(false);
-        window.getContentPane().setBackground(Color.BLACK);
+        window.setResizable(false);
 
+        con = window.getContentPane();
+        backgroundPanel = new JPanel();
+        backgroundPanel.setBounds(0,0,window.getWidth(),window.getHeight());
 
-        //Initializing Title Name Panel
-        titleNamePanel = new JPanel();
-        titleNamePanel.setBounds(100, 100, 600, 150);
-        titleNamePanel.setBackground(Color.BLACK);
+        backgroundLabel = new JLabel();
+        backgroundLabel.setSize(backgroundPanel.getWidth(), backgroundPanel.getHeight());
+        backgroundLabel.setIcon(backgroundIcon);
 
-        JLabel titleNameLabel = new JLabel("");
-        titleNameLabel.setForeground(Color.WHITE);
-        titleNameLabel.setFont(new Font("Times New Roman", Font.PLAIN, 60));
+        backgroundPanel.add(backgroundLabel);
+        con.add(backgroundPanel);
 
-        titleNamePanel.add(titleNameLabel);
-
-        window.add(titleNamePanel);
         window.setVisible(true);
     }
 
@@ -103,14 +104,17 @@ public class GUI2nd {
         String balbasaurPath = "images/Balbasaur-Pokemon.png";
         String charmanderPath = "images/Charmander-Pokemon.png";
         String squirtlePath = "images/Squirtle-Pokemon.png";
+        String backgroundPath = "images/oak-room.jpg";
 
         Image balbasaurImg = transformImage(createImageIcon(balbasaurPath, ""), 120, 120);
         Image charmanderImg = transformImage(createImageIcon(charmanderPath, ""), 120, 120);
         Image squirtleImg = transformImage(createImageIcon(squirtlePath, ""), 120, 120);
+        Image backgroundImg  = transformImage(createImageIcon(backgroundPath, ""), 1200, 600);
 
         balbasaurIcon = new ImageIcon(balbasaurImg);
         charmanderIcon = new ImageIcon(charmanderImg);
         squirtleIcon = new ImageIcon(squirtleImg);
+        backgroundIcon = new ImageIcon(backgroundImg);
     }
 
     /**
@@ -142,25 +146,37 @@ public class GUI2nd {
         JPanel starterPokemonPanel = new JPanel();
         starterPokemonPanel.setLayout(new BoxLayout(starterPokemonPanel, BoxLayout.PAGE_AXIS)); //center the layout here later
 
-        JLabel pokemonImageLabel = getPokemonImageLabel();
-        starterPokemonPanel.add(pokemonImageLabel);
+        String newLine = System.getProperty("line.separator");
+        String startLine = String.join(newLine,"","","","","",
+                "You're in OakRoom","",
+                "...",
+                "Professor Oak: Hey! You're finally here, I've been waiting for you.",
+                "I'm going on vacation soon... and the flight I'm going on has a strict 1 Pokemon carry on limit.",
+                "I'm going to need you to look after one while I'm gone! I'll even let you choose who you want to take!",
+                "...");
+/*
+        String startLine = "You're in OakRoom;...;Professor Oak: Hey! You're finally here, I've been waiting for you.;I'm going on vacation soon... and the flight I'm going on has a strict 1 Pokemon carry on limit.;I'm going to need you to look after one while I'm gone! I'll even let you choose who you want to take!;...";
+*/
+        JTextArea startLineTextArea = new JTextArea();
+        startLineTextArea.setText(startLine);
+        startLineTextArea.setHighlighter(null);
+        startLineTextArea.setBorder(null);
+        starterPokemonPanel.add(startLineTextArea);
+        //startLineTextArea.setSize(1200,300);
+        startLineTextArea.setBackground(new Color(0,0,0,0));
+        startLineTextArea.setForeground(Color.black);
+        startLineTextArea.setFont(startLineFont);
+        startLineTextArea.setEditable(false);
 
-        starterPokemonPanel.add(new JLabel("You're in OakRoom"));
-        starterPokemonPanel.add(new JLabel("..."));
-        starterPokemonPanel.add(new JLabel("Professor Oak: Hey! You're finally here, I've been waiting for you."));
-        starterPokemonPanel.add(new JLabel("I'm going on vacation soon... and the flight I'm going on has a strict 1 Pokemon carry on limit."));
-        starterPokemonPanel.add(new JLabel("I'm going to need you to look after one while I'm gone! I'll even let you choose who you want to take!"));
-        starterPokemonPanel.add(new JLabel("..."));
+
+        /*tWriter = new Typewriter(startLineTextArea, startLine);
+        tWriter.start();*/
 
         //Group the radio buttons.
         ButtonGroup group = new ButtonGroup();
-        ActionListener radioButtonListener = new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent event) {
-                starter = event.getActionCommand();
-                System.out.println("actionCommand: " + starter);
-            }
+        ActionListener radioButtonListener = event -> {
+            starter = event.getActionCommand();
+            System.out.println("actionCommand: " + starter);
         };
 
         starterPokemonPanel.add(new JLabel("..."));
@@ -169,9 +185,13 @@ public class GUI2nd {
             JRadioButton radio = new JRadioButton(choiceDisplayArr[i]);
             radio.setActionCommand(choiceActionCommandArr[i]);
             radio.addActionListener(radioButtonListener);
+            radio.setForeground(Color.red);
+            radio.setFont(startLineFont);
+            radio.setBorder(null);
             group.add(radio);
             starterPokemonPanel.add(radio);
         }
+
 
         JButton startButton = new JButton("START");
         startButton.setBackground(Color.BLACK);
@@ -179,34 +199,39 @@ public class GUI2nd {
         startButton.setFont(normalFont);
 
         starterPokemonPanel.add(startButton);
-        startButton.addActionListener(new ActionListener() {
+        startButton.addActionListener(e -> {
+            System.out.println("selected starter: " + starter);
+            for (Pokemon pokemon : game.listOfPokemon) {
+                if (pokemon.getName().equalsIgnoreCase(starter)) {
+                    player.playersPokemon.add(pokemon);
+                    System.out.println("You chose: " + starter);
+                    for (Pokemon playersFirstPokemon : player.playersPokemon) {
+                        System.setOut(pokemonDisplayOut);
+                        playersFirstPokemon.displayOutStatsAndAll();
+                        System.setOut(System.out);
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("selected starter: " + starter);
-                for (Pokemon pokemon : game.listOfPokemon) {
-                    if (pokemon.getName().equalsIgnoreCase(starter)) {
-                        player.playersPokemon.add(pokemon);
-                        System.out.println("You chose: " + starter);
-                        for (Pokemon playersFirstPokemon : player.playersPokemon) {
-                            System.setOut(pokemonDisplayOut);
-                            playersFirstPokemon.displayOutStatsAndAll();
-                            System.setOut(System.out);
-
-                            displayOutStatsAndAll(playersFirstPokemon, player);
-                            setPokemonImageLabel(playersFirstPokemon);
-                            parser.checkPlayerCommand(game, gameEngine,combatEngine, player1, "check map", commonDisplayOut, mapDisplayOut, roomDisplayOut,pokemonDisplayOut, pokemonDisplay);
-
-                        }
+                        displayOutStatsAndAll(playersFirstPokemon, player);
+                        setPokemonImageLabel(playersFirstPokemon);
+                        parser.checkPlayerCommand(game, gameEngine,combatEngine, player1, "check map", commonDisplayOut, mapDisplayOut, roomDisplayOut,pokemonDisplayOut, pokemonDisplay);
                     }
                 }
             }
-
         });
 
-        window.getContentPane().removeAll();
-        window.setLayout(new BorderLayout());
-        window.getContentPane().add(getBorderedPanel(starterPokemonPanel), BorderLayout.CENTER);
+        //window.getContentPane().removeAll();
+        //con.setLayout(new BorderLayout());
+        //starterPokemonPanel.setBackground(new Color(0,0,0,65));
+
+
+        //JPanel bPanel = getBorderedPanel(starterPokemonPanel);
+
+        //bPanel.setBackground(new Color(0,0,0,100));
+        //bp.setOpaque(false);
+        con.add(starterPokemonPanel);
+        //starterPokemonPanel.setBackground(new Color(0,0,0,0));
+        starterPokemonPanel.setOpaque(false);
+        //backgroundPanel.setOpaque(false);
+        //con.add(bPanel, BorderLayout.CENTER);
         window.revalidate();
     }
 

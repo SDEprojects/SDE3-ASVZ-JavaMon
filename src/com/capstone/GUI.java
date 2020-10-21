@@ -1,3 +1,4 @@
+/*
 package com.capstone;
 
 import java.awt.BorderLayout;
@@ -512,4 +513,4 @@ public class GUI {
     }
 
 
-}
+}*/

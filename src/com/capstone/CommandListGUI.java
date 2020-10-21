@@ -10,7 +10,7 @@ public class CommandListGUI {
     Font fontCommand = new Font("Times New Roman",Font.PLAIN,23);
    public void displayCommandList(){
        commandWindow.setSize(600, 300);
-       //commandWindow.setResizable(false);
+       commandWindow.setResizable(false);
        commandWindow.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
        commandWindow.getContentPane().setBackground(Color.BLACK);
        commandWindow.setLayout(null);

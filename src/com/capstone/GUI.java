@@ -6,20 +6,11 @@ import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import javax.swing.BoxLayout;
-import javax.swing.ButtonGroup;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 
 public class GUI {
@@ -369,6 +360,8 @@ public class GUI {
         southP.add(new JLabel("Enter your choice: "));
         southP.add(inputTF);
 
+
+
         JButton submitB = new JButton("Submit");
         southP.add(submitB);
         submitB.addActionListener(new ActionListener() {
@@ -379,6 +372,8 @@ public class GUI {
                 System.out.println("Input: " + input);
                 handleUserInput(input);
             }
+            //mine
+
         });
 
         window.getContentPane().removeAll();
@@ -390,6 +385,7 @@ public class GUI {
 
 
     }
+
     private JPanel getRoomDetailsPanel(Room room) {
         player1.getCurrentRoom().displayOutput();
 

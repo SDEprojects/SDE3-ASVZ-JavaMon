@@ -11,7 +11,7 @@ public class Typewriter {
     public Typewriter(JTextArea textArea, String input) {
         this.textArea = textArea;
         this.input = input;
-        timer = new Timer(10, e -> {
+        timer = new Timer(60, e -> {
             if (characterIndex < input.length()) {
                 if (String.valueOf(input.charAt(characterIndex)).equals(";")){
                     textArea.append("\n");

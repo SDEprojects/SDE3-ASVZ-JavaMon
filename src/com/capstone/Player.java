@@ -1,5 +1,7 @@
 package com.capstone;
 
+import java.io.FileNotFoundException;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Optional;
@@ -7,8 +9,8 @@ import java.util.Scanner;
 
 public class Player {
     //fields, name and inventory
-    private String name = "Emeke"; //default player name
-    private ArrayList<String> inventory = new ArrayList<>(); //inventory
+    private String name = "Victor"; //default player name
+    public ArrayList<String> inventory = new ArrayList<>(); //inventory
     private int money = 9001; //initialize with 100 monies
     public ArrayList<Pokemon> playersPokemon = new ArrayList<>(); //This collection is where the player's pokemon is saved.
 
@@ -72,11 +74,24 @@ public class Player {
         System.out.println("To the South of you is: " + this.currentRoom.getSouthTile());
         System.out.println("To the West of you is: " + this.currentRoom.getWestTile());
     }
-
+    InventoryAddition ia = new InventoryAddition();
+    Typewriter ty;
     public void checkInventory(){
         System.out.println("Items you currently have in your inventory: ");
         for (String item: this.inventory) {
             System.out.println(item);
+        }
+        System.out.println("You currently have " + money + " dollars.");
+        ia.updateTextAreaInventory(this.inventory);
+
+        //changing the set out to new TextArea
+        PrintStream newInventoryArea = new PrintStream(new CustomOutputStream(ia.getTextAreaInventory()));
+        System.setOut(newInventoryArea );
+        System.out.println("Items you currently have in your inventory: ");
+        for (String item: this.inventory) {
+            //System.out.println(item);
+             ty = new Typewriter(ia.getTextAreaInventory(),item);
+             ty.start();
         }
         System.out.println("You currently have " + money + " dollars.");
     }

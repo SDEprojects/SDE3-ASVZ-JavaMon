@@ -25,6 +25,7 @@ public class GUI2nd {
     private Container con;
     private final Font normalFont = new Font("Times New Roman", Font.PLAIN, 28);
     private final Font startLineFont = new Font("Times New Roman", Font.BOLD, 25);
+    private final Font generalFont = new Font("Futura", Font.PLAIN, 16); // Changes the main page font.
 
     private String[] choiceDisplayArr = {"Bulbasaur (Grass-Type)", "Charmander (Fire-Type)", "Squirtle (Water-Type)"};
     private String[] choiceActionCommandArr = {"bulbasaur", "charmander", "squirtle"};
@@ -77,6 +78,7 @@ public class GUI2nd {
     private void initFrame() {
 
         setDisplayNonEditable();
+        setGeneralFont();
         createPokemonTypeImages();
 
         // Initializing JFrame Window
@@ -139,6 +141,14 @@ public class GUI2nd {
         commonDisplay.setEditable(false);
         mapDisplay.setEditable(false);
         pokemonDisplay.setEditable(false);
+    }
+
+    // Change font on main game screen
+    private void setGeneralFont(){
+        roomDisplay.setFont(generalFont);
+        commonDisplay.setFont(generalFont);
+        mapDisplay.setFont(generalFont);
+        pokemonDisplay.setFont(generalFont);
     }
     /**
      * Select the Pokemon type.

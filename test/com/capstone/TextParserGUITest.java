@@ -1,8 +1,9 @@
+/*
 package com.capstone;
 
-import org.junit.Test;
+//import org.junit.Test;
 
-import static org.junit.Assert.*;
+//import static org.junit.Assert.*;
 
 // Unit Tests written by Amanda
 
@@ -61,4 +62,4 @@ public class TextParserGUITest {
         // Two random words--valid because it is two words (just how the code was written)
         assertTrue(parser.inputValidation(randomWords));
     }
-}
+}*/

@@ -160,7 +160,7 @@ public class GUI2nd {
 
         String newLine = System.getProperty("line.separator");
         String startLine = String.join(newLine,"","","","","",
-                "You're in OakRoom","",
+                "You're in Oak's Lab","",
                 "...",
                 "Professor Oak: Hey! You're finally here, I've been waiting for you.",
                 "I'm going on vacation soon... and the flight I'm going on has a strict 1 Pokemon carry on limit.",

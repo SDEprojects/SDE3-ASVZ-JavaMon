@@ -174,8 +174,10 @@ public class Pokemon {
         for(PokeAttack attacks : dataList){
             if (attacks.getAttackName().equalsIgnoreCase(move1Name)){
                 move1 = attacks;
+                break;
             } else if (attacks.getAttackName().equalsIgnoreCase(move2Name)){
                 move2 = attacks;
+                break;
             } else {
                 System.out.println("Finished processing.");
             }

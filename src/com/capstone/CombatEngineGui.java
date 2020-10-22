@@ -189,7 +189,8 @@ public class CombatEngineGui {
             System.out.println("Which attack would you like to use?");
             playerFirstPoke.getMove1().displayOutAttackStats(playerFirstPoke.getLevel());
             playerFirstPoke.getMove2().displayOutAttackStats(playerFirstPoke.getLevel());
-            String[] attacks = {playerFirstPoke.getMove1().getAttackName(),playerFirstPoke.getMove2().getAttackName(), "back"};
+            String[] attacks = {playerFirstPoke.getMove1().getAttackName() + " [Damage: " + playerFirstPoke.getMove1().getDamage() + "-" + playerFirstPoke.getMove1().getPotentialDamage() + "]",
+                    playerFirstPoke.getMove2().getAttackName() + " [Damage: " + playerFirstPoke.getMove2().getDamage() + "-" + playerFirstPoke.getMove2().getPotentialDamage() + "]", "back"};
             String res = (String) JOptionPane.showInputDialog(null, "Which attack would you like to use?", "Attacks",
                     JOptionPane.PLAIN_MESSAGE, null, attacks, attacks[0]);
 

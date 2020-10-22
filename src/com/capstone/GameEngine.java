@@ -27,7 +27,6 @@ public class GameEngine {
 
         TextParser parser = new TextParser();
 
-
         Player player1 = new Player();
         gameEngine.chooseStarter(game, player1);//This method takes the game(initXML for access to the pokemon list, and player1 for access to their pokemon invite.)
 

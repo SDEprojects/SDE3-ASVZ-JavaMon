@@ -33,7 +33,6 @@ public class TextParser {
 
             //go north
 
-
             Scanner scanner = new Scanner(System.in);
             inputString = scanner.nextLine();
 

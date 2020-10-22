@@ -411,4 +411,8 @@ public class GUI2nd {
         player.showRoomDetails();
         System.setOut(System.out);
     }
+
+    public Player getPlayer1() {
+        return player1;
+    }
 }

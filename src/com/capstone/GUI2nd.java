@@ -188,7 +188,7 @@ public class GUI2nd {
         ButtonGroup group = new ButtonGroup();
         ActionListener radioButtonListener = event -> {
             starter = event.getActionCommand();
-            System.out.println("actionCommand: " + starter);
+           // System.out.println("actionCommand: " + starter);
         };
 
         starterPokemonPanel.add(new JLabel("..."));
@@ -212,11 +212,11 @@ public class GUI2nd {
 
         starterPokemonPanel.add(startButton);
         startButton.addActionListener(e -> {
-            System.out.println("selected starter: " + starter);
+          //  System.out.println("selected starter: " + starter);
             for (Pokemon pokemon : game.listOfPokemon) {
                 if (pokemon.getName().equalsIgnoreCase(starter)) {
                     player.playersPokemon.add(pokemon);
-                    System.out.println("You chose: " + starter);
+                   // System.out.println("You chose: " + starter);
                     for (Pokemon playersFirstPokemon : player.playersPokemon) {
                         System.setOut(pokemonDisplayOut);
                         playersFirstPokemon.displayOutStatsAndAll();

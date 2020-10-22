@@ -25,6 +25,7 @@ public class GUI2nd {
     private Container con;
     private final Font normalFont = new Font("Times New Roman", Font.PLAIN, 28);
     private final Font startLineFont = new Font("Times New Roman", Font.BOLD, 25);
+    private final Font generalFont = new Font("Futura", Font.PLAIN, 16); // Changes the main page font.
 
     private String[] choiceDisplayArr = {"Bulbasaur (Grass-Type)", "Charmander (Fire-Type)", "Squirtle (Water-Type)"};
     private String[] choiceActionCommandArr = {"bulbasaur", "charmander", "squirtle"};
@@ -77,6 +78,7 @@ public class GUI2nd {
     private void initFrame() {
 
         setDisplayNonEditable();
+        setGeneralFont();
         createPokemonTypeImages();
 
         // Initializing JFrame Window
@@ -140,6 +142,14 @@ public class GUI2nd {
         mapDisplay.setEditable(false);
         pokemonDisplay.setEditable(false);
     }
+
+    // Change font on main game screen
+    private void setGeneralFont(){
+        roomDisplay.setFont(generalFont);
+        commonDisplay.setFont(generalFont);
+        mapDisplay.setFont(generalFont);
+        pokemonDisplay.setFont(generalFont);
+    }
     /**
      * Select the Pokemon type.
      */
@@ -150,7 +160,7 @@ public class GUI2nd {
 
         String newLine = System.getProperty("line.separator");
         String startLine = String.join(newLine,"","","","","",
-                "You're in OakRoom","",
+                "You're in Oak's Lab","",
                 "...",
                 "Professor Oak: Hey! You're finally here, I've been waiting for you.",
                 "I'm going on vacation soon... and the flight I'm going on has a strict 1 Pokemon carry on limit.",

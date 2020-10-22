@@ -1,10 +1,7 @@
 package com.capstone;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
+import java.awt.event.*;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -61,6 +58,8 @@ public class GUI2nd {
     //Path of the starting screen image
     private String startPageImagePath = "images/pokemon.gif";
 
+    private JRadioButton radio;
+
     //main method.
     public static void main(String[] args) {
         GUI2nd gui = new GUI2nd();
@@ -94,7 +93,7 @@ public class GUI2nd {
         backgroundLabel.setIcon(backgroundIcon);
 
         backgroundPanel.add(backgroundLabel);
-        con.add(backgroundPanel);
+        con.add(backgroundLabel);
 
         window.setVisible(true);
     }
@@ -180,20 +179,60 @@ public class GUI2nd {
             starter = event.getActionCommand();
             System.out.println("actionCommand: " + starter);
         };
+        MouseAdapter radioButtonMouseListener = new MouseAdapter() {
+            JDialog dialog = new JDialog();
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                super.mouseEntered(e);
+                System.out.println("mouse entered");
+               /* if(e.getComponent().getName().equals("Bulbasaur") ||
+                        e.getComponent().getName().equals("Charmander")||
+                        e.getComponent().getName().equals("Squirtle"))
+                {*/
+                    //JOptionPane.showMessageDialog(null,e.getComponent().getName());
+                final JOptionPane optionPane = new JOptionPane(e.getComponent().getName(), JOptionPane.INFORMATION_MESSAGE
+                ,JOptionPane.DEFAULT_OPTION, getPokemonImageLabel().getIcon(), new Object[]{},null);
+                //}
+
+                dialog.setTitle("POKEMON STATISTICS");
+                dialog.setModal(false);//setting this to false allows us to access the other parts of the program
+                dialog.setResizable(false);
+                dialog.setLocation(e.getComponent().getX(),e.getComponent().getY()-150);
+                dialog.setSize(300,200);
+                dialog.setContentPane(optionPane);
+                dialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+                //window.requestFocus();
+                dialog.pack();
+
+                dialog.setVisible(true);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                super.mouseExited(e);
+                System.out.println("mouse exited");
+                dialog.dispose();
+                dialog.setVisible(false);
+            }
+        };
+
 
         starterPokemonPanel.add(new JLabel("..."));
         starterPokemonPanel.add(new JLabel("Choose One:"));
+
         for (int i = 0; i < choiceDisplayArr.length; i++) {
-            JRadioButton radio = new JRadioButton(choiceDisplayArr[i]);
+            radio = new JRadioButton(choiceDisplayArr[i]);
+            radio.setName(choiceDisplayArr[i].split(" ",2)[0]);//get the first word and set it as a name
+            System.out.println(radio.getName());
             radio.setActionCommand(choiceActionCommandArr[i]);
             radio.addActionListener(radioButtonListener);
+            radio.addMouseListener(radioButtonMouseListener);
             radio.setForeground(Color.red);
             radio.setFont(startLineFont);
             radio.setBorder(null);
             group.add(radio);
             starterPokemonPanel.add(radio);
         }
-
 
         JButton startButton = new JButton("START");
         startButton.setBackground(Color.BLACK);

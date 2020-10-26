@@ -5,24 +5,32 @@ import java.io.*;
 public class PlayerLog {
     private File log = new File("src/com/capstone/log.txt");
 
-    public void updateLog(String action){
+    public void readLog(){
         try {
             FileReader fr = new FileReader(log);
-            FileWriter fw = new FileWriter(log, true);
-
             BufferedReader br = new BufferedReader(fr);
-            BufferedWriter bw = new BufferedWriter(fw);
+            String line;
 
-            System.out.println("Trying to write");
-            bw.write(action);
-            bw.newLine();
-            bw.flush();
-            bw.close();
-
-//            System.out.println("Trying to read");
-//            br.read();
+            while ((line = br.readLine()) != null) {
+                System.out.println(line);
+            }
         } catch (FileNotFoundException e){
             System.out.println("The file was not found: " + e.getMessage());
+        } catch (IOException e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void updateLog(String action){
+        try {
+            FileWriter fw = new FileWriter(log, true);
+            BufferedWriter bw = new BufferedWriter(fw);
+
+            bw.write(action);
+            bw.newLine();
+//            bw.flush();
+            bw.close();
+
         } catch (IOException e){
             System.out.println(e.getMessage());
         }

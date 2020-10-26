@@ -1,29 +1,32 @@
 package com.capstone;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
+import java.awt.event.*;
 import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Scanner;
-
 import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.border.CompoundBorder;
+import javax.swing.border.*;
 
-/*
-*The GUI class for the Pokemon Game.
- */
+// Main GUI.
+public class GUI2nd extends JFrame { // Added 'extends JFrame'. *Zack*
 
-public class GUI2nd {
+    // Main JFrame. *Zack*
+    private JFrame gameFrame; // *Zack*
 
-    private JFrame window;
-    private JPanel titleNamePanel;
-    private final Font normalFont = new Font("Times New Roman", Font.PLAIN, 28);
+    // Start Screen JPanels. *Zack*
+    private JPanel startScreenTextPanel; // *Zack*
+    private JPanel startScreenBackgroundPanel; // *Zack*
 
+    // Start Screen JLabels. *Zack*
+    private JLabel backgroundLabel; // *Zack*
+
+    // Start Screen Image Icons. *Zack*
+    private ImageIcon backgroundIcon; // *Zack*
+
+    // Start Screen Fonts. *Zack*
+    private final Font startButtonFont = new Font("Times New Roman", Font.PLAIN, 25); // Start button. *Zack*
+    private final Font startGameText = new Font("Sans Serif", Font.BOLD, 20); // Start screen text. *Zack*
+
+    // String Arrays. *Zack*
     private String[] choiceDisplayArr = {"Bulbasaur (Grass-Type)", "Charmander (Fire-Type)", "Squirtle (Water-Type)"};
     private String[] choiceActionCommandArr = {"bulbasaur", "charmander", "squirtle"};
 
@@ -54,10 +57,7 @@ public class GUI2nd {
     //Pokemon Image Label
     private JLabel pokemonImageLabel;
 
-    //Path of the starting screen image
-    private String startPageImagePath = "images/pokemon.gif";
-
-    //main method.
+    // Main Method. *Zack*
     public static void main(String[] args) {
         GUI2nd gui = new GUI2nd();
         gui.game.initAttacks(); //must be initialized before pokemon
@@ -65,43 +65,23 @@ public class GUI2nd {
         gui.game.initNPCs(); //must be initialized before rooms
         gui.game.initRooms();
         gui.game.initItems();
-        gui.initFrame();
         gui.chooseStarter(gui.game, gui.player1);
     }
 
-    //initialize the frame components
-    private void initFrame() {
-
-        setDisplayNonEditable();
-        createPokemonTypeImages();
-
-        // Initializing JFrame Window
-        window = new JFrame();
-        window.setSize(1200, 600);
-        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //window.setResizable(false);
-        window.getContentPane().setBackground(Color.BLACK);
-
-
-        //Initializing Title Name Panel
-        titleNamePanel = new JPanel();
-        titleNamePanel.setBounds(100, 100, 600, 150);
-        titleNamePanel.setBackground(Color.BLACK);
-
-        JLabel titleNameLabel = new JLabel("");
-        titleNameLabel.setForeground(Color.WHITE);
-        titleNameLabel.setFont(new Font("Times New Roman", Font.PLAIN, 60));
-
-        titleNamePanel.add(titleNameLabel);
-
-        window.add(titleNamePanel);
-        window.setVisible(true);
+    // *Zack* This method forces JFrame into a size that's a percentage of the user's screen and centers it (nice and neat).
+    private void MakeFrameNinetyFivePercent(JFrame frame) {
+        Toolkit toolKit = Toolkit.getDefaultToolkit(); // *Zack* Toolkit
+        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+        int ySize = ((int) toolKit.getScreenSize().getHeight()); // *Zack* Initial height.
+        int xSize = ((int) toolKit.getScreenSize().getWidth()); // *Zack* Initial width.
+        int windowHeight = (int) (Math.round(ySize * 0.93)); // *Zack* Screen reduced to 95% height.
+        int windowWidth = (int) (Math.round(xSize * 0.95)); // *Zack* Screen reduced to 95% width.
+        frame.setSize(new Dimension(windowWidth, windowHeight)); // *Zack* Setting that screen size based on calculations.
+        frame.setLocation(dimension.width/2-frame.getSize().width/2, dimension.height/2-frame.getSize().height/2); // *Zack* Set the JFrame to the center.
     }
 
-    /**
-     * Create images for various Pokemon types.
-     */
-    private void createPokemonTypeImages() {
+    // Create Images for Pokemon Types
+    private void createPokemonTypeImages() { // Moved method here for neatness and readability. *Zack*
         String balbasaurPath = "images/Balbasaur-Pokemon.png";
         String charmanderPath = "images/Charmander-Pokemon.png";
         String squirtlePath = "images/Squirtle-Pokemon.png";
@@ -115,44 +95,72 @@ public class GUI2nd {
         squirtleIcon = new ImageIcon(squirtleImg);
     }
 
-    /**
-     * Transforms the given icon's image to scaled instance based on the given width and height.
-     * @param icon
-     * @param width
-     * @param height
-     * @return
-     */
-
-    private Image transformImage(ImageIcon icon, int width, int height) {
+    // Transforms the Icon's Image to Scaled Instance (based on height and width). *Zack*
+    private Image transformImage(ImageIcon icon, int width, int height) { // *Zack* Moved method here for neatness and readability.
         Image image = icon.getImage(); // transform it
         Image newimg = image.getScaledInstance(width, height,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
         return newimg;
     }
 
-    //Make all the display text area non editable.
-    private void setDisplayNonEditable() {
+    // Make Display Text Area Non-Editable. *Zack*
+    private void setDisplayNonEditable() { // *Zack* Moved method here for neatness and readability.
         roomDisplay.setEditable(false);
         commonDisplay.setEditable(false);
         mapDisplay.setEditable(false);
         pokemonDisplay.setEditable(false);
     }
-    /**
-     * Select the Pokemon type.
-     */
 
+    // Change the Pokemon Image Label (based on name). *Zack*
+    protected void setPokemonImageLabel(Pokemon pokemon) { // *Zack* Moved method here for neatness and readability.
+        switch(pokemon.getName()) {
+            case "Balbasaur":
+                pokemonImageLabel.setIcon(balbasaurIcon);
+                break;
+            case "Charmander":
+                pokemonImageLabel.setIcon(charmanderIcon);
+                break;
+            case "Squirtle":
+                pokemonImageLabel.setIcon(squirtleIcon);
+                break;
+        }
+    }
+
+    // Select the Starter Pokemon and Initialize the Game. *Zack*
     public void chooseStarter(InitXML game, Player player) {
-        JPanel starterPokemonPanel = new JPanel();
-        starterPokemonPanel.setLayout(new BoxLayout(starterPokemonPanel, BoxLayout.PAGE_AXIS)); //center the layout here later
+
+        setDisplayNonEditable();
+        createPokemonTypeImages();
+
+        // Main Game Frame Window. *Zack*
+        gameFrame = new JFrame("Gotta Code 'Em All... JavaMon!"); // *Zack*
+        MakeFrameNinetyFivePercent(gameFrame); // Must stay valid! *Zack*
+        gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Must stay valid! *Zack*
+        gameFrame.setResizable(false); // Must stay false! *Zack*
+
+        // Start Screen Background Panel (CENTER). *Zack*
+        startScreenBackgroundPanel = new JPanel(new BorderLayout(0, 0)); // *Zack*
+        backgroundIcon = new ImageIcon(this.getClass().getResource("images/OakPic.jpg")); // Stores the background picture in an ImageIcon. *Zack*
+        backgroundLabel = new JLabel(backgroundIcon); // Sets the stored background picture into a JLabel. *Zack*
+        startScreenBackgroundPanel.add(backgroundLabel); // Slaps the JLabel to the JPanel. *Zack*
+        startScreenBackgroundPanel.setVisible(true); // Must stay true! *Zack*
+
+        // Start Screen Text Panel (PAGE_END). *Zack*
+        startScreenTextPanel = new JPanel(); // *Zack*
+        startScreenTextPanel.setPreferredSize(new Dimension(0, 75)); // *Zack*
+        startScreenTextPanel.setBackground(Color.WHITE); // *Zack*
+        startScreenTextPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 4, true)); // *Zack*
+        startScreenTextPanel.setVisible(true); // *Zack*
 
         JLabel pokemonImageLabel = getPokemonImageLabel();
-        starterPokemonPanel.add(pokemonImageLabel);
+        startScreenTextPanel.add(pokemonImageLabel);
 
-        starterPokemonPanel.add(new JLabel("You're in OakRoom"));
-        starterPokemonPanel.add(new JLabel("..."));
-        starterPokemonPanel.add(new JLabel("Professor Oak: Hey! You're finally here, I've been waiting for you."));
-        starterPokemonPanel.add(new JLabel("I'm going on vacation soon... and the flight I'm going on has a strict 1 Pokemon carry on limit."));
-        starterPokemonPanel.add(new JLabel("I'm going to need you to look after one while I'm gone! I'll even let you choose who you want to take!"));
-        starterPokemonPanel.add(new JLabel("..."));
+        startScreenTextPanel.setFont(startGameText); // Bold font. *Zack*
+        startScreenTextPanel.add(new JLabel("You're in OakRoom"));
+        startScreenTextPanel.add(new JLabel("..."));
+        startScreenTextPanel.add(new JLabel("Professor Oak: Hey! You're finally here, I've been waiting for you."));
+        startScreenTextPanel.add(new JLabel("I'm going on vacation soon... and the flight I'm going on has a strict 1 Pokemon carry on limit."));
+        startScreenTextPanel.add(new JLabel("I'm going to need you to look after one while I'm gone! I'll even let you choose who you want to take!"));
+        startScreenTextPanel.add(new JLabel("..."));
 
         //Group the radio buttons.
         ButtonGroup group = new ButtonGroup();
@@ -165,22 +173,35 @@ public class GUI2nd {
             }
         };
 
-        starterPokemonPanel.add(new JLabel("..."));
-        starterPokemonPanel.add(new JLabel("Choose One:"));
+        startScreenTextPanel.add(new JLabel("..."));
+        startScreenTextPanel.add(new JLabel("Choose One:"));
         for (int i = 0; i < choiceDisplayArr.length; i++) {
             JRadioButton radio = new JRadioButton(choiceDisplayArr[i]);
             radio.setActionCommand(choiceActionCommandArr[i]);
             radio.addActionListener(radioButtonListener);
             group.add(radio);
-            starterPokemonPanel.add(radio);
+            startScreenTextPanel.add(radio);
+            if (i == 0) { // Conditionals to color the radio group. *Zack*
+                Color bulbaGreen = new Color(0,128,0);
+                radio.setBackground(bulbaGreen);
+                radio.setForeground(Color.WHITE);
+            }
+            else if (i == 1) {
+                radio.setBackground(Color.RED);
+                radio.setForeground(Color.WHITE);
+            }
+            else if (i == 2) {
+                radio.setBackground(Color.BLUE);
+                radio.setForeground(Color.WHITE);
+            }
         }
 
-        JButton startButton = new JButton("START");
+        JButton startButton = new JButton("PLAY");
         startButton.setBackground(Color.BLACK);
-        startButton.setForeground(Color.RED);
-        startButton.setFont(normalFont);
+        startButton.setForeground(Color.WHITE);
+        startButton.setFont(startButtonFont);
 
-        starterPokemonPanel.add(startButton);
+        startScreenTextPanel.add(startButton);
         startButton.addActionListener(new ActionListener() {
 
             @Override
@@ -198,53 +219,25 @@ public class GUI2nd {
                             displayOutStatsAndAll(playersFirstPokemon, player);
                             setPokemonImageLabel(playersFirstPokemon);
                             parser.checkPlayerCommand(game, gameEngine,combatEngine, player1, "check map", commonDisplayOut, mapDisplayOut, roomDisplayOut,pokemonDisplayOut, pokemonDisplay);
-
                         }
                     }
                 }
             }
-
         });
-
-        window.getContentPane().removeAll();
-        window.setLayout(new BorderLayout());
-        window.getContentPane().add(getBorderedPanel(starterPokemonPanel), BorderLayout.CENTER);
-        window.revalidate();
+        gameFrame.add(startScreenBackgroundPanel, BorderLayout.CENTER); // I wouldn't mess with this line. *Zack*
+        gameFrame.add(startScreenTextPanel, BorderLayout.SOUTH); // I wouldn't mess with this line either. *Zack*
+        gameFrame.setVisible(true); // Must stay true! *Zack*
     }
 
-    /*
-     * Changes the pokemon image label based on the given pokemon's name
-     */
-
-    protected void setPokemonImageLabel(Pokemon pokemon) {
-        switch(pokemon.getName()) {
-            case "Balbasaur":
-                pokemonImageLabel.setIcon(balbasaurIcon);
-                break;
-            case "Charmander":
-                pokemonImageLabel.setIcon(charmanderIcon);
-                break;
-            case "Squirtle":
-                pokemonImageLabel.setIcon(squirtleIcon);
-                break;
-        }
-    }
-
-    /**
-     * Create Pokemon image label
-     */
-
+    // Pokemon Image Label
     private JLabel getPokemonImageLabel() {
-        Image img = transformImage(createImageIcon(startPageImagePath, ""), 120, 120);
+        Image img = transformImage(createImageIcon("images", ""), 120, 120);
         ImageIcon icon = new ImageIcon(img);  // transform it back
         JLabel imageLabel = new JLabel("", icon, JLabel.CENTER);
         return imageLabel;
     }
 
-    /**
-     * Returns an ImageIcon, or null if the path was invalid.
-     *
-     */
+    // Returns an ImageIcon (or null if path invalid). *Zack*
     private ImageIcon createImageIcon(String path, String description) {
         java.net.URL imgURL = getClass().getResource(path);
         if (imgURL != null) {
@@ -342,12 +335,12 @@ public class GUI2nd {
         mainPanel.add(getBorderedPanel(inputP), BorderLayout.SOUTH);
 
         //Add the mainPanel to the window.
-        window.getContentPane().removeAll();
-        window.setLayout(new BorderLayout());
-        window.getContentPane().add(mainPanel);
+        gameFrame.getContentPane().removeAll();
+        gameFrame.setLayout(new BorderLayout());
+        gameFrame.getContentPane().add(mainPanel);
 
         //Revalidate to make sure that the newly added components are shown.
-        window.revalidate();
+        gameFrame.revalidate();
     }
     private void performAction(JTextField inputTF, Player player) {
         commonDisplay.setText("");

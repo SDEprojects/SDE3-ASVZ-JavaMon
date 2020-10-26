@@ -185,32 +185,39 @@ public class CombatEngineGui {
         npcFirstPoke.displayOutStatsAndAll();
 
         //If userChoice is attack
-        if (userChoice.equalsIgnoreCase("Attack")){
+        if (userChoice == null){
+            System.out.println("You have forfeited your turn.");
+        }
+        else if (userChoice.equalsIgnoreCase("Attack")){
             System.out.println("Which attack would you like to use?");
             playerFirstPoke.getMove1().displayOutAttackStats(playerFirstPoke.getLevel());
             playerFirstPoke.getMove2().displayOutAttackStats(playerFirstPoke.getLevel());
-            String[] attacks = {playerFirstPoke.getMove1().getAttackName(),playerFirstPoke.getMove2().getAttackName(), "back"};
+            String[] attacks = {playerFirstPoke.getMove1().getAttackName() + " [Damage: " + playerFirstPoke.getMove1().getDamage() + "-" + playerFirstPoke.getMove1().getPotentialDamage() + "]",
+                    playerFirstPoke.getMove2().getAttackName() + " [Damage: " + playerFirstPoke.getMove2().getDamage() + "-" + playerFirstPoke.getMove2().getPotentialDamage() + "]", "back"};
             String res = (String) JOptionPane.showInputDialog(null, "Which attack would you like to use?", "Attacks",
                     JOptionPane.PLAIN_MESSAGE, null, attacks, attacks[0]);
 
+            if (res != null) {
+                //String attackChoice = scanner.nextLine();
+                //If user between attack move one or two
+                if (res.equalsIgnoreCase(playerFirstPoke.getMove1().getAttackName())) {
+                    System.out.println(playerFirstPoke.getName() + " use " + playerFirstPoke.getMove1().getAttackName());
+                    playerPokeAttack = playerFirstPoke.getMove1().attack(playerFirstPoke.getAttack());
+                    playerFirstPoke.getMove1().attackUsed();
+                    npcFirstPoke.takeDamage(playerPokeAttack);
+                } else if (res.equalsIgnoreCase(playerFirstPoke.getMove2().getAttackName())) {
+                    System.out.println(playerFirstPoke.getName() + " use " + playerFirstPoke.getMove2().getAttackName());
+                    playerPokeAttack = playerFirstPoke.getMove2().attack(playerFirstPoke.getAttack());
+                    playerFirstPoke.getMove2().attackUsed();
+                    npcFirstPoke.takeDamage(playerPokeAttack);
 
-            //String attackChoice = scanner.nextLine();
-            //If user between attack move one or two
-            if (res.equalsIgnoreCase(playerFirstPoke.getMove1().getAttackName())){
-                System.out.println(playerFirstPoke.getName() + " use " + playerFirstPoke.getMove1().getAttackName());
-                playerPokeAttack = playerFirstPoke.getMove1().attack(playerFirstPoke.getAttack());
-                playerFirstPoke.getMove1().attackUsed();
-                npcFirstPoke.takeDamage(playerPokeAttack);
-            } else if (res.equalsIgnoreCase(playerFirstPoke.getMove2().getAttackName())){
-                System.out.println(playerFirstPoke.getName() + " use " + playerFirstPoke.getMove2().getAttackName());
-                playerPokeAttack = playerFirstPoke.getMove2().attack(playerFirstPoke.getAttack());
-                playerFirstPoke.getMove2().attackUsed();
-                npcFirstPoke.takeDamage(playerPokeAttack);
-
-            } else if (userChoice.equalsIgnoreCase("back")){
-                processActionPhase(userChoice,player,npc, game);
+                } else if (userChoice.equalsIgnoreCase("back")) {
+                    processActionPhase(userChoice, player, npc, game);
+                } else {
+                    System.out.println("Invalid entry.");
+                }
             } else {
-                System.out.println("Invalid entry.");
+                System.out.println("You have forfeited your turn.");
             }
 
         }

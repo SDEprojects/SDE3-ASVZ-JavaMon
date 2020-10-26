@@ -9,6 +9,7 @@ public class PokeAttack {
     private int damage; //base damage set from AttackMoves.txt xml.
     private int currentEnergy;
     private int maxEnergy;
+    private int potentialDamage;
 
     //Constructors ------------------------------------------------------------------------------
 
@@ -46,11 +47,15 @@ public class PokeAttack {
         this.maxEnergy = maxEnergy;
     }
 
+    public int getPotentialDamage() {
+        return potentialDamage;
+    }
+
     //Class Methods -------------------------------------------------------------------------
 
     //This is a displayOut that also calculates potential damage, and also shows remaining energy points.
     void displayOutAttackStats(int pokemonAttackStat){
-        int potentialDamage = damage + pokemonAttackStat;
+        potentialDamage = damage + pokemonAttackStat;
         System.out.println(attackName + ": damage: (" + damage + "-" + potentialDamage + ") energy: [" + currentEnergy + "/" + maxEnergy + "]" );
     }
 
@@ -65,8 +70,4 @@ public class PokeAttack {
 
         return (int)(Math.random() * (potentialDamage - damage + 1) + damage);
     }
-
-
-
-
 }

@@ -2,12 +2,12 @@ package com.capstone;
 
 import java.io.*;
 
-public class PlayerLog {
-    private File log = new File("src/com/capstone/log.txt");
+public class Codex {
+    private File codex = new File("src/com/capstone/codex.txt");
 
-    public void readLog(){
+    public void readCodex(){
         try {
-            FileReader fr = new FileReader(log);
+            FileReader fr = new FileReader(codex);
             BufferedReader br = new BufferedReader(fr);
             String line;
 
@@ -21,9 +21,9 @@ public class PlayerLog {
         }
     }
 
-    public void updateLog(String action){
+    public void updateCodex(String action){
         try {
-            FileWriter fw = new FileWriter(log, true);
+            FileWriter fw = new FileWriter(codex, true);
             BufferedWriter bw = new BufferedWriter(fw);
 
             bw.write(action);

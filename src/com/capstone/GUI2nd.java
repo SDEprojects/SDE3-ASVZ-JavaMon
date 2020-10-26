@@ -24,7 +24,7 @@ public class GUI2nd extends JFrame { // Added 'extends JFrame'. *Zack*
 
     // Start Screen Fonts. *Zack*
     private final Font startButtonFont = new Font("Times New Roman", Font.PLAIN, 25); // Start button. *Zack*
-    private final Font startGameText = new Font("Sans Serif", Font.BOLD, 20); // Start screen text. *Zack*
+    private final Font startGameText = new Font("Bold", Font.BOLD, 20); // Start screen text. *Zack*
 
     // String Arrays. *Zack*
     private String[] choiceDisplayArr = {"Bulbasaur (Grass-Type)", "Charmander (Fire-Type)", "Squirtle (Water-Type)"};
@@ -74,7 +74,7 @@ public class GUI2nd extends JFrame { // Added 'extends JFrame'. *Zack*
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
         int ySize = ((int) toolKit.getScreenSize().getHeight()); // *Zack* Initial height.
         int xSize = ((int) toolKit.getScreenSize().getWidth()); // *Zack* Initial width.
-        int windowHeight = (int) (Math.round(ySize * 0.93)); // *Zack* Screen reduced to 95% height.
+        int windowHeight = (int) (Math.round(ySize * 0.93)); // *Zack* Screen reduced to 93% height.
         int windowWidth = (int) (Math.round(xSize * 0.95)); // *Zack* Screen reduced to 95% width.
         frame.setSize(new Dimension(windowWidth, windowHeight)); // *Zack* Setting that screen size based on calculations.
         frame.setLocation(dimension.width/2-frame.getSize().width/2, dimension.height/2-frame.getSize().height/2); // *Zack* Set the JFrame to the center.

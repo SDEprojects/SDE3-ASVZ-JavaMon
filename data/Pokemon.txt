@@ -6,6 +6,7 @@
         <health>10</health>
         <attack>5</attack>
         <startingExp>50</startingExp>
+        <startsound>bulbasaur.wav</startsound>
     </pokemon>
     <pokemon>
         <name>Charmander</name>
@@ -13,6 +14,7 @@
         <health>10</health>
         <attack>5</attack>
         <startingExp>50</startingExp>
+        <startsound>charmander.wav</startsound>
     </pokemon>
     <pokemon>
         <name>Squirtle</name>
@@ -20,6 +22,7 @@
         <health>12</health>
         <attack>3</attack>
         <startingExp>50</startingExp>
+        <startsound>squirtle.wav</startsound>
     </pokemon>
     <pokemon>
         <name>Rattata</name>
@@ -27,6 +30,7 @@
         <health>8</health>
         <attack>4</attack>
         <startingExp>50</startingExp>
+        <startsound>squirtle.wav</startsound>
     </pokemon>
     <pokemon>
         <name>Pidgey</name>
@@ -34,6 +38,7 @@
         <health>9</health>
         <attack>3</attack>
         <startingExp>50</startingExp>
+        <startsound>squirtle.wav</startsound>
     </pokemon>
     <pokemon>
         <name>Caterpie</name>
@@ -41,6 +46,7 @@
         <health>9</health>
         <attack>3</attack>
         <startingExp>50</startingExp>
+        <startsound>squirtle.wav</startsound>
     </pokemon>
     <pokemon>
         <name>Zubat</name>
@@ -48,5 +54,6 @@
         <health>8</health>
         <attack>4</attack>
         <startingExp>50</startingExp>
+        <startsound>squirtle.wav</startsound>
     </pokemon>
 </class>

@@ -1,20 +1,65 @@
 <?xml version = "1.0"?>
 <keywords>
    <action activity = "01">
-      <engage>interact touch</engage>
-      <communicate>talk speak chat communicate express say tell gab contact</communicate>
-      <utilize>apply use utilize</utilize>
-      <check>check look glance see stare study view watch focus</check>
-      <buy>buy purchase</buy>
-      <get>get grab gain procure pick take acquire attain</get>
-      <go>move go proceed jump walk run leap dance</go>
-      <up>north up</up>
-      <down>south down</down>
-      <left>west left</left>
-      <right>east right</right>
-      <bag>bag backpack pack gear handbag briefcase pocket pouch sack suitcase</bag>
-      <map>map atlas picture</map>
-      <pokemon>pokemon monster poke mon</pokemon>
-      <help>help hel hep</help>
+      <engage>
+	<mode>interact touch</mode>
+	<sound>intro.wav</sound>
+ </engage>
+      <communicate>	
+	<mode>talk speak chat communicate express say tell gab contact</mode>
+	<sound>intro.wav</sound>
+</communicate>
+      <utilize>
+	<mode>apply use utilize</mode>
+	<sound>intro.wav</sound>
+</utilize>
+      <check>
+	<mode>check look glance see stare study view watch focus</mode>
+	<sound>intro.wav</sound>
+</check>
+      <buy>
+	<mode>buy purchase</mode>
+	<sound>intro.wav</sound>
+</buy>
+      <get>
+	<mode>get grab gain procure pick take acquire attain</mode>
+	<sound>intro.wav</sound>
+</get>
+      <go>
+	<mode>move go proceed jump walk run leap dance</mode>
+	<sound>intro.wav</sound>
+</go>
+      <up>
+	<mode>north up</mode>
+	<sound>go.wav</sound>
+</up>
+      <down>
+	<mode>south down</mode>
+	<sound>go.wav</sound>
+</down>
+      <left>
+	<mode>west left</mode>
+	<sound>go.wav</sound>
+</left>
+      <right>
+	<mode>east right</mode>
+	<sound>go.wav</sound>
+</right>
+      <bag>
+	<mode>bag backpack pack gear handbag briefcase pocket pouch sack suitcase</mode>
+	<sound>intro.wav</sound>
+</bag>
+      <map>
+	<mode>map atlas picture</mode>
+	<sound>intro.wav</sound>
+</map>
+      <pokemon>
+	<mode>pokemon monster poke mon</mode>
+	<sound>intro.wav</sound>
+</pokemon>
+      <help>
+	<mode>help hel hep</mode>
+	<sound>intro.wav</sound>
+</help>
    </action>
 </keywords>

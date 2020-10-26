@@ -58,7 +58,8 @@ public class GUI2nd {
     private JLabel backgroundLabel;//sanju added
     //Path of the starting screen image
     private String startPageImagePath = "images/pokemon.gif";
-
+    public static MusicPlayer music = new MusicPlayer();
+    private MusicPlayer startMusic = new MusicPlayer();
     private JRadioButton radio;
 
     //main method.
@@ -70,7 +71,9 @@ public class GUI2nd {
         gui.game.initRooms();
         gui.game.initItems();
         gui.initFrame();
+        gui.startMusic.PlaySounds("intro.wav");
         gui.chooseStarter(gui.game, gui.player1);
+
     }
 
     //initialize the frame components
@@ -187,6 +190,12 @@ public class GUI2nd {
         ButtonGroup group = new ButtonGroup();
         ActionListener radioButtonListener = event -> {
             starter = event.getActionCommand();
+            for (Pokemon pokemon : game.listOfPokemon) {
+                if (pokemon.getName().equalsIgnoreCase(starter)) {
+                    music.PlaySounds(pokemon.getStartSound());
+                    break;
+                }
+            }
            // System.out.println("actionCommand: " + starter);
         };
         MouseAdapter radioButtonMouseListener = new MouseAdapter() {
@@ -252,6 +261,7 @@ public class GUI2nd {
         starterPokemonPanel.add(startButton);
         startButton.addActionListener(e -> {
           //  System.out.println("selected starter: " + starter);
+            this.music.stopMusic();
             for (Pokemon pokemon : game.listOfPokemon) {
                 if (pokemon.getName().equalsIgnoreCase(starter)) {
                     player.playersPokemon.add(pokemon);
@@ -265,6 +275,9 @@ public class GUI2nd {
                         setPokemonImageLabel(playersFirstPokemon);
                         parser.checkPlayerCommand(game, gameEngine,combatEngine, player1, "check map", commonDisplayOut, mapDisplayOut, roomDisplayOut,pokemonDisplayOut, pokemonDisplay);
                     }
+                    startMusic.stopMusic();
+                    music.PlaySounds("startGame.wav");
+                    break;
                 }
             }
         });

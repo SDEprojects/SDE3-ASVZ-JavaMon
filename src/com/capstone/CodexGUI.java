@@ -1,6 +1,111 @@
 package com.capstone;
 
-public class CodexGUI {
-    //The GUI will go here.
+import javax.swing.*;
+import java.awt.*;
 
+public class CodexGUI {
+    JFrame codexWindow = new JFrame("Codex");
+    Font titleFont = new Font("Futura", Font.BOLD, 18);
+    Font generalFont = new Font("Futura", Font.PLAIN, 16);
+
+    final int width = 400;
+    final int height = 600;
+    final int borderSize = 50;
+    final int panelWidth = width - borderSize*2;
+    final int headerHeight = 50;
+    final int gap = 15;
+    final int codexY = borderSize + headerHeight + gap;
+    final int textHeight = height - borderSize*2 - codexY; //500-115=385
+
+    public void displayLog(){
+//        Codex log = new Codex();
+// Using a string temporarily
+        String log = "Oh hey this is the log! \n" +
+                "How's it going? \n" +
+                "Pika-Pika!\n" +
+                "Pika-Pika!\n" +
+                "Oh hey this is the log! \n" +
+                "How's it going? \n" +
+                "Oh hey this is the log! \n" +
+                "How's it going? \n" +
+                "Oh hey this is the log! \n" +
+                "How's it going? \n" +
+                "Oh hey this is the log! \n" +
+                "How's it going? \n" +
+                "Oh hey this is the log! \n" +
+                "How's it going? \n" +
+                "Oh hey this is the log! \n" +
+                "How's it going? \n" +
+                "Oh hey this is the log! \n" +
+                "How's it going? \n" +
+                "Oh hey this is the log! \n" +
+                "How's it going? \n" +
+                "Oh hey this is the log! \n" +
+                "How's it going? \n" +
+                "Oh hey this is the log! \n" +
+                "How's it going? \n" +
+                "Oh hey this is the log! \n" +
+                "How's it going? \n" +
+                "Oh hey this is the log! \n" +
+                "How's it going? \n" +
+                "Oh hey this is the log! \n" +
+                "How's it going? \n" +
+                "Oh hey this is the log! \n" +
+                "How's it going? \n" +
+                "Oh hey this is the log! \n" +
+                "How's it going? \n" +
+                "Oh hey this is the log! \n" +
+                "How's it going? \n" +
+                "Oh hey this is the log! \n" +
+                "How's it going? \n" +
+                "Oh hey this is the log! \n" +
+                "How's it going? \n" +
+                "END";
+
+        codexWindow.setSize(width, height);
+        codexWindow.setResizable(false);
+        codexWindow.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        codexWindow.getContentPane().setBackground(Color.green);
+        codexWindow.setLayout(null);
+
+        // Instantiating a container for Codex
+        Container codexContainer = codexWindow.getContentPane();
+
+        // Header Label
+        JLabel codexHeader = new JLabel("Codex of Past Turns");
+        codexHeader.setFont(titleFont);
+        codexHeader.setForeground(Color.WHITE);
+
+        // Header Panel
+        JPanel headerPanel = new JPanel();
+        headerPanel.setBounds(borderSize, borderSize, panelWidth, headerHeight);
+        headerPanel.add(codexHeader);
+        headerPanel.setBackground(Color.red);
+
+        // Codex Panel
+        JPanel codexPanel = new JPanel();
+        codexPanel.setBounds(borderSize, codexY, panelWidth, textHeight);
+        codexPanel.setBackground(Color.WHITE);
+
+        // Codex Text Area
+        JTextArea codexTextArea = new JTextArea(18,20);
+        codexTextArea.setFont(generalFont);
+        codexTextArea.setText(log);
+        codexTextArea.setEditable(false);
+
+        codexPanel.add(codexTextArea);
+
+        // Scroll Bar
+        JScrollPane scroll = new JScrollPane(codexTextArea, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        codexPanel.add(scroll);
+
+        codexContainer.add(headerPanel);
+        codexContainer.add(codexPanel);
+        codexWindow.setVisible(true);
+    }
+
+    public static void main(String[] args){
+        CodexGUI codex = new CodexGUI();
+        codex.displayLog();
+    }
 }

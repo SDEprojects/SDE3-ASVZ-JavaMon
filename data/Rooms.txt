@@ -1,7 +1,7 @@
 <class>
     <room>
         <name>Oak's Lab</name>
-        <description>Pokemon lab located in Pallet Town, the lab is for researching Pokemon!</description>
+        <description>Pokemon lab located in Pallet Town for researching Pokemon!</description>
         <adjacent_north>Route 1</adjacent_north>
         <adjacent_south>Lake</adjacent_south>
         <adjacent_east>Rival's House</adjacent_east>
@@ -72,7 +72,7 @@
 
     <room>
         <name>Strange House</name>
-        <description>A Strange looking house at the edge of the clearing... Inside you see.. </description>
+        <description>A Strange looking house at the edge of the clearing. Inside you see </description>
         <adjacent_north>nothing</adjacent_north>
         <adjacent_south>nothing</adjacent_south>
         <adjacent_east>nothing</adjacent_east>

@@ -95,7 +95,6 @@ public class InitXML {
         catch (Exception e) {
             System.out.println("there was an error initializing the NPCs list.");
         }
-
     }
 
     //same thing as npc but with items

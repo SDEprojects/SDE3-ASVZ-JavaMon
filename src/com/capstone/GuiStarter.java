@@ -7,7 +7,7 @@ import javax.swing.*;
 import javax.swing.border.*;
 
 // Main GUI. // *Zack*
-public class GUI2nd extends JFrame { // Added 'extends JFrame'. *Zack*
+public class GuiStarter extends JFrame { // Added 'extends JFrame'. *Zack*
 
     // Main JFrame. *Zack*
     private JFrame gameFrame; // *Zack*
@@ -67,25 +67,14 @@ public class GUI2nd extends JFrame { // Added 'extends JFrame'. *Zack*
     private JLabel pokemonImageLabel;
 
     // Main Method. *Zack*
-   // private JLabel backgroundLabel;//sanju added
-    //Path of the starting screen image
-    private String startPageImagePath = "images/pokemon.gif";
-    public static MusicPlayer music = new MusicPlayer();
-    private MusicPlayer startMusic = new MusicPlayer();
-   // private JRadioButton radio;
-
-    //main method.
     public static void main(String[] args) {
-        GUI2nd gui = new GUI2nd();
+        GuiStarter gui = new GuiStarter();
         gui.game.initAttacks(); //must be initialized before pokemon
         gui.game.initPokemon(); //must be initialized before npcs
         gui.game.initNPCs(); //must be initialized before rooms
         gui.game.initRooms();
         gui.game.initItems();
-       // gui.initFrame();
-        gui.startMusic.PlaySounds("intro.wav");
         gui.chooseStarter(gui.game, gui.player1);
-
     }
 
     // Select the Starter Pokemon and Initialize the Game. *Zack*
@@ -130,13 +119,6 @@ public class GUI2nd extends JFrame { // Added 'extends JFrame'. *Zack*
         ButtonGroup group = new ButtonGroup();
         ActionListener radioButtonListener = event -> {
             starter = event.getActionCommand();
-            for (Pokemon pokemon : game.listOfPokemon) {
-                if (pokemon.getName().equalsIgnoreCase(starter)) {
-                    music.PlaySounds(pokemon.getStartSound());
-                    break;
-                }
-            }
-           // System.out.println("actionCommand: " + starter);
         };
 
         // *Sanju*
@@ -248,8 +230,6 @@ public class GUI2nd extends JFrame { // Added 'extends JFrame'. *Zack*
 
         startScreenTextPanel.add(startButton);
         startButton.addActionListener(e -> {
-          //  System.out.println("selected starter: " + starter);
-            this.music.stopMusic();
             for (Pokemon pokemon : game.listOfPokemon) {
                 if (pokemon.getName().equalsIgnoreCase(starter)) {
                     player.playersPokemon.add(pokemon);
@@ -262,9 +242,6 @@ public class GUI2nd extends JFrame { // Added 'extends JFrame'. *Zack*
                         setPokemonImageLabel(playersFirstPokemon);
                         parser.checkPlayerCommand(game, gameEngine,combatEngine, player1, "check map", commonDisplayOut, mapDisplayOut, roomDisplayOut,pokemonDisplayOut, pokemonDisplay);
                     }
-                    startMusic.stopMusic();
-                    music.PlaySounds("startGame.wav");
-                    break;
                 }
             }
         });

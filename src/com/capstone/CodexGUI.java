@@ -9,15 +9,15 @@ public class CodexGUI {
     Font generalFont = new Font("Futura", Font.PLAIN, 16);
 
     final int width = 400;
-    final int height = 600;
-    final int borderSize = 50;
+    final int height = 500;
+    final int borderSize = 25;
     final int panelWidth = width - borderSize*2;
     final int headerHeight = 50;
     final int gap = 15;
     final int codexY = borderSize + headerHeight + gap;
     final int textHeight = height - borderSize*2 - codexY; //500-115=385
 
-    public void displayLog(){
+    public void displayLog(JButton CodexButton){
 //        Codex log = new Codex();
 // Using a string temporarily
         String log = "Oh hey this is the log! \n" +
@@ -68,6 +68,10 @@ public class CodexGUI {
         codexWindow.getContentPane().setBackground(Color.green);
         codexWindow.setLayout(null);
 
+        Point popupLocation = CodexButton.getLocationOnScreen();
+        codexWindow.setLocation((int)popupLocation.getX()-codexWindow.getWidth(),
+                (int)popupLocation.getY()-codexWindow.getHeight());
+
         // Instantiating a container for Codex
         Container codexContainer = codexWindow.getContentPane();
 
@@ -88,7 +92,7 @@ public class CodexGUI {
         codexPanel.setBackground(Color.WHITE);
 
         // Codex Text Area
-        JTextArea codexTextArea = new JTextArea(18,20);
+        JTextArea codexTextArea = new JTextArea(16,22);
         codexTextArea.setFont(generalFont);
         codexTextArea.setText(log);
         codexTextArea.setEditable(false);
@@ -106,6 +110,6 @@ public class CodexGUI {
 
     public static void main(String[] args){
         CodexGUI codex = new CodexGUI();
-        codex.displayLog();
+//        codex.displayLog();
     }
 }

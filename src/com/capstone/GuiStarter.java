@@ -7,7 +7,7 @@ import javax.swing.*;
 import javax.swing.border.*;
 
 // Main GUI. // *Zack*
-public class GUI2nd extends JFrame { // Added 'extends JFrame'. *Zack*
+public class GuiStarter extends JFrame { // Added 'extends JFrame'. *Zack*
 
     // Main JFrame. *Zack*
     private JFrame gameFrame; // *Zack*
@@ -27,7 +27,6 @@ public class GUI2nd extends JFrame { // Added 'extends JFrame'. *Zack*
     private final Font startGameText = new Font("Sans Serif", Font.BOLD, 20); // Start screen text. *Zack*
     private final Font generalFont = new Font("Futura", Font.PLAIN, 16); // *Sanju*
 
-    private CodexGUI codexGUI;
     // String Arrays. *Zack*
     private String[] choiceDisplayArr = {"Bulbasaur (Grass-Type)", "Charmander (Fire-Type)", "Squirtle (Water-Type)"};
     private String[] choiceActionCommandArr = {"bulbasaur", "charmander", "squirtle"};
@@ -69,7 +68,7 @@ public class GUI2nd extends JFrame { // Added 'extends JFrame'. *Zack*
 
     // Main Method. *Zack*
     public static void main(String[] args) {
-        GUI2nd gui = new GUI2nd();
+        GuiStarter gui = new GuiStarter();
         gui.game.initAttacks(); //must be initialized before pokemon
         gui.game.initPokemon(); //must be initialized before npcs
         gui.game.initNPCs(); //must be initialized before rooms
@@ -342,7 +341,6 @@ public class GUI2nd extends JFrame { // Added 'extends JFrame'. *Zack*
 
         JScrollPane scroll = new JScrollPane (commonDisplay,
                 JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        codexGUI = new CodexGUI();
 
         String roomName = "Oak's Lab";
         Room startingRoom = game.getRoom(roomName);
@@ -374,7 +372,6 @@ public class GUI2nd extends JFrame { // Added 'extends JFrame'. *Zack*
         JButton codexB = new JButton("Codex");
         codexB.setFocusPainted(false);
         inputP.add(codexB);
-        codexB.addActionListener(e -> codexGUI.displayLog(codexB));
 
         CommandListGUI cListGUI = new CommandListGUI();
         JButton helpB = new JButton("Help");

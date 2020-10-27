@@ -20,6 +20,7 @@ public class GUI2nd {
     private final Font normalFont = new Font("Times New Roman", Font.PLAIN, 28);
     private final Font startLineFont = new Font("Times New Roman", Font.BOLD, 25);
     private final Font generalFont = new Font("Futura", Font.PLAIN, 16); // Changes the main page font.
+    private CodexGUI codexGUI;
 
     private String[] choiceDisplayArr = {"Bulbasaur (Grass-Type)", "Charmander (Fire-Type)", "Squirtle (Water-Type)"};
     private String[] choiceActionCommandArr = {"bulbasaur", "charmander", "squirtle"};
@@ -30,6 +31,7 @@ public class GUI2nd {
     JTextArea mapDisplay = new JTextArea(6,30);
     JTextArea roomDisplay = new JTextArea(6,48);
     JTextArea inventoryDisplay = new JTextArea(7,48);
+
 
 
     private PrintStream roomDisplayOut = new PrintStream(new CustomOutputStream(roomDisplay));
@@ -357,6 +359,7 @@ public class GUI2nd {
 
         JScrollPane scroll = new JScrollPane (commonDisplay,
                 JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        codexGUI = new CodexGUI();
 
 
 
@@ -393,6 +396,7 @@ public class GUI2nd {
 
         JButton codexB = new JButton("Codex");
         inputP.add(codexB);
+        codexB.addActionListener(e -> codexGUI.displayLog());
 
         CommandListGUI cListGUI = new CommandListGUI();
         JButton helpB = new JButton("Help");

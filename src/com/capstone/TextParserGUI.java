@@ -71,11 +71,14 @@ public class TextParserGUI {
                         else {
                             System.out.println("There's no shop here! You can't buy anything!");
                         }
+                        System.out.println("in buy");
                     }
                     else if (eElement.getElementsByTagName("engage").item(0).getTextContent().contains(userActions)) {
+                        System.out.println("in engage");
                         String npcName = player1.getCurrentRoom().getNpcName();
                         NPCFactory npcActual = game.getNPC(npcName);
                         playerInteracts(player1, npcActual, gameEngine, combatEngine,userArgument,commonDisplayOut, pokeDisplayOut, pokeDisplay);
+                        System.out.println("out engage");
                     } else if (eElement.getElementsByTagName("communicate").item(0).getTextContent().contains(userActions)) {
                         playerTalks(player1, game, userArgument);
                     } else if (eElement.getElementsByTagName("utilize").item(0).getTextContent().contains(userActions)) {
@@ -151,6 +154,7 @@ public class TextParserGUI {
     } catch (Exception e) {
         System.out.println("There was an error in the text parser");
         System.out.println(e.getMessage());
+
         System.out.println(e.getStackTrace());
     }
     System.setOut(System.out);

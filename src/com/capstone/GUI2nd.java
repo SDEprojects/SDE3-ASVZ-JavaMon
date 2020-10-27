@@ -3,9 +3,6 @@ package com.capstone;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Scanner;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -28,14 +25,17 @@ public class GUI2nd {
     private String[] choiceActionCommandArr = {"bulbasaur", "charmander", "squirtle"};
 
     // Creates and Initializes the text area.
-    JTextArea commonDisplay = new JTextArea(20,25);
-    JTextArea pokemonDisplay = new JTextArea(20,10);
-    JTextArea mapDisplay = new JTextArea(20,10);
-    JTextArea roomDisplay = new JTextArea(6,50);
+    JTextArea commonDisplay = new JTextArea(16,25);
+    JTextArea pokemonDisplay = new JTextArea(7,10);
+    JTextArea mapDisplay = new JTextArea(6,30);
+    JTextArea roomDisplay = new JTextArea(6,48);
+    JTextArea inventoryDisplay = new JTextArea(7,48);
+
 
     private PrintStream roomDisplayOut = new PrintStream(new CustomOutputStream(roomDisplay));
     private PrintStream commonDisplayOut = new PrintStream(new CustomOutputStream(commonDisplay));
     private PrintStream mapDisplayOut = new PrintStream(new CustomOutputStream(mapDisplay));
+    private PrintStream inventoryDisplayOut = new PrintStream(new CustomOutputStream(inventoryDisplay));
     PrintStream pokemonDisplayOut = new PrintStream(new CustomOutputStream(pokemonDisplay));
 
     private Typewriter  tWriter;
@@ -87,6 +87,7 @@ public class GUI2nd {
         window.setResizable(false);
 
         con = window.getContentPane();
+        //con.setLayout(new BoxLayout(con, BoxLayout.PAGE_AXIS));
         backgroundPanel = new JPanel();
         backgroundPanel.setBounds(0,0,window.getWidth(),window.getHeight());
 
@@ -140,6 +141,7 @@ public class GUI2nd {
         commonDisplay.setEditable(false);
         mapDisplay.setEditable(false);
         pokemonDisplay.setEditable(false);
+        inventoryDisplay.setEditable(false);
     }
 
     // Change font on main game screen
@@ -156,9 +158,9 @@ public class GUI2nd {
     public void chooseStarter(InitXML game, Player player) {
         JPanel starterPokemonPanel = new JPanel();
         starterPokemonPanel.setLayout(new BoxLayout(starterPokemonPanel, BoxLayout.PAGE_AXIS)); //center the layout here later
-
+        //starterPokemonPanel.setSize(1200,500);
         String newLine = System.getProperty("line.separator");
-        String startLine = String.join(newLine,"","","","","",
+        String startLine = String.join(newLine,"",
                 "You're in Oak's Lab","",
                 "...",
                 "Professor Oak: Hey! You're finally here, I've been waiting for you.",
@@ -187,31 +189,63 @@ public class GUI2nd {
         ButtonGroup group = new ButtonGroup();
         ActionListener radioButtonListener = event -> {
             starter = event.getActionCommand();
+            System.out.println(starter);
            // System.out.println("actionCommand: " + starter);
         };
+
+        //hover effect on the radio buttons for pokemon stats
         MouseAdapter radioButtonMouseListener = new MouseAdapter() {
             JDialog dialog = new JDialog();
             @Override
             public void mouseEntered(MouseEvent e) {
                 super.mouseEntered(e);
                 System.out.println("mouse entered");
-               /* if(e.getComponent().getName().equals("Bulbasaur") ||
-                        e.getComponent().getName().equals("Charmander")||
-                        e.getComponent().getName().equals("Squirtle"))
-                {*/
-                    //JOptionPane.showMessageDialog(null,e.getComponent().getName());
-                final JOptionPane optionPane = new JOptionPane(e.getComponent().getName(), JOptionPane.INFORMATION_MESSAGE
-                ,JOptionPane.DEFAULT_OPTION, getPokemonImageLabel().getIcon(), new Object[]{},null);
-                //}
 
+                String newLine = System.getProperty("line.separator");
+                String pokemonStats = "";
+
+                //icon created to assign the icon dynamically when user hovers over the radio button
+                ImageIcon statsIcon = new ImageIcon();
+
+                for (Pokemon pokemon: game.listOfPokemon
+                     ) {
+                    if (pokemon.getName().equalsIgnoreCase(e.getComponent().getName())){
+                        pokemonStats = String.join(newLine,
+                                "Pokemon:"+ pokemon.getName(),
+                                "Pokemon Type: " + pokemon.getType(),
+                                "Pokemon Level: " + pokemon.getLevel(),
+                                "Pokemon HP: [" + pokemon.getCurrentHealth() + "/" + pokemon.getMaxHealth() + "]",
+                                "Pokemon Attack: " + pokemon.getAttack(),
+                                "Pokemon Current Experience: [" + pokemon.getCurrentExp() + "/" + pokemon.getExpToLevelUp() + "]"
+                        );
+
+                        switch (pokemon.getName().toLowerCase()){
+                            case "bulbasaur":
+                                statsIcon = balbasaurIcon;
+                                break;
+                            case "squirtle":
+                                statsIcon = squirtleIcon;
+                                break;
+                            case "charmander":
+                                statsIcon = charmanderIcon;
+                        }
+                    }
+                }
+
+                final JOptionPane optionPane = new JOptionPane(pokemonStats, JOptionPane.INFORMATION_MESSAGE
+                        ,JOptionPane.DEFAULT_OPTION, statsIcon, new Object[]{},null);
                 dialog.setTitle("POKEMON STATISTICS");
                 dialog.setModal(false);//setting this to false allows us to access the other parts of the program
                 dialog.setResizable(false);
-                dialog.setLocation(e.getComponent().getX(),e.getComponent().getY()-150);
+                //point to be deducted from event location to opo the window top left of the event point
+                Point dialogPopUpLocation = e.getLocationOnScreen();
+                //settting location relative to parent
+                dialog.setLocation((int)dialogPopUpLocation.getX()-dialog.getWidth()
+                        ,(int)dialogPopUpLocation.getY()-dialog.getHeight());
+                //dialog.setLocationRelativeTo(window);
                 dialog.setSize(300,200);
                 dialog.setContentPane(optionPane);
                 dialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
-                //window.requestFocus();
                 dialog.pack();
 
                 dialog.setVisible(true);
@@ -225,7 +259,6 @@ public class GUI2nd {
                 dialog.setVisible(false);
             }
         };
-
 
         starterPokemonPanel.add(new JLabel("..."));
         starterPokemonPanel.add(new JLabel("Choose One:"));
@@ -243,7 +276,6 @@ public class GUI2nd {
             group.add(radio);
             starterPokemonPanel.add(radio);
         }
-
         JButton startButton = new JButton("START");
         startButton.setBackground(Color.BLACK);
         startButton.setForeground(Color.RED);
@@ -269,20 +301,8 @@ public class GUI2nd {
             }
         });
 
-        //window.getContentPane().removeAll();
-        //con.setLayout(new BorderLayout());
-        //starterPokemonPanel.setBackground(new Color(0,0,0,65));
-
-
-        //JPanel bPanel = getBorderedPanel(starterPokemonPanel);
-
-        //bPanel.setBackground(new Color(0,0,0,100));
-        //bp.setOpaque(false);
         con.add(starterPokemonPanel);
-        //starterPokemonPanel.setBackground(new Color(0,0,0,0));
         starterPokemonPanel.setOpaque(false);
-        //backgroundPanel.setOpaque(false);
-        //con.add(bPanel, BorderLayout.CENTER);
         window.revalidate();
     }
 
@@ -290,7 +310,7 @@ public class GUI2nd {
      * Changes the pokemon image label based on the given pokemon's name
      */
 
-    protected void setPokemonImageLabel(Pokemon pokemon) {
+    protected  void setPokemonImageLabel(Pokemon pokemon) {
         switch(pokemon.getName()) {
             case "Balbasaur":
                 pokemonImageLabel.setIcon(balbasaurIcon);
@@ -337,7 +357,9 @@ public class GUI2nd {
 
         JScrollPane scroll = new JScrollPane (commonDisplay,
                 JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        scroll.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+
+
 
         String roomName = "Oak's Lab";
         Room startingRoom = game.getRoom(roomName);
@@ -348,9 +370,9 @@ public class GUI2nd {
 
         //Create input panel
         JPanel inputP = new JPanel();
-        inputP.setLayout(new BoxLayout(inputP, BoxLayout.PAGE_AXIS));
+        inputP.setLayout(new BoxLayout(inputP, BoxLayout.LINE_AXIS));
         JTextField inputTF = new JTextField(20);
-        inputP.add(new JLabel("Enter your command: "));
+        inputP.add(new JLabel("Next Move: "));
         inputP.add(inputTF);
         inputTF.addKeyListener(new KeyAdapter() {
             @Override
@@ -360,7 +382,6 @@ public class GUI2nd {
                 //mine
                 if (e.getKeyCode()==KeyEvent.VK_ENTER) {
                     performAction(inputTF, player);
-
                 }
             }
         });
@@ -368,28 +389,62 @@ public class GUI2nd {
 
         JButton submitB = new JButton("Submit");
         inputP.add(submitB);
-        submitB.addActionListener(new ActionListener() {
+        submitB.addActionListener(e -> performAction(inputTF, player));
 
+        JButton codexB = new JButton("Codex");
+        inputP.add(codexB);
+
+        CommandListGUI cListGUI = new CommandListGUI();
+        JButton helpB = new JButton("Help");
+        inputP.add(helpB);
+        MouseAdapter helpButtonMouseListener = new MouseAdapter() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                performAction(inputTF, player);
-
+            public void mouseEntered(MouseEvent e) {
+                super.mouseEntered(e);
+                cListGUI.displayCommandList(helpB);
             }
 
-        });
+            @Override
+            public void mouseExited(MouseEvent e) {
+                super.mouseExited(e);
+                cListGUI.commandWindow.dispose();
+            }
+        };
+
+
+        helpB.addMouseListener(helpButtonMouseListener);
+        /*helpB.addActionListener(e->{
+            cListGUI.displayCommandList(helpB);
+        });*/
+
 
         //Create room Panel with room details display
         JPanel roomPanel = new JPanel();
         roomPanel.setLayout(new BorderLayout());
-        roomPanel.add(getBorderedPanel(roomDisplay), BorderLayout.CENTER);
+        roomPanel.add(getBorderedPanel(roomDisplay), BorderLayout.WEST);
+        roomPanel.add(getBorderedPanel(mapDisplay), BorderLayout.CENTER);
+
+        //left bottom main panel
+        JPanel statsPanel = new JPanel();
+
+        statsPanel.setLayout(new BorderLayout());
+        statsPanel.add(getBorderedPanel(pokemonDisplay),BorderLayout.NORTH);
+        statsPanel.add(getBorderedPanel(inventoryDisplay),BorderLayout.CENTER);
+
+        /*statsPanel.setLayout(new BoxLayout(statsPanel, BoxLayout.PAGE_AXIS));
+        statsPanel.add(pokemonDisplay);
+        statsPanel.add(inventory);*/
+
 
         //the pokemon Details Panel
         JPanel pokemonPanel = new JPanel();
-        pokemonPanel.setLayout(new BoxLayout(pokemonPanel, BoxLayout.PAGE_AXIS));
+        pokemonPanel.setLayout(new BoxLayout(pokemonPanel, BoxLayout.LINE_AXIS));
         pokemonPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
         pokemonImageLabel = new JLabel("", balbasaurIcon, JLabel.CENTER);
+        ////push it to the main bottom left corner panel-to the left of that
         pokemonPanel.add(pokemonImageLabel);
-        pokemonPanel.add(pokemonDisplay);
+        //push it to the main bottom left corner panel-to the right of that
+        pokemonPanel.add(statsPanel);
 
         //Create Middle Panel with
         //the pokemon Details Panel,
@@ -397,13 +452,24 @@ public class GUI2nd {
 
         JPanel middlePanel = new JPanel();
 
-
         middlePanel.setLayout(new BorderLayout());
 
         middlePanel.add(getBorderedPanel(pokemonPanel), BorderLayout.WEST);
         //middlePanel.add(getBorderedPanel(commonDisplay), BorderLayout.CENTER);
-        middlePanel.add(getBorderedPanel(scroll), BorderLayout.CENTER);
-        middlePanel.add(getBorderedPanel(mapDisplay), BorderLayout.EAST);
+
+        //Jpanel created to add scroll and merge input area together
+        JPanel logPane = new JPanel();
+        logPane.setLayout(new BoxLayout(logPane, BoxLayout.PAGE_AXIS));
+        logPane.setAlignmentX(Component.CENTER_ALIGNMENT);
+        logPane.add(scroll);
+        logPane.add(inputP);
+
+        middlePanel.add(getBorderedPanel(logPane), BorderLayout.CENTER);
+
+/*
+        middlePanel.add(getBorderedPanel(scroll),BorderLayout BorderLayout.CENTER);
+*/
+        //middlePanel.add(getBorderedPanel(mapDisplay), BorderLayout.EAST);
 
         //Setup Main Panel with
         //RoomDetails Panel, the Middle Panel and the Input Panel.
@@ -413,7 +479,9 @@ public class GUI2nd {
         //Add RoomDetails Panel
         mainPanel.add(roomPanel, BorderLayout.NORTH);
         mainPanel.add(middlePanel, BorderLayout.CENTER);
+/*
         mainPanel.add(getBorderedPanel(inputP), BorderLayout.SOUTH);
+*/
 
         //Add the mainPanel to the window.
         window.getContentPane().removeAll();
@@ -432,6 +500,9 @@ public class GUI2nd {
         System.setOut(pokemonDisplayOut);
         player1.getPlayersPokemon().get(0).displayOutStatsAndAll();
         System.setOut(System.out);
+
+        inventoryDisplay.setText("");
+        showInventoryDetails(player);
 
         inputTF.setText("");
     }
@@ -458,6 +529,14 @@ public class GUI2nd {
         roomDisplayOut.flush();
         System.setOut(roomDisplayOut);
         player.showRoomDetails();
+        System.setOut(System.out);
+    }
+
+    private void showInventoryDetails(Player player){
+        inventoryDisplayOut.flush();
+        System.setOut(inventoryDisplayOut);
+        InventoryAddition ia = new InventoryAddition();
+        player.checkInventory();
         System.setOut(System.out);
     }
 

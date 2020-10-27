@@ -3,7 +3,7 @@ package com.capstone;
 import java.io.IOException;
 import java.io.OutputStream;
 
-import javax.swing.JTextArea;
+import javax.swing.*;
 
 /**
  * This class extends from OutputStream to redirect output to a JTextArrea

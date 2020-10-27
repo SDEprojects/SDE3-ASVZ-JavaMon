@@ -1,5 +1,7 @@
 package com.capstone;
 
+import java.io.FileDescriptor;
+import java.io.FileOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Random;
@@ -8,7 +10,7 @@ import javax.swing.*;
 
 public class CombatEngineGui {
     //Class Fields
-
+private GUI2nd gui;
 
     //Constructor
 

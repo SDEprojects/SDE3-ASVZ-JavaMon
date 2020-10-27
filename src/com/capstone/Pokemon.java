@@ -159,6 +159,8 @@ public class Pokemon {
     public void generateStats(){
         attack += level; //ex level = 5, attack = 3 -> new attack = 8
         maxHealth += level * 2; //ex level = 5, maxHealth = 12 -> new maxHealth = 22 or ex level = 10, maxHealth = 22 -> new maxHealth = 32.
+
+
     }
 
 
@@ -172,10 +174,8 @@ public class Pokemon {
         for(PokeAttack attacks : dataList){
             if (attacks.getAttackName().equalsIgnoreCase(move1Name)){
                 move1 = attacks;
-                //break;
             } else if (attacks.getAttackName().equalsIgnoreCase(move2Name)){
                 move2 = attacks;
-                //break;
             } else {
                 System.out.println("Finished processing.");
             }

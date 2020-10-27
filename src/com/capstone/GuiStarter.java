@@ -7,7 +7,7 @@ import javax.swing.*;
 import javax.swing.border.*;
 
 // Main GUI. // *Zack*
-public class GUI2nd extends JFrame { // Added 'extends JFrame'. *Zack*
+public class GuiStarter extends JFrame { // Added 'extends JFrame'. *Zack*
 
     // Main JFrame. *Zack*
     private JFrame gameFrame; // *Zack*
@@ -68,7 +68,7 @@ public class GUI2nd extends JFrame { // Added 'extends JFrame'. *Zack*
 
     // Main Method. *Zack*
     public static void main(String[] args) {
-        GUI2nd gui = new GUI2nd();
+        GuiStarter gui = new GuiStarter();
         gui.game.initAttacks(); //must be initialized before pokemon
         gui.game.initPokemon(); //must be initialized before npcs
         gui.game.initNPCs(); //must be initialized before rooms

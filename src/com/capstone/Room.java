@@ -92,7 +92,7 @@ public class Room {
     void displayOutput(){
         //Prints out the name and description of the room.
         System.out.println("Your current location: " + name);
-        System.out.println("Location Description: " + description);
+        System.out.println("Location: " + description);
 
         //Check if npcName is null or empty, if not print out the npc name.
         if(npcName != null && !npcName.trim().isEmpty()){
@@ -128,7 +128,7 @@ public class Room {
 
         sb.append("Your current location: " + this.getName()).append("\n");
 
-        sb.append("Location Description: " + this.getDescription()).append("\n");
+        sb.append("Location: " + this.getDescription()).append("\n");
 
         // Check if npcName is null or empty, if not print out the npc name.
         String npcName = this.getNpcName();

@@ -53,6 +53,17 @@ public class PokeAttack {
 
     //Class Methods -------------------------------------------------------------------------
 
+    // Critical Hit RNG Method. *Zack*
+    public int rollCriticalChance() {
+        int randomlyGeneratedNumber = (int) Math.floor(Math.random() * 10) + 1; // Returns a random integer from 1 to 10 and casts it to a whole number. *Zack*
+        if (randomlyGeneratedNumber == 1) {
+            return this.getDamage() * 2;
+        }
+        else {
+            return 1;
+        }
+    }
+
     //This is a displayOut that also calculates potential damage, and also shows remaining energy points.
     void displayOutAttackStats(int pokemonAttackStat){
         potentialDamage = damage + pokemonAttackStat;
@@ -68,6 +79,6 @@ public class PokeAttack {
     int attack(int attackStat){
         int potentialDamage = damage + attackStat;
 
-        return (int)(Math.random() * (potentialDamage - damage + 1) + damage);
+        return (int)(Math.random() * (potentialDamage - damage + 1) + damage) * rollCriticalChance();
     }
 }

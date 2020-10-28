@@ -18,6 +18,7 @@ public class CombatEngine {
 
     //Action Phase - this is the phase where the player gets to choose between fight, use item, or run (They cant run from trainer battles)
     //This method is not yet used. Stubbed out and reserved for the wild pokemon encounter.
+
     String actionPhaseChoiceWildPoke(){
         //The userChoice here is what the user chooses to do
         Scanner scanner = new Scanner(System.in);

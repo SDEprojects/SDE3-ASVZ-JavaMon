@@ -9,11 +9,12 @@ import java.util.Scanner;
 import javax.swing.*;
 
 public class CombatEngineGui {
+
     //Class Fields
-private GUI2nd gui;
+    private GUI2nd gui;
+    private Codex codex = new Codex();
 
     //Constructor
-
     public CombatEngineGui() {
 
     }
@@ -22,17 +23,18 @@ private GUI2nd gui;
 
     //Action Phase - this is the phase where the player gets to choose between fight, use item, or run (They cant run from trainer battles)
     //This method is not yet used. Stubbed out and reserved for the wild pokemon encounter.
-    String actionPhaseChoiceWildPoke(){
-        //The userChoice here is what the user chooses to do
-        Scanner scanner = new Scanner(System.in);
-        String userChoice = scanner.nextLine();
+//    String actionPhaseChoiceWildPoke(){
+////        //The userChoice here is what the user chooses to do
+////        Scanner scanner = new Scanner(System.in);
+////        String userChoice = scanner.nextLine();
+////
+////        if (!userChoice.equalsIgnoreCase("attack") && !userChoice.equalsIgnoreCase("item") && !userChoice.equalsIgnoreCase("run")){
+////            System.out.println("You can't do that.");
+////            actionPhaseChoiceWildPoke();
+////        }
+////        return userChoice;
+////    }
 
-        if (!userChoice.equalsIgnoreCase("attack") && !userChoice.equalsIgnoreCase("item") && !userChoice.equalsIgnoreCase("run")){
-            System.out.println("You can't do that.");
-            actionPhaseChoiceWildPoke();
-        }
-        return userChoice;
-    }
     //This method is for taking in user input if they want to attack or use item.
     //Basic input validation is used here to limit choices to attack or item.
     String actionPhaseChoiceTrainerBattle(){
@@ -78,7 +80,8 @@ private GUI2nd gui;
                 player.playersPokemon.get(0).rewardEXP(expReward);
 
                 //Reward Player money for winning.
-                System.out.println("You received: 1000 for winning!"); //hard coded
+                System.out.println("You received: 1000 for winning!");//hard coded
+                codex.updateCodex("You received: 1000 for winning!");
                 player.addMoney(1000); //hard coded 1000 money to add as reward.
                 result = "NPC Lost";
                 break;
@@ -93,9 +96,11 @@ private GUI2nd gui;
                 //If opponent's pokemon's hp reaches 0, break out of combat loop.
                 if (npc.npcPokemonList.get(0).getCurrentHealth() <= 0){
                     System.out.println("The opponent's Pokemon fainted!");
+                    codex.updateCodex("The opponent's Pokemon fainted!");
                     double expReward = npc.npcPokemonList.get(0).getLevel() * 10; //Current xp reward scales with level and is hard coded.
                     player.playersPokemon.get(0).rewardEXP(expReward);
                     System.out.println("You received: 1000 for winning!"); //hard coded
+                    codex.updateCodex("You received 1000 for winning!");
                     player.addMoney(1000); //hard coded 1000 money to add as reward.
                     result = "NPC Lost";
                     break;
@@ -109,6 +114,7 @@ private GUI2nd gui;
 
                 if (player.playersPokemon.get(0).getCurrentHealth() <= 0){
                     System.out.println("Your Pokemon fainted!");
+                    codex.updateCodex("Your Pokemon fainted!");
                     result = "Player Lost";
                     break;
 
@@ -144,18 +150,21 @@ private GUI2nd gui;
         opponentAttackChoice = random.nextInt(2);
 
         System.out.println("Opponent attacks!");
+        codex.updateCodex("Opponent attacks!");
 
 
         if (opponentAttackChoice == 0){
 
             opponentAttack = npcFirstPoke.getMove1().attack(npcFirstPoke.getAttack());
             System.out.println("The opposing " + npcFirstPoke.getName() + " uses " + npcFirstPoke.getMove1().getAttackName());
+            codex.updateCodex("The opposing " + npcFirstPoke.getName() + " uses " + npcFirstPoke.getMove1().getAttackName());
             playerFirstPoke.takeDamage(opponentAttack);
 
         } else if (opponentAttackChoice == 1){
 
             opponentAttack = npcFirstPoke.getMove2().attack(npcFirstPoke.getAttack());
             System.out.println("The opposing " + npcFirstPoke.getName() + " uses " + npcFirstPoke.getMove2().getAttackName());
+            codex.updateCodex("The opposing " + npcFirstPoke.getName() + " uses " + npcFirstPoke.getMove2().getAttackName());
             playerFirstPoke.takeDamage(opponentAttack);
         }
 
@@ -189,26 +198,44 @@ private GUI2nd gui;
         //If userChoice is attack
         if (userChoice == null){
             System.out.println("You have forfeited your turn.");
+            codex.updateCodex("You have forfeited your turn.");
         }
         else if (userChoice.equalsIgnoreCase("Attack")){
             System.out.println("Which attack would you like to use?");
+            codex.updateCodex("Which attack would you like to use?");
             playerFirstPoke.getMove1().displayOutAttackStats(playerFirstPoke.getLevel());
             playerFirstPoke.getMove2().displayOutAttackStats(playerFirstPoke.getLevel());
             String[] attacks = {playerFirstPoke.getMove1().getAttackName() + " [Damage: " + playerFirstPoke.getMove1().getDamage() + "-" + playerFirstPoke.getMove1().getPotentialDamage() + "]",
-                    playerFirstPoke.getMove2().getAttackName() + " [Damage: " + playerFirstPoke.getMove2().getDamage() + "-" + playerFirstPoke.getMove2().getPotentialDamage() + "]", "back"};
+                    playerFirstPoke.getMove2().getAttackName() + " [Damage: " + playerFirstPoke.getMove2().getDamage() + "-" + playerFirstPoke.getMove2().getPotentialDamage() + "]"
+                    , "back"};
+//
             String res = (String) JOptionPane.showInputDialog(null, "Which attack would you like to use?", "Attacks",
                     JOptionPane.PLAIN_MESSAGE, null, attacks, attacks[0]);
 
-            if (res != null) {
+            // Created strippedAttacks and this for loop because attacks were invalid due to additional option description
+            String strippedAttacks ="";
+
+            for(Character resA : res.toCharArray()){
+                if(resA == '['){
+                    break;
+                }
+                strippedAttacks += resA;
+            }
+            System.out.println(strippedAttacks);
+            strippedAttacks = strippedAttacks.trim();
+
+            if (strippedAttacks != null) {
                 //String attackChoice = scanner.nextLine();
                 //If user between attack move one or two
-                if (res.equalsIgnoreCase(playerFirstPoke.getMove1().getAttackName())) {
+                if (strippedAttacks.equalsIgnoreCase(playerFirstPoke.getMove1().getAttackName())) {
                     System.out.println(playerFirstPoke.getName() + " use " + playerFirstPoke.getMove1().getAttackName());
+                    codex.updateCodex(playerFirstPoke.getName() + " use " + playerFirstPoke.getMove1().getAttackName());
                     playerPokeAttack = playerFirstPoke.getMove1().attack(playerFirstPoke.getAttack());
                     playerFirstPoke.getMove1().attackUsed();
                     npcFirstPoke.takeDamage(playerPokeAttack);
-                } else if (res.equalsIgnoreCase(playerFirstPoke.getMove2().getAttackName())) {
+                } else if (strippedAttacks.equalsIgnoreCase(playerFirstPoke.getMove2().getAttackName())) {
                     System.out.println(playerFirstPoke.getName() + " use " + playerFirstPoke.getMove2().getAttackName());
+                    codex.updateCodex(playerFirstPoke.getName() + " use " + playerFirstPoke.getMove2().getAttackName());
                     playerPokeAttack = playerFirstPoke.getMove2().attack(playerFirstPoke.getAttack());
                     playerFirstPoke.getMove2().attackUsed();
                     npcFirstPoke.takeDamage(playerPokeAttack);
@@ -217,9 +244,11 @@ private GUI2nd gui;
                     processActionPhase(userChoice, player, npc, game);
                 } else {
                     System.out.println("Invalid entry.");
+                    codex.updateCodex("Invalid entry.");
                 }
             } else {
                 System.out.println("You have forfeited your turn.");
+                codex.updateCodex("You have forfeited your turn.");
             }
 
         }
@@ -230,6 +259,7 @@ private GUI2nd gui;
 
             if (player.getInventory().isEmpty()) {
                 System.out.println("You don't have any items to use!");
+                codex.updateCodex("You don't have any items to use!");
             }
             else {
                 String itemString[] = new String[player.getInventory().size()];
@@ -241,19 +271,15 @@ private GUI2nd gui;
                 }
 
                 System.out.println("Which item would you like to use?");
+                codex.updateCodex("Which item would you like to use?");
 
                 String res = (String) JOptionPane.showInputDialog(null, "Which item would you like to use?", "Items",
                         JOptionPane.PLAIN_MESSAGE, null, itemString, itemString[0]);
 
                 //String itemChoice = scanner.nextLine();
                 game.useItem(res, playerFirstPoke);
-
             }
 
         }
-
-
-
     }
-
 }

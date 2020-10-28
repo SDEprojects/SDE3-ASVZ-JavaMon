@@ -2,10 +2,10 @@
 <keywords>
    <action activity = "01">
       <engage>
-	<mode>interact touch</mode>
+	<mode>interact touch inspect</mode>
 	<sound>intro.wav</sound>
  </engage>
-      <communicate>	
+      <communicate>
 	<mode>talk speak chat communicate express say tell gab contact</mode>
 	<sound>intro.wav</sound>
 </communicate>

@@ -14,9 +14,10 @@ public class MusicPlayer {
 
     }
 
-    public void PlaySounds(String fileName)
+    public String PlaySounds(String fileName)
     {
-        stopMusic();
+        if(!stopMusic())
+            return "Error stopping music";
 
         try
         {
@@ -28,18 +29,28 @@ public class MusicPlayer {
 
             clip.open(audioIn);
             clip.start();
+            return null;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+            return "File Not Found";
         } catch (LineUnavailableException e) {
             e.printStackTrace();
+            return "Line Unavailable";
         } catch (IOException e) {
             e.printStackTrace();
+            return "Error Reading File";
         } catch (UnsupportedAudioFileException e) {
             e.printStackTrace();
+            return "Unsupported Media Format";
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            return "Unknown Error";
         }
     }
 
-    public void stopMusic(){
+    public boolean stopMusic(){
         if(clip != null && clip.isActive())
         {
             try {
@@ -48,7 +59,9 @@ public class MusicPlayer {
             }
             catch (InterruptedException e) {
                 e.printStackTrace();
+                return false;
             }
         }
+        return true;
     }
 }

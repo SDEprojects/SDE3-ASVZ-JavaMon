@@ -297,8 +297,8 @@ public class GUI2nd extends JFrame { // Added 'extends JFrame'. *Zack*
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
         int ySize = ((int) toolKit.getScreenSize().getHeight()); // Initial height. *Zack*
         int xSize = ((int) toolKit.getScreenSize().getWidth()); // Initial width. *Zack*
-        int windowHeight = (int) (Math.round(ySize * 0.60)); // Screen reduced to 95% height. *Zack*
-        int windowWidth = (int) (Math.round(xSize * 0.78)); // Screen reduced to 95% width. *Zack*
+        int windowHeight = (int) (Math.round(ySize * 0.95)); // Screen reduced to 95% height. *Zack*
+        int windowWidth = (int) (Math.round(xSize * 0.93)); // Screen reduced to 95% width. *Zack*
         frame.setSize(new Dimension(windowWidth, windowHeight)); // Setting that screen size based on calculations. *Zack*
         frame.setLocation(dimension.width/2-frame.getSize().width/2, dimension.height/2-frame.getSize().height/2); // Set the JFrame to the center. *Zack*
     }

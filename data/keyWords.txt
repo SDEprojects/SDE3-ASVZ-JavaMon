@@ -1,7 +1,7 @@
 <?xml version = "1.0"?>
 <keywords>
    <action activity = "01">
-      <engage>interact touch</engage>
+      <engage>interact touch inspect</engage>
       <communicate>talk speak chat communicate express say tell gab contact</communicate>
       <utilize>apply use utilize</utilize>
       <check>check look glance see stare study view watch focus</check>

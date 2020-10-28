@@ -2,11 +2,15 @@ package com.capstone;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 
 public class CodexGUI {
     JFrame codexWindow = new JFrame("Codex");
     Font titleFont = new Font("Futura", Font.BOLD, 18);
     Font generalFont = new Font("Futura", Font.PLAIN, 16);
+    Codex cdx = new Codex();
+    public JTextArea codexTextArea = new JTextArea(16,22);
+
 
     final int width = 400;
     final int height = 500;
@@ -20,47 +24,7 @@ public class CodexGUI {
     public void displayLog(JButton CodexButton){
 //        Codex log = new Codex();
 // Using a string temporarily
-        String log = "Oh hey this is the log! \n" +
-                "How's it going? \n" +
-                "Pika-Pika!\n" +
-                "Pika-Pika!\n" +
-                "Oh hey this is the log! \n" +
-                "How's it going? \n" +
-                "Oh hey this is the log! \n" +
-                "How's it going? \n" +
-                "Oh hey this is the log! \n" +
-                "How's it going? \n" +
-                "Oh hey this is the log! \n" +
-                "How's it going? \n" +
-                "Oh hey this is the log! \n" +
-                "How's it going? \n" +
-                "Oh hey this is the log! \n" +
-                "How's it going? \n" +
-                "Oh hey this is the log! \n" +
-                "How's it going? \n" +
-                "Oh hey this is the log! \n" +
-                "How's it going? \n" +
-                "Oh hey this is the log! \n" +
-                "How's it going? \n" +
-                "Oh hey this is the log! \n" +
-                "How's it going? \n" +
-                "Oh hey this is the log! \n" +
-                "How's it going? \n" +
-                "Oh hey this is the log! \n" +
-                "How's it going? \n" +
-                "Oh hey this is the log! \n" +
-                "How's it going? \n" +
-                "Oh hey this is the log! \n" +
-                "How's it going? \n" +
-                "Oh hey this is the log! \n" +
-                "How's it going? \n" +
-                "Oh hey this is the log! \n" +
-                "How's it going? \n" +
-                "Oh hey this is the log! \n" +
-                "How's it going? \n" +
-                "Oh hey this is the log! \n" +
-                "How's it going? \n" +
-                "END";
+        String log = cdx.readCodex();
 
         codexWindow.setSize(width, height);
         codexWindow.setResizable(false);
@@ -92,7 +56,7 @@ public class CodexGUI {
         codexPanel.setBackground(Color.WHITE);
 
         // Codex Text Area
-        JTextArea codexTextArea = new JTextArea(16,22);
+//        JTextArea codexTextArea = new JTextArea(16,22);
         codexTextArea.setFont(generalFont);
         codexTextArea.setText(log);
         codexTextArea.setEditable(false);

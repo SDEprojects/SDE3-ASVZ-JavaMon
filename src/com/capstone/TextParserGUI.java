@@ -85,12 +85,12 @@ public class TextParserGUI {
                         System.out.println("in buy");
                     }
                     else if (eElement.getElementsByTagName("engage").item(0).getTextContent().contains(userActions)) {
-                        System.out.println("in engage");
+                        //System.out.println("in engage");
                         playActionSound("engage", eElement);
                         String npcName = player1.getCurrentRoom().getNpcName();
                         NPCFactory npcActual = game.getNPC(npcName);
                         playerInteracts(player1, npcActual, gameEngine, combatEngine,userArgument,commonDisplayOut, pokeDisplayOut, pokeDisplay);
-                        System.out.println("out engage");
+                        //System.out.println("out engage");
                     } else if (eElement.getElementsByTagName("communicate").item(0).getTextContent().contains(userActions)) {
                         playActionSound("communicate", eElement);
                         playerTalks(player1, game, userArgument);

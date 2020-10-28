@@ -24,6 +24,7 @@ public class TextParserGUI {
             String userActions = userInput.split(" ")[0];
             String userArgument = userInput.split(" ", 2)[1];
 
+            /*
             File inputFile = new File("data", "keyWords.txt");
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
@@ -32,10 +33,13 @@ public class TextParserGUI {
             // prints the root element of the file which is "keyWords" using getNodeName()
             // System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
 
-                    /* Insert if statement for "action item by checking if the first word corresponds to items in
-                    action group - need to initialize reference"*/
+                    //Insert if statement for "action item by checking if the first word corresponds to items in
+                    //action group - need to initialize reference
             // creates and populates a list of nodes tag items by the tag name "action"
             NodeList nList = doc.getElementsByTagName("action");
+             */
+
+            NodeList nList = TextParser.getCommandList();
             //System.out.println("----------------------------");
 
             // iterates over node list of tag names "action"
@@ -53,44 +57,61 @@ public class TextParserGUI {
                         if (player1.getCurrentRoom().getInteractableItem().toLowerCase().equals("shop counter")) {
                             switch (userArgument) {
                                 case "potion":
+                                    playActionSound( "buy", eElement);
                                     player1.buyItem("potion", 100);
                                     break;
                                 case "super potion":
+                                    playActionSound( "buy", eElement);
                                     player1.buyItem("super potion", 500);
                                     break;
                                 case "full heal":
+                                    playActionSound( "buy", eElement);
                                     player1.buyItem("full heal", 1000);
                                     break;
                                 case "revive":
+                                    playActionSound( "buy", eElement);
                                     player1.buyItem("revive", 2500);
                                     break;
-                                default:
+                                default: {
+                                    playActionSound(null, eElement);
                                     System.out.println("No such item here to buy!");
+                                }
                             }
                         }
                         else {
+                            playActionSound(null, eElement);
                             System.out.println("There's no shop here! You can't buy anything!");
                         }
+                        System.out.println("in buy");
                     }
                     else if (eElement.getElementsByTagName("engage").item(0).getTextContent().contains(userActions)) {
+                        System.out.println("in engage");
+                        playActionSound("engage", eElement);
                         String npcName = player1.getCurrentRoom().getNpcName();
                         NPCFactory npcActual = game.getNPC(npcName);
                         playerInteracts(player1, npcActual, gameEngine, combatEngine,userArgument,commonDisplayOut, pokeDisplayOut, pokeDisplay);
+                        System.out.println("out engage");
                     } else if (eElement.getElementsByTagName("communicate").item(0).getTextContent().contains(userActions)) {
+                        playActionSound("communicate", eElement);
                         playerTalks(player1, game, userArgument);
                     } else if (eElement.getElementsByTagName("utilize").item(0).getTextContent().contains(userActions)) {
                         if (userInput.split(" ").length <= 2) {
+                            playActionSound("hint", eElement);
                             System.out.println("Please include which Pokemon you want to use it on");
                         }
                         else {
+                            playActionSound("utilize", eElement);
                             String pokemon = userArgument.substring(userArgument.lastIndexOf(" ") + 1);
                             String item = userArgument.substring(0,userArgument.lastIndexOf(" "));
                             useItem(player1, gameEngine, item,pokemon);
                         }
-                    } else if (eElement.getElementsByTagName("check").item(0).getTextContent().contains(userActions)) {
+                    }
+                    else if (eElement.getElementsByTagName("check").item(0).getTextContent().contains(userActions)) {
                         if (eElement.getElementsByTagName("bag").item(0).getTextContent().contains(userArgument)) {
+                            playActionSound("bag", eElement);
                             player1.checkInventory();
                         } else if (eElement.getElementsByTagName("pokemon").item(0).getTextContent().contains(userArgument)) {
+                            playActionSound("pokemon", eElement);
                             player1.checkPokemon();
                         } else if (eElement.getElementsByTagName("map").item(0).getTextContent().contains(userArgument)) {
                             mapDisplayOut.flush();
@@ -98,52 +119,68 @@ public class TextParserGUI {
                             player1.checkMap();
                             System.setOut(commonDisplayOut);
                         } else {
+                            playActionSound("hint", eElement);
                             System.out.println("You don't have that... you can't check it!");
                             //System.out.println("----------------------------");
                         }
-                    } else if (eElement.getElementsByTagName("get").item(0).getTextContent().contains(userActions)) {
+                    }
+                    else if (eElement.getElementsByTagName("get").item(0).getTextContent().contains(userActions)) {
                         if (eElement.getElementsByTagName("help").item(0).getTextContent().contains(userArgument)) {
+                            playActionSound("help", eElement);
                             player1.showHelp();
-                        } else {
+                        }
+                        else {
+                            playActionSound("hint", eElement);
                             System.out.println("Did you mean to type: get help?");
                             //System.out.println("----------------------------");
                         }
-                    } else if (eElement.getElementsByTagName("go").item(0).getTextContent().contains(userActions)) {
+                    }
+                    else if (eElement.getElementsByTagName("go").item(0).getTextContent().contains(userActions)) {
                         if (eElement.getElementsByTagName("up").item(0).getTextContent().contains(userArgument) && player1.validMove("north")) {
+                            playActionSound("up", eElement);
                             System.out.println("You go North");
                             //System.out.println("----------------------------");
                             System.setOut(roomDisplayOut);
                             player1.setCurrentRoom(game.getRoom(player1.getCurrentRoom().getNorthTile()));
                             player1.showRoomDetails();
-                        } else if (eElement.getElementsByTagName("down").item(0).getTextContent().contains(userArgument) && player1.validMove("south")) {
+                        }
+                        else if (eElement.getElementsByTagName("down").item(0).getTextContent().contains(userArgument) && player1.validMove("south")) {
+                            playActionSound( "down", eElement);
                             System.out.println("You go South");
                             //System.out.println("----------------------------");
                             System.setOut(roomDisplayOut);
                             player1.setCurrentRoom(game.getRoom(player1.getCurrentRoom().getSouthTile()));
                             player1.showRoomDetails();
-                        } else if (eElement.getElementsByTagName("left").item(0).getTextContent().contains(userArgument) && player1.validMove("west")) {
+                        }
+                        else if (eElement.getElementsByTagName("left").item(0).getTextContent().contains(userArgument) && player1.validMove("west")) {
+                            playActionSound( "left", eElement);
                             System.out.println("You go West");
                             //System.out.println("----------------------------");
                             System.setOut(roomDisplayOut);
                             player1.setCurrentRoom(game.getRoom(player1.getCurrentRoom().getWestTile()));
                             player1.showRoomDetails();
-                        } else if (eElement.getElementsByTagName("right").item(0).getTextContent().contains(userArgument) && player1.validMove("east")) {
+                        }
+                        else if (eElement.getElementsByTagName("right").item(0).getTextContent().contains(userArgument) && player1.validMove("east")) {
+                            playActionSound( "right", eElement);
                             System.out.println("You go East");
                             //System.out.println("----------------------------");
                             System.setOut(roomDisplayOut);
                             player1.setCurrentRoom(game.getRoom(player1.getCurrentRoom().getEastTile()));
                             player1.showRoomDetails();
-                        } else {
-//                                	System.setOut(commonDisplayOut);
+                        }
+                        else {
+                            playActionSound( null, eElement);
                             System.out.println("Invalid direction, please try again :<");
                             //System.out.println("----------------------------");
                         }
                         System.setOut(System.out);
                     }
                 }
+                break;
             }
         }
         else {
+            playActionSound( null, null);
             System.out.println("Invalid input.");
             System.out.println("----------------------------");
         }
@@ -151,10 +188,30 @@ public class TextParserGUI {
     } catch (Exception e) {
         System.out.println("There was an error in the text parser");
         System.out.println(e.getMessage());
+
         System.out.println(e.getStackTrace());
     }
-    System.setOut(System.out);
-}
+        System.setOut(System.out);
+    }
+
+    public static void playActionSound(String action, Element eElement) {
+        if(action != null && eElement != null) {
+            if(action == "hint")
+            {
+                GUI2nd.music.PlaySounds("hintAction.wav");
+            }
+            else {
+                //System.out.println(action);
+                NodeList nodes = eElement.getElementsByTagName(action);
+                GUI2nd.music.PlaySounds(((Element) nodes.item(0)).getElementsByTagName("sound").item(0).getTextContent());
+            }
+        }
+        else
+        {
+            GUI2nd.music.PlaySounds("errorAction.wav");
+        }
+    }
+
     // change to package private?
     // make public for unit-testing purpose? APIs available to text private methods but may not be best practice
     public boolean inputValidation(String input) {

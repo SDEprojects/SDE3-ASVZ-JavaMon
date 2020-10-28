@@ -13,6 +13,7 @@ public class Pokemon {
     private int maxHealth;
     private int level;
     private int initialEXPtoLevel;
+    private String startSound;
     private int attack; //attack is the damage threshold. calculated by RNG range between (base attack from move) and (attack stat).
     private double currentExp; //Current exp until the next level up
     private double expToLevelUp; //This is the exp required to level up to the next level
@@ -28,12 +29,13 @@ public class Pokemon {
 
 
     //Constructors
-    public Pokemon(String pokeName, String pokeType){
+    public Pokemon(String pokeName, String pokeType, String startSound){
         name = pokeName;
         type = pokeType;
+        this.startSound = startSound;
     }
-    public Pokemon(String pokeName, String pokeType, int hp, int pokeLevel, int attackStat, String move1, String move2, Collection<PokeAttack> attacksList, int startingEXP){
-        this(pokeName,pokeType);
+    public Pokemon(String pokeName, String pokeType, String startSound, int hp, int pokeLevel, int attackStat, String move1, String move2, Collection<PokeAttack> attacksList, int startingEXP){
+        this(pokeName,pokeType, startSound);
         maxHealth = hp;
         level = pokeLevel;
         attack = attackStat;
@@ -180,6 +182,10 @@ public class Pokemon {
                 System.out.println("Finished processing.");
             }
         }
+    }
+
+    public String getStartSound() {
+        return startSound;
     }
 
 }

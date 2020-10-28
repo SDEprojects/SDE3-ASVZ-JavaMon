@@ -95,7 +95,6 @@ public class InitXML {
         catch (Exception e) {
             System.out.println("there was an error initializing the NPCs list.");
         }
-
     }
 
     //same thing as npc but with items
@@ -198,13 +197,14 @@ public class InitXML {
                 int pokeHealth = Integer.parseInt(pokeEle.getElementsByTagName("health").item(0).getTextContent());
                 int pokeAttack = Integer.parseInt(pokeEle.getElementsByTagName("attack").item(0).getTextContent());
                 int startingExp = Integer.parseInt(pokeEle.getElementsByTagName("startingExp").item(0).getTextContent());
+                String startSound = pokeEle.getElementsByTagName("startsound").item(0).getTextContent();
                 String move1 = pokeEle.getElementsByTagName("move1").item(0).getTextContent();
                 String move2 = pokeEle.getElementsByTagName("move2").item(0).getTextContent();
 
 
                 //roomNPC and roomInteractable holds the value from the rooms.txt xml with the npc and interactable tags.
                 //TODO: implement constructor with stats.
-                listOfPokemon.add(new Pokemon(pokemonName, pokemonType, pokeHealth, 5, pokeAttack, move1, move2, listOfAttacks,startingExp)); //Pokelevel is hardcoded here.
+                listOfPokemon.add(new Pokemon(pokemonName, pokemonType, startSound, pokeHealth, 5, pokeAttack, move1, move2, listOfAttacks,startingExp)); //Pokelevel is hardcoded here.
                 //TODO: implement a way of associating level to room/area/or npc. For now it is hard coded to five.
 
             }

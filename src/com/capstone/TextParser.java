@@ -4,10 +4,13 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
+import java.io.IOException;
 import java.io.PrintStream;
 import java.util.Collection;
 import java.util.Scanner;
@@ -55,6 +58,7 @@ public class TextParser {
             String userActions = userInput.split(" ")[0];
             String userArgument = userInput.split(" ", 2)[1];
 
+            /*
             File inputFile = new File("data", "keyWords.txt");
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
@@ -63,10 +67,12 @@ public class TextParser {
             // prints the root element of the file which is "keyWords" using getNodeName()
             // System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
 
-                /* Insert if statement for "action item by checking if the first word corresponds to items in
-                action group - need to initialize reference"*/
+                // Insert if statement for "action item by checking if the first word corresponds to items in
+                //action group - need to initialize reference"
             // creates and populates a list of nodes tag items by the tag name "action"
             NodeList nList = doc.getElementsByTagName("action");
+             */
+            NodeList nList = getCommandList();
             System.out.println("----------------------------");
 
             // iterates over node list of tag names "action"
@@ -81,49 +87,63 @@ public class TextParser {
                     Element eElement = (Element) nNode;
                     // for(int a = 0; a < userActions.length; a++)
                     if (eElement.getElementsByTagName("engage").item(0).getTextContent().contains(userActions)) {
+                        TextParserGUI.playActionSound( "engage", eElement);
                         playerInteracts(player1,userArgument);
                     }
                     else if (eElement.getElementsByTagName("communicate").item(0).getTextContent().contains(userActions)) {
+                        TextParserGUI.playActionSound( "communicate", eElement);
                         playerTalks(player1,game,userArgument);
                     }
                     else if (eElement.getElementsByTagName("utilize").item(0).getTextContent().contains(userActions)) {
+                        TextParserGUI.playActionSound( "utilize", eElement);
                         player1.useItem(userArgument, gameEngine);
                     }
                     else if (eElement.getElementsByTagName("check").item(0).getTextContent().contains(userActions)) {
                         System.out.println("Player checks");
                         if (eElement.getElementsByTagName("bag").item(0).getTextContent().contains(userArgument)) {
+                            TextParserGUI.playActionSound( "bag", eElement);
                             player1.checkInventory();
                         }
                         else if (eElement.getElementsByTagName("pokemon").item(0).getTextContent().contains(userArgument)) {
+                            TextParserGUI.playActionSound( "pokemon", eElement);
                             player1.checkPokemon();
                         }
                         else if (eElement.getElementsByTagName("map").item(0).getTextContent().contains(userArgument)) {
+                            //TextParserGUI.playActionSound( "left", eElement);
                             player1.checkMap();
                         }
                         else {
+                            TextParserGUI.playActionSound( "hint", eElement);
                             System.out.println("You don't have that... you can't check it!");
                             System.out.println("----------------------------");
                         }
                     }
                     else if (eElement.getElementsByTagName("get").item(0).getTextContent().contains(userActions)) {
                         if (eElement.getElementsByTagName("help").item(0).getTextContent().contains(userArgument)) {
+                            TextParserGUI.playActionSound( "help", eElement);
                             player1.showHelp();
                         }
                         else {
+                            TextParserGUI.playActionSound( "hint", eElement);
                             System.out.println("Did you mean to type: get help?");
                             System.out.println("----------------------------");
                         }
                     }
                     else if (eElement.getElementsByTagName("go").item(0).getTextContent().contains(userActions)) {
                         if (eElement.getElementsByTagName("up").item(0).getTextContent().contains(userArgument) && player1.validMove("north")) {
+                            TextParserGUI.playActionSound( "up", eElement);
                             player1.setCurrentRoom(game.getRoom(player1.getCurrentRoom().getNorthTile()));
                         } else if (eElement.getElementsByTagName("down").item(0).getTextContent().contains(userArgument) && player1.validMove("south")) {
+                            TextParserGUI.playActionSound( "down", eElement);
                             player1.setCurrentRoom(game.getRoom(player1.getCurrentRoom().getSouthTile()));
                         } else if (eElement.getElementsByTagName("left").item(0).getTextContent().contains(userArgument) && player1.validMove("west")) {
+                            TextParserGUI.playActionSound( "left", eElement);
                             player1.setCurrentRoom(game.getRoom(player1.getCurrentRoom().getWestTile()));
                         } else if (eElement.getElementsByTagName("right").item(0).getTextContent().contains(userArgument) && player1.validMove("east")) {
+                            TextParserGUI.playActionSound( "right", eElement);
                             player1.setCurrentRoom(game.getRoom(player1.getCurrentRoom().getEastTile()));
                         } else {
+                            TextParserGUI.playActionSound( null, eElement);
                             System.out.println("Invalid direction, please try again :<");
                             System.out.println("----------------------------");
                         }
@@ -132,9 +152,42 @@ public class TextParser {
                 }
             }
         } catch (Exception e) {
+            TextParserGUI.playActionSound( null, null);
             System.out.println("There was an error :< ");
             System.out.println("----------------------------");
         }
+    }
+
+    public static NodeList getCommandList() {
+        try {
+            //String userActions = userInput.split(" ")[0];
+            //String userArgument = userInput.split(" ", 2)[1];
+
+            File inputFile = new File("data", "keyWords.txt");
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.parse(inputFile);
+            doc.getDocumentElement().normalize();
+            // prints the root element of the file which is "keyWords" using getNodeName()
+            // System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
+
+                /* Insert if statement for "action item by checking if the first word corresponds to items in
+                action group - need to initialize reference"*/
+            // creates and populates a list of nodes tag items by the tag name "action"
+            NodeList nList = doc.getElementsByTagName("action");
+
+            return nList;
+        }
+        catch (ParserConfigurationException e)
+        {
+            e.printStackTrace();
+        } catch (SAXException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
     // change to package private?
     // make public for unit-testing purpose? APIs available to text private methods but may not be best practice

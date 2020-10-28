@@ -8,12 +8,16 @@ public class CommandListGUI {
    JFrame commandWindow = new JFrame("POKEMANDS");
     Font fontTitle = new Font("Times New Roman",Font.BOLD,25);
     Font fontCommand = new Font("Times New Roman",Font.PLAIN,23);
-   public void displayCommandList(){
+   public void displayCommandList(JButton btn){
        commandWindow.setSize(600, 300);
        commandWindow.setResizable(false);
        commandWindow.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
        commandWindow.getContentPane().setBackground(Color.BLACK);
        commandWindow.setLayout(null);
+
+       Point popUpLocation = btn.getLocationOnScreen();
+       commandWindow.setLocation((int)popUpLocation.getX()-commandWindow.getWidth()
+               ,(int)popUpLocation.getY()-commandWindow.getHeight());
        //Instantiating a container for command list
        Container comContainer = commandWindow.getContentPane();
 
@@ -52,6 +56,6 @@ public class CommandListGUI {
 
     public static void main(String[] args) {
         CommandListGUI display = new CommandListGUI();
-        display.displayCommandList();
+        //display.displayCommandList();
     }
 }

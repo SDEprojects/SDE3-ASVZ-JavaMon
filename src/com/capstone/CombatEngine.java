@@ -1,5 +1,8 @@
 package com.capstone;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
@@ -176,12 +179,12 @@ public class CombatEngine {
             String attackChoice = scanner.nextLine();
             //If user between attack move one or two
             if (attackChoice.equalsIgnoreCase(playerFirstPoke.getMove1().getAttackName())){
-                System.out.println(playerFirstPoke.getName() + " use " + playerFirstPoke.getMove1().getAttackName());
+                System.out.println(playerFirstPoke.getName() + " uses " + playerFirstPoke.getMove1().getAttackName());
                 playerPokeAttack = playerFirstPoke.getMove1().attack(playerFirstPoke.getAttack());
                 playerFirstPoke.getMove1().attackUsed();
                 npcFirstPoke.takeDamage(playerPokeAttack);
             } else if (attackChoice.equalsIgnoreCase(playerFirstPoke.getMove2().getAttackName())){
-                System.out.println(playerFirstPoke.getName() + " use " + playerFirstPoke.getMove2().getAttackName());
+                System.out.println(playerFirstPoke.getName() + " uses " + playerFirstPoke.getMove2().getAttackName());
                 playerPokeAttack = playerFirstPoke.getMove2().attack(playerFirstPoke.getAttack());
                 playerFirstPoke.getMove2().attackUsed();
                 npcFirstPoke.takeDamage(playerPokeAttack);

@@ -1,41 +1,6 @@
+
 Which attack would you like to use?
-Invalid entry.
-Opponent attacks!
-The opposing Pikachu uses Thunder Shock
-Which attack would you like to use?
-Invalid entry.
-Opponent attacks!
-The opposing Pikachu uses Thunder Shock
-Which attack would you like to use?
-Invalid entry.
-Opponent attacks!
-The opposing Pikachu uses Tackle
-Which attack would you like to use?
-Invalid entry.
-Opponent attacks!
-The opposing Pikachu uses Tackle
-Your Pokemon fainted!
-Which attack would you like to use?
-Invalid entry.
-Opponent attacks!
-The opposing Pikachu uses Thunder Shock
-Which attack would you like to use?
-Invalid entry.
-Opponent attacks!
-The opposing Pikachu uses Tackle
-Which item would you like to use?
-Opponent attacks!
-The opposing Pikachu uses Tackle
-Which attack would you like to use?
-Invalid entry.
-Opponent attacks!
-The opposing Pikachu uses Tackle
-Which attack would you like to use?
-You have forfeited your turn.
-Opponent attacks!
-The opposing Pikachu uses Thunder Shock
-Your Pokemon fainted!
-You have forfeited your turn.
+Squirtle use Water Gun
 Opponent attacks!
 The opposing Pikachu uses Thunder Shock
 You have forfeited your turn.
@@ -44,62 +9,50 @@ The opposing Pikachu uses Tackle
 You have forfeited your turn.
 Opponent attacks!
 The opposing Pikachu uses Tackle
-Which attack would you like to use?
-Invalid entry.
-Opponent attacks!
-The opposing Pikachu uses Tackle
-Your Pokemon fainted!
-Which attack would you like to use?
-Invalid entry.
-Opponent attacks!
-The opposing Pikachu uses Thunder Shock
-Which attack would you like to use?
-Invalid entry.
-Opponent attacks!
-The opposing Pikachu uses Thunder Shock
-Your Pokemon fainted!
-Which attack would you like to use?
-Invalid entry.
-Opponent attacks!
-The opposing Squirtle uses Tackle
-Which attack would you like to use?
-Invalid entry.
-Opponent attacks!
-The opposing Squirtle uses Water Gun
-Which attack would you like to use?
-Invalid entry.
-Opponent attacks!
-The opposing Squirtle uses Tackle
-Which attack would you like to use?
-Invalid entry.
-Opponent attacks!
-The opposing Squirtle uses Tackle
 You have forfeited your turn.
 Opponent attacks!
-The opposing Squirtle uses Water Gun
-Your Pokemon fainted!
-Which attack would you like to use?
-Invalid entry.
-Opponent attacks!
-The opposing Pikachu uses Thunder Shock
-Which attack would you like to use?
-Invalid entry.
-Opponent attacks!
-The opposing Pikachu uses Thunder Shock
-Which attack would you like to use?
-Invalid entry.
-Opponent attacks!
 The opposing Pikachu uses Tackle
 Your Pokemon fainted!
+Which attack would you like to use?
+Charmander use Ember
+Opponent attacks!
+The opposing Pikachu uses Thunder Shock
+Which attack would you like to use?
+Charmander use Ember
+Opponent attacks!
+The opposing Pikachu uses Thunder Shock
+Your Pokemon fainted!
+Which attack would you like to use?
+Bulbasaur use Vine Whip
+The opponent's Pokemon fainted!
+You received 1000 for winning!
 Which attack would you like to use?
 Bulbasaur use Tackle
+The opponent's Pokemon fainted!
+You received 1000 for winning!
+Which attack would you like to use?
+Squirtle use Tackle
+Opponent attacks!
+The opposing Pikachu uses Thunder Shock
+You have forfeited your turn.
+Opponent attacks!
+The opposing Pikachu uses Tackle
+Your Pokemon fainted!
+Which attack would you like to use?
+Bulbasaur use Vine Whip
+Opponent attacks!
+The opposing Pikachu uses Thunder Shock
+Your Pokemon fainted!
+You have forfeited your turn.
+Opponent attacks!
+The opposing Pikachu uses Tackle
+You have forfeited your turn.
 Opponent attacks!
 The opposing Pikachu uses Thunder Shock
 You have forfeited your turn.
 Opponent attacks!
 The opposing Pikachu uses Thunder Shock
 Your Pokemon fainted!
-Which attack would you like to use?
 Which attack would you like to use?
 Bulbasaur use Tackle
 Opponent attacks!
@@ -109,45 +62,43 @@ Bulbasaur use Tackle
 The opponent's Pokemon fainted!
 You received 1000 for winning!
 Which attack would you like to use?
-Invalid entry.
+Charmander use Scratch
+Opponent attacks!
+The opposing Pikachu uses Tackle
+Which attack would you like to use?
+Charmander use Scratch
+The opponent's Pokemon fainted!
+You received 1000 for winning!
+Which attack would you like to use?
+Squirtle use Tackle
 Opponent attacks!
 The opposing Pikachu uses Thunder Shock
 Which attack would you like to use?
-Invalid entry.
+Squirtle use Tackle
+The opponent's Pokemon fainted!
+You received 1000 for winning!
+Which attack would you like to use?
+Bulbasaur use Tackle
+The opponent's Pokemon fainted!
+You received 1000 for winning!
+Which attack would you like to use?
+Bulbasaur use Tackle
+The opponent's Pokemon fainted!
+You received 1000 for winning!
+Which attack would you like to use?
+Charmander uses Scratch
 Opponent attacks!
-The opposing Pikachu uses Tackle
+The opposing Pikachu uses Thunder Shock
+You have forfeited your turn.
+Opponent attacks!
+The opposing Pikachu uses Thunder Shock
 Your Pokemon fainted!
 Which attack would you like to use?
-Invalid entry.
+Charmander uses Scratch
 Opponent attacks!
 The opposing Pikachu uses Thunder Shock
 Which attack would you like to use?
-Invalid entry.
+Charmander uses Scratch
 Opponent attacks!
 The opposing Pikachu uses Tackle
-Which attack would you like to use?
-Invalid entry.
-Opponent attacks!
-The opposing Pikachu uses Thunder Shock
-Which attack would you like to use?
-Invalid entry.
-Opponent attacks!
-The opposing Pikachu uses Thunder Shock
-Your Pokemon fainted!
-Which attack would you like to use?
-Invalid entry.
-Opponent attacks!
-The opposing Pikachu uses Tackle
-Which attack would you like to use?
-Invalid entry.
-Opponent attacks!
-The opposing Pikachu uses Tackle
-Which attack would you like to use?
-Invalid entry.
-Opponent attacks!
-The opposing Pikachu uses Tackle
-Which attack would you like to use?
-Invalid entry.
-Opponent attacks!
-The opposing Pikachu uses Thunder Shock
 Your Pokemon fainted!

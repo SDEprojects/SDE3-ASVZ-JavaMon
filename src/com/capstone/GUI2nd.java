@@ -264,7 +264,7 @@ public class GUI2nd extends JFrame { // Added 'extends JFrame'. *Zack*
                         parser.checkPlayerCommand(game, gameEngine,combatEngine, player1, "check map", commonDisplayOut, mapDisplayOut, roomDisplayOut,pokemonDisplayOut, pokemonDisplay);
                     }
                     startMusic.stopMusic();
-                    music.PlaySounds("startGame.wav");
+//                    music.PlaySounds("startGame.wav");
                     break;
                 }
             }

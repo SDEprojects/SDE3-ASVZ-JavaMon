@@ -5,6 +5,10 @@
 	<mode>interact touch inspect</mode>
 	<sound>intro.wav</sound>
  </engage>
+      <trainer>
+      <mode>battle fight duel challenge</mode>
+      <sound>TrainerFightMusic.wav</sound>
+ </trainer>
       <communicate>
 	<mode>talk speak chat communicate express say tell gab contact</mode>
 	<sound>intro.wav</sound>

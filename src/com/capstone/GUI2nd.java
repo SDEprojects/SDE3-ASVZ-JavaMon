@@ -395,6 +395,7 @@ public class GUI2nd extends JFrame { // Added 'extends JFrame'. *Zack*
         submitB.addActionListener(e -> performAction(inputTF, player));
 
         JButton codexB = new JButton("Codex");
+        codexGUI.cdx.clear();
         codexB.setFocusPainted(false);
         inputP.add(codexB);
         codexB.addActionListener(e -> codexGUI.displayLog(codexB));

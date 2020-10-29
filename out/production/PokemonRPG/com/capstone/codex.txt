@@ -1,1 +1,17 @@
-
+Which attack would you like to use?
+Squirtle use Tackle
+Opponent attacks!
+The opposing Pikachu uses Tackle
+Which attack would you like to use?
+Squirtle use Tackle
+Opponent attacks!
+The opposing Pikachu uses Thunder Shock
+Which attack would you like to use?
+Squirtle use Tackle
+The opponent's Pokemon fainted!
+You received 1000 for winning!
+Which attack would you like to use?
+Squirtle use Tackle
+Opponent attacks!
+The opposing Weedle uses Tackle
+Your Pokemon fainted!

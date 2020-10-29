@@ -122,9 +122,9 @@ public class GUI2nd extends JFrame { // Added 'extends JFrame'. *Zack*
         startScreenTextPanel.setFont(startGameText); // Bold font. *Zack*
         //startScreenTextPanel.add(new JLabel(""));
         //startScreenTextPanel.add(new JLabel(""));
-        startScreenTextPanel.add(new JLabel("Professor Oak: Hey! You're finally here, I've been waiting for you."));
-        startScreenTextPanel.add(new JLabel("I'm going on vacation soon, and the flight I'm going on has a strict \"1 Pokemon carry on limit\"."));
-        startScreenTextPanel.add(new JLabel("I'm going to need you to look after one while I'm gone! I'll even let you choose who you want to take!"));
+        startScreenTextPanel.add(new JLabel("Professor Oak: Hey! You're finally here, I've been waiting for you. I'm going on vacation soon, and the flight I'm going on has a strict \"1 Pokemon carry on limit\". I'm going to need you to look after one while I'm gone! I'll even let you choose who you want to take!"));
+        //startScreenTextPanel.add(new JLabel("I'm going on vacation soon, and the flight I'm going on has a strict \"1 Pokemon carry on limit\"."));
+        //startScreenTextPanel.add(new JLabel("I'm going to need you to look after one while I'm gone! I'll even let you choose who you want to take!"));
         //startScreenTextPanel.add(new JLabel("..."));
 
         //Group the radio buttons.
@@ -148,7 +148,7 @@ public class GUI2nd extends JFrame { // Added 'extends JFrame'. *Zack*
             @Override
             public void mouseEntered(MouseEvent e) {
                 super.mouseEntered(e);
-                System.out.println("mouse entered");
+                //System.out.println("mouse entered");
 
                 String newLine = System.getProperty("line.separator");
                 String pokemonStats = "";
@@ -203,7 +203,7 @@ public class GUI2nd extends JFrame { // Added 'extends JFrame'. *Zack*
             @Override
             public void mouseExited(MouseEvent e) {
                 super.mouseExited(e);
-                System.out.println("mouse exited");
+                //System.out.println("mouse exited");
                 dialog.dispose();
                 dialog.setVisible(false);
             }
@@ -215,7 +215,7 @@ public class GUI2nd extends JFrame { // Added 'extends JFrame'. *Zack*
         for (int i = 0; i < choiceDisplayArr.length; i++) {
             radio = new JRadioButton(choiceDisplayArr[i]);
             radio.setName(choiceDisplayArr[i].split(" ", 2)[0]); // *Sanju*
-            System.out.println(radio.getName()); // *Sanju*
+            //System.out.println(radio.getName()); // *Sanju*
             radio.setActionCommand(choiceActionCommandArr[i]);
             radio.addActionListener(radioButtonListener);
             radio.addMouseListener(radioButtonMouseListener);
@@ -298,8 +298,8 @@ public class GUI2nd extends JFrame { // Added 'extends JFrame'. *Zack*
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
         int ySize = ((int) toolKit.getScreenSize().getHeight()); // Initial height. *Zack*
         int xSize = ((int) toolKit.getScreenSize().getWidth()); // Initial width. *Zack*
-        int windowHeight = (int) (Math.round(ySize * 0.95)); // Screen reduced to 95% height. *Zack*
-        int windowWidth = (int) (Math.round(xSize * 0.93)); // Screen reduced to 95% width. *Zack*
+        int windowHeight = (int) (Math.round(ySize * 0.60)); // Screen reduced to 95% height. *Zack*
+        int windowWidth = (int) (Math.round(xSize * 0.78)); // Screen reduced to 95% width. *Zack*
         frame.setSize(new Dimension(windowWidth, windowHeight)); // Setting that screen size based on calculations. *Zack*
         frame.setLocation(dimension.width/2-frame.getSize().width/2, dimension.height/2-frame.getSize().height/2); // Set the JFrame to the center. *Zack*
     }

@@ -33,11 +33,12 @@ public class CombatEngineGui {
         String result = "";
         pokeDisplay.setText("");
         System.setOut(pokeDisplayOut);
-//        player.getPlayersPokemon().get(0).displayOutStatsAndAll(); //Redundant
+        player.getPlayersPokemon().get(0).displayOutStatsAndAll();
         System.setOut(commonDisplayOut);
 
         //Runs until the player or the opponent is defeated.
         while (true){
+            gui.commonDisplay.setText("");
             if(player.playersPokemon.get(0).getCurrentHealth() <= 0){
                 result = "Player Lost";
                 break;
@@ -49,13 +50,16 @@ public class CombatEngineGui {
 
                 //Reward Player money for winning.
                 System.out.println("You received: 1000 for winning!");//hard coded
+
                 codex.updateCodex("You received: 1000 for winning!");
                 player.addMoney(1000); //hard coded 1000 money to add as reward.
                 result = "NPC Lost";
                 break;
             } else {
                 player.playersPokemon.get(0).displayOutStatsAndAll();
+                codex.updateCodex(player.playersPokemon.get(0).displayOutStatsAndAll_ReturnString());
                 npc.npcPokemonList.get(0).displayOutStatsAndAll();
+                codex.updateCodex(npc.npcPokemonList.get(0).displayOutStatsAndAll_ReturnString());
 
                 String userChoice = actionPhaseChoiceTrainerBattle();
 
@@ -80,6 +84,7 @@ public class CombatEngineGui {
                 System.setOut(pokeDisplayOut);
                 player.getPlayersPokemon().get(0).displayOutStatsAndAll();
                 System.setOut(commonDisplayOut);
+                codex.updateCodex(player.getPlayersPokemon().get(0).displayOutStatsAndAll_ReturnString());
 
                 if (player.playersPokemon.get(0).getCurrentHealth() <= 0){
                     System.out.println("Your Pokemon fainted!");
@@ -166,7 +171,9 @@ public class CombatEngineGui {
             System.out.println("Which attack would you like to use?");
             codex.updateCodex("Which attack would you like to use?");
             playerFirstPoke.getMove1().displayOutAttackStats(playerFirstPoke.getLevel());
+            // Add here
             playerFirstPoke.getMove2().displayOutAttackStats(playerFirstPoke.getLevel());
+            // Add here
             String[] attacks = {playerFirstPoke.getMove1().getAttackName() + " [Damage: " + playerFirstPoke.getMove1().getDamage() + "-" + playerFirstPoke.getMove1().getPotentialDamage() + "]",
                     playerFirstPoke.getMove2().getAttackName() + " [Damage: " + playerFirstPoke.getMove2().getDamage() + "-" + playerFirstPoke.getMove2().getPotentialDamage() + "]"
                     , "back"};

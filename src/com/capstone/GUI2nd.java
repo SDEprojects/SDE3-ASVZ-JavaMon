@@ -2,6 +2,8 @@ package com.capstone;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.PrintStream;
 import javax.swing.*;
 import javax.swing.border.*;
@@ -27,7 +29,7 @@ public class GUI2nd extends JFrame { // Added 'extends JFrame'. *Zack*
     private final Font startGameText = new Font("Sans Serif", Font.BOLD, 20); // Start screen text. *Zack*
     private final Font generalFont = new Font("Futura", Font.PLAIN, 16); // *Sanju*
 
-    private CodexGUI codexGUI;
+    private CodexGUI codexGUI = new CodexGUI();
     // String Arrays. *Zack*
     private String[] choiceDisplayArr = {"Bulbasaur (Grass-Type)", "Charmander (Fire-Type)", "Squirtle (Water-Type)"};
     private String[] choiceActionCommandArr = {"bulbasaur", "charmander", "squirtle"};
@@ -36,7 +38,7 @@ public class GUI2nd extends JFrame { // Added 'extends JFrame'. *Zack*
     private JRadioButton radio;
 
     // Initialize Text Area. *Zack*
-    JTextArea commonDisplay = new JTextArea(16,50);
+    public static JTextArea commonDisplay = new JTextArea(23,50);
     JTextArea pokemonDisplay = new JTextArea(7,45);
     JTextArea mapDisplay = new JTextArea(6,50);
     JTextArea roomDisplay = new JTextArea(6,57);
@@ -299,7 +301,7 @@ public class GUI2nd extends JFrame { // Added 'extends JFrame'. *Zack*
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
         int ySize = ((int) toolKit.getScreenSize().getHeight()); // Initial height. *Zack*
         int xSize = ((int) toolKit.getScreenSize().getWidth()); // Initial width. *Zack*
-        int windowHeight = (int) (Math.round(ySize * 0.60)); // Screen reduced to 95% height. *Zack*
+        int windowHeight = (int) (Math.round(ySize * 0.68)); // Screen reduced to 95% height. *Zack*
         int windowWidth = (int) (Math.round(xSize * 0.78)); // Screen reduced to 95% width. *Zack*
         frame.setSize(new Dimension(windowWidth, windowHeight)); // Setting that screen size based on calculations. *Zack*
         frame.setLocation(dimension.width/2-frame.getSize().width/2, dimension.height/2-frame.getSize().height/2); // Set the JFrame to the center. *Zack*
@@ -365,8 +367,7 @@ public class GUI2nd extends JFrame { // Added 'extends JFrame'. *Zack*
     public void displayOutStatsAndAll(Pokemon pokemon, Player player) {
 
         JScrollPane scroll = new JScrollPane (commonDisplay,
-                JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        codexGUI = new CodexGUI();
+                JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
         String roomName = "Oak's Lab";
         Room startingRoom = game.getRoom(roomName);
@@ -396,6 +397,7 @@ public class GUI2nd extends JFrame { // Added 'extends JFrame'. *Zack*
         submitB.addActionListener(e -> performAction(inputTF, player));
 
         JButton codexB = new JButton("Codex");
+        codexGUI.cdx.clear();
         codexB.setFocusPainted(false);
         inputP.add(codexB);
         codexB.addActionListener(e -> codexGUI.displayLog(codexB));

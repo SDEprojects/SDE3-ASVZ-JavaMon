@@ -9,10 +9,10 @@ public class CodexGUI {
     Font titleFont = new Font("Futura", Font.BOLD, 18);
     Font generalFont = new Font("Futura", Font.PLAIN, 16);
     Codex cdx = new Codex();
-    public JTextArea codexTextArea = new JTextArea(16,22);
+    public JTextArea codexTextArea = new JTextArea(15,26);
 
 
-    final int width = 400;
+    final int width = 450;
     final int height = 500;
     final int borderSize = 25;
     final int panelWidth = width - borderSize*2;

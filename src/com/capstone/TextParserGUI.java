@@ -99,24 +99,24 @@ public class TextParserGUI {
                             System.setOut(mapDisplayOut);
                             player1.checkMap();
                             System.setOut(commonDisplayOut);
-                        } else if(eElement.getElementsByTagName("tallgrass").item(0).getTextContent().contains(userArgument)
-                        || eElement.getElementsByTagName("boulder").item(0).getTextContent().contains(userArgument)
+                        } else if (eElement.getElementsByTagName("tallgrass").item(0).getTextContent().contains(userArgument)
+                                || eElement.getElementsByTagName("boulder").item(0).getTextContent().contains(userArgument)
                                 || eElement.getElementsByTagName("holeinthewall").item(0).getTextContent().contains(userArgument)
                                 || eElement.getElementsByTagName("pileofrocks").item(0).getTextContent().contains(userArgument)
-                                || eElement.getElementsByTagName("caveinrubble").item(0).getTextContent().contains(userArgument)){
+                                || eElement.getElementsByTagName("caveinrubble").item(0).getTextContent().contains(userArgument)) {
 
-                            if(!visitedRoom.contains(player1.getCurrentRoom().getName())) {
-                                String[] foundItems = {"Wild Pokemon", "Gold Coins","Rare Candy", "Berries"};
+                            if (!visitedRoom.contains(player1.getCurrentRoom().getName())) {
+                                String[] foundItems = {"Wild Pokemon", "Gold Coins", "Rare Candy", "Berries"};
                                 String res = (String) JOptionPane.showInputDialog(null, "You found some items", "Items",
                                         JOptionPane.PLAIN_MESSAGE, null, foundItems, foundItems[0]);
                                 List<String> wildPokemonNameSet = new ArrayList<>();
-                                for (Pokemon pk:game.listOfPokemon
+                                for (Pokemon pk : game.listOfPokemon
                                 ) {
                                     wildPokemonNameSet.add(pk.getName());
                                 }
                                 Random rand = new Random();
-                                int luckyNumber = rand.nextInt(wildPokemonNameSet.size() - 3 ) + 3;
-                                if(res!=null){
+                                int luckyNumber = rand.nextInt(wildPokemonNameSet.size() - 3) + 3;
+                                if (res != null) {
                                     switch (res) {
                                         case "Wild Pokemon":
                                             player1.addInventory(wildPokemonNameSet.get(luckyNumber));
@@ -149,18 +149,20 @@ public class TextParserGUI {
                                 System.out.println("Nothing is there anymore..");
                             }
                         } else {
-                       // } else if (eElement.getElementsByTagName("items").item(0).getTextContent().contains(userArgument)) {
-                        //    playActionSound("items", eElement);
-                        //    player1.showRoomItems();
-                       // }
 
-                       // else {
                             playActionSound("hint", eElement);
                             System.out.println("You don't have that... you can't check it!");
                             //System.out.println("----------------------------");
                         }
+
                     }
-                    else if (eElement.getElementsByTagName("get").item(0).getTextContent().contains(userActions)) {
+                   /* else if
+
+                    (eElement.getElementsByTagName("items").item(0).getTextContent().contains(userArgument)) {
+                       playActionSound("items", eElement);
+                        player1.showRoomItems();*/
+
+                      else if (eElement.getElementsByTagName("get").item(0).getTextContent().contains(userActions)) {
                         if (eElement.getElementsByTagName("help").item(0).getTextContent().contains(userArgument)) {
                             playActionSound("help", eElement);
                             player1.showHelp();

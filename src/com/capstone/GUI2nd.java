@@ -84,8 +84,9 @@ public class GUI2nd extends JFrame { // Added 'extends JFrame'. *Zack*
         gui.game.initRooms();
         gui.game.initItems();
        // gui.initFrame();
-        gui.startMusic.PlaySounds("intro.wav");
+
         gui.chooseStarter(gui.game, gui.player1);
+        gui.startMusic.PlaySounds("intro.wav");
 
     }
 
@@ -515,7 +516,7 @@ public class GUI2nd extends JFrame { // Added 'extends JFrame'. *Zack*
     private void showInventoryDetails(Player player){
         inventoryDisplayOut.flush();
         System.setOut(inventoryDisplayOut);
-        InventoryAddition ia = new InventoryAddition();
+        //InventoryAddition ia = new InventoryAddition();
         player.checkInventory();
         System.setOut(System.out);
     }

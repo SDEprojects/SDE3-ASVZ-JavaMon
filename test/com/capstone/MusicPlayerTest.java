@@ -1,4 +1,4 @@
-/**
+
 package com.capstone;
 
 import org.junit.Test;
@@ -39,6 +39,3 @@ public class MusicPlayerTest {
         //assertFalse(parser.inputValidation(noInput));
     }
 }
-
-
- **/

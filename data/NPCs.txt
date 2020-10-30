@@ -112,8 +112,8 @@
     </npc>
 
     <npc>
-        <name>Zack</name>
-        <dialog>Have you heard of the tale of the siren head?</dialog>
+        <name>Gooselord Zack</name>
+        <dialog>Honk!</dialog>
         <item>none</item>
         <money>0</money>
         <pokemon>Psyduck</pokemon>

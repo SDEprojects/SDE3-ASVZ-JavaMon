@@ -25,7 +25,7 @@
 
     <npc>
         <name>Trainer Amanda</name>
-        <dialog>Why you beefing? Wanna Fight?</dialog>
+        <dialog>Someone hand me a mop, I gotta clean up this mess.</dialog>
         <item>none</item>
         <money>0</money>
         <pokemon>Pikachu</pokemon>

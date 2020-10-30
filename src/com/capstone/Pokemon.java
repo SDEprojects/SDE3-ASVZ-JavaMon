@@ -114,7 +114,7 @@ public class Pokemon {
 
     //Call this method when you win the pokemon battle.
     public void rewardEXP(double expGain){
-        System.out.println("You Pokemon gained: " + expGain + " experience.");
+        System.out.println("Your Pokemon gained: " + expGain + " experience.");
         double tempExp; //This is for the overflow carry over experience.
         currentExp += expGain;
         if (currentExp >= expToLevelUp){
@@ -154,18 +154,33 @@ public class Pokemon {
         System.out.println("Pokemon Attack: " + getAttack());
         System.out.println("Pokemon Current Experience: [" + getCurrentExp() + "/" + getExpToLevelUp() + "]");
         System.out.println("=====================================================");
+    }
 
+    public String displayOutStatsAndAll_ReturnString(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("=====================================================")
+                .append("\n")
+            .append("Pokemon: " + getName())
+                .append("\n")
+            .append("Pokemon Type: " + getType())
+                .append("\n")
+            .append("Pokemon Level: " + getLevel())
+                .append("\n")
+            .append("Pokemon HP: " + "[" + getCurrentHealth() + "/" + getMaxHealth() + "]")
+                .append("\n")
+            .append("Pokemon Attack: " + getAttack())
+                .append("\n")
+            .append("Pokemon Current Experience: [" + getCurrentExp() + "/" + getExpToLevelUp() + "]")
+                .append("\n")
+            .append("=====================================================");
+        return sb.toString();
     }
 
     //Stat Generator Method, gets called upon instantiation of Pokemon.
     public void generateStats(){
         attack += level; //ex level = 5, attack = 3 -> new attack = 8
         maxHealth += level * 2; //ex level = 5, maxHealth = 12 -> new maxHealth = 22 or ex level = 10, maxHealth = 22 -> new maxHealth = 32.
-
-
     }
-
-
 
     public void takeDamage(int incomingDamage){
         currentHealth = currentHealth - incomingDamage;
@@ -178,12 +193,9 @@ public class Pokemon {
                 move1 = attacks;
             } else if (attacks.getAttackName().equalsIgnoreCase(move2Name)){
                 move2 = attacks;
-
-            } else {
-
+            } /*else {
                 System.out.println("Finished processing.");
-
-            }
+            }*/
         }
     }
 

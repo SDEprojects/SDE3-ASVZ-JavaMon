@@ -100,6 +100,13 @@ public class TextParserGUI {
                         NPCFactory npcActual = game.getNPC(npcName);
                         playerInteracts(player1, npcActual, gameEngine, combatEngine,userArgument,commonDisplayOut, pokeDisplayOut, pokeDisplay);
                         //System.out.println("out engage");
+                    } else if (eElement.getElementsByTagName("trainer").item(0).getTextContent().contains(userActions)) {
+                        //System.out.println("in engage");
+                        playActionSound("trainer", eElement);
+                        String npcName = player1.getCurrentRoom().getNpcName();
+                        NPCFactory npcActual = game.getNPC(npcName);
+                        playerInteracts(player1, npcActual, gameEngine, combatEngine, userArgument, commonDisplayOut, pokeDisplayOut, pokeDisplay);
+                        //System.out.println("out engage");
                     } else if (eElement.getElementsByTagName("communicate").item(0).getTextContent().contains(userActions)) {
                         playActionSound("communicate", eElement);
                         playerTalks(player1, game, userArgument);

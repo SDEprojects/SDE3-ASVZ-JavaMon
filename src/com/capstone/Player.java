@@ -157,6 +157,7 @@ public class Player {
         System.out.println("To move: go <north,east,south, or west");
         System.out.println("To talk: talk <NPC's name>");
         System.out.println("To interact: interact <interactable object>");
+        System.out.println("To battle a trainer: battle <full trainer name>");
         System.out.println("To check the map: check map");
         System.out.println("To check your inventory and wallet: check bag/inventory");
         System.out.println("To display this help prompt again: get help");

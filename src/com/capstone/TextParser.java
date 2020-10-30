@@ -90,6 +90,10 @@ public class TextParser {
                         TextParserGUI.playActionSound( "engage", eElement);
                         playerInteracts(player1,userArgument);
                     }
+                    else if (eElement.getElementsByTagName("trainer").item(0).getTextContent().contains(userActions)) {
+                        TextParserGUI.playActionSound( "trainer", eElement);
+                        playerInteracts(player1,userArgument);
+                    }
                     else if (eElement.getElementsByTagName("communicate").item(0).getTextContent().contains(userActions)) {
                         TextParserGUI.playActionSound( "communicate", eElement);
                         playerTalks(player1,game,userArgument);

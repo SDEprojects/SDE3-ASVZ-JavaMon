@@ -17,12 +17,12 @@ Pokemon Current Experience: [0.0/50.0]
 Which attack would you like to use?
 Charmander uses Ember
 Opponent attacks!
-The opposing Pikachu uses Tackle
+The opposing Pikachu uses Thunder Shock
 =====================================================
 Pokemon: Charmander
 Pokemon Type: Fire
 Pokemon Level: 5
-Pokemon HP: [18/20]
+Pokemon HP: [7/20]
 Pokemon Attack: 10
 Pokemon Current Experience: [0.0/50.0]
 =====================================================
@@ -30,35 +30,7 @@ Pokemon Current Experience: [0.0/50.0]
 Pokemon: Charmander
 Pokemon Type: Fire
 Pokemon Level: 5
-Pokemon HP: [18/20]
-Pokemon Attack: 10
-Pokemon Current Experience: [0.0/50.0]
-=====================================================
-=====================================================
-Pokemon: Pikachu
-Pokemon Type: Electric
-Pokemon Level: 5
-Pokemon HP: [13/18]
-Pokemon Attack: 9
-Pokemon Current Experience: [0.0/50.0]
-=====================================================
-Which attack would you like to use?
-Charmander uses Ember
-Opponent attacks!
-The opposing Pikachu uses Tackle
-=====================================================
-Pokemon: Charmander
-Pokemon Type: Fire
-Pokemon Level: 5
-Pokemon HP: [10/20]
-Pokemon Attack: 10
-Pokemon Current Experience: [0.0/50.0]
-=====================================================
-=====================================================
-Pokemon: Charmander
-Pokemon Type: Fire
-Pokemon Level: 5
-Pokemon HP: [10/20]
+Pokemon HP: [7/20]
 Pokemon Attack: 10
 Pokemon Current Experience: [0.0/50.0]
 =====================================================
@@ -66,7 +38,7 @@ Pokemon Current Experience: [0.0/50.0]
 Pokemon: Pikachu
 Pokemon Type: Electric
 Pokemon Level: 5
-Pokemon HP: [10/18]
+Pokemon HP: [9/18]
 Pokemon Attack: 9
 Pokemon Current Experience: [0.0/50.0]
 =====================================================
@@ -74,9 +46,3 @@ Which attack would you like to use?
 Charmander uses Ember
 The opponent's Pokemon fainted!
 You received 1000 for winning!
-You received: 1000 for winning!
-You received: 1000 for winning!
-You received: 1000 for winning!
-You received: 1000 for winning!
-You received: 1000 for winning!
-You received: 1000 for winning!

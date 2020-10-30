@@ -118,7 +118,12 @@ public class TextParserGUI {
                             System.setOut(mapDisplayOut);
                             player1.checkMap();
                             System.setOut(commonDisplayOut);
-                        } else {
+                        } else if (eElement.getElementsByTagName("items").item(0).getTextContent().contains(userArgument)) {
+                            playActionSound("items", eElement);
+                            player1.showRoomItems();
+                        }
+
+                        else {
                             playActionSound("hint", eElement);
                             System.out.println("You don't have that... you can't check it!");
                             //System.out.println("----------------------------");

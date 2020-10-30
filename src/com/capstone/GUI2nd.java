@@ -12,6 +12,8 @@ public class GUI2nd extends JFrame { // Added 'extends JFrame'. *Zack*
     // Main JFrame. *Zack*
     private JFrame gameFrame; // *Zack*
 
+   // private Room room = new Room();
+
     // Start Screen JPanels. *Zack*
     private JPanel startScreenTextPanel; // *Zack*
     private JPanel startScreenBackgroundPanel; // *Zack*
@@ -508,8 +510,11 @@ public class GUI2nd extends JFrame { // Added 'extends JFrame'. *Zack*
     private void showRoomDetails(Player player) {
         roomDisplayOut.flush();
         System.setOut(roomDisplayOut);
-        player.showRoomDetails();
+        player.showRoomDetails(true);   //victor
         System.setOut(System.out);
+     //   room.processAcceptItems(room.getInteractableItem());
+        player1.getCurrentRoom().processAcceptItems(player1.getCurrentRoom().getInteractableItem());
+
     }
     //displays inventory details
     private void showInventoryDetails(Player player){
@@ -525,4 +530,3 @@ public class GUI2nd extends JFrame { // Added 'extends JFrame'. *Zack*
         return player1;
     }
 }
-

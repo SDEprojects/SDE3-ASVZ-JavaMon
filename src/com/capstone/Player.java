@@ -60,10 +60,21 @@ public class Player {
     /*
     *Displays the current room Details
      */
+  // victor
+    private boolean processItems = false;
+    public void showRoomDetails(boolean processItems) {
+        this.processItems = processItems;
+        showRoomDetails();
+        this.processItems = false;
+    }
 
     public void showRoomDetails() {
-        String roomDetails = currentRoom.getRoomDetails();
+        String roomDetails = currentRoom.getRoomDetails(processItems); // victor
         System.out.println(roomDetails);
+    }
+
+    public void showRoomItems() {
+        currentRoom.showHiddenItems(); // victor
     }
 
     public void checkMap(){

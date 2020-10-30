@@ -49,6 +49,10 @@
 	<mode>bag backpack pack gear handbag briefcase pocket pouch sack suitcase</mode>
 	<sound>intro.wav</sound>
 </bag>
+<items>
+	<mode>item things gift gifts</mode>
+	<sound>go.wav</sound>
+</items>
       <map>
 	<mode>map atlas picture</mode>
 	<sound>intro.wav</sound>

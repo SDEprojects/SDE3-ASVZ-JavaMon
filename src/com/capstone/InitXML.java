@@ -165,7 +165,6 @@ public class InitXML {
         catch (Exception e) {
             System.out.println("there was an error initializing the rooms list.");
         }
-
     }
 
     public void initPokemon(){

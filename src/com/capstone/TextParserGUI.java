@@ -11,12 +11,12 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import java.awt.*;
 import java.io.File;
 import java.io.PrintStream;
-import java.util.Collection;
-import java.util.Scanner;
+import java.util.*;
+import java.util.List;
 
 /*The TextParser class parses and validates the user (console) inputs*/
 public class TextParserGUI {
-
+    public Set<String> visitedRoom = new HashSet<>();
     public void checkPlayerCommand(InitXML game, GameEngine gameEngine, CombatEngineGui combatEngine, Player player1, String userInput, PrintStream commonDisplayOut, PrintStream mapDisplayOut, PrintStream roomDisplayOut, PrintStream pokeDisplayOut, JTextArea pokeDisplay) {
     System.setOut(commonDisplayOut);
     try {
@@ -24,31 +24,12 @@ public class TextParserGUI {
             String userActions = userInput.split(" ")[0];
             String userArgument = userInput.split(" ", 2)[1];
 
-            /*
-            File inputFile = new File("data", "keyWords.txt");
-            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-            Document doc = dBuilder.parse(inputFile);
-            doc.getDocumentElement().normalize();
-            // prints the root element of the file which is "keyWords" using getNodeName()
-            // System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
-
-                    //Insert if statement for "action item by checking if the first word corresponds to items in
-                    //action group - need to initialize reference
-            // creates and populates a list of nodes tag items by the tag name "action"
-            NodeList nList = doc.getElementsByTagName("action");
-             */
-
             NodeList nList = TextParser.getCommandList();
-            //System.out.println("----------------------------");
 
             // iterates over node list of tag names "action"
             for (int temp = 0; temp < nList.getLength(); temp++) {
                 // fetches node item from list by their index position
                 Node nNode = nList.item(temp);
-                // System.out.println("Node list length is: " + nList.getLength());
-                // prints current node name
-                // System.out.println("\nCurrent Element :" + nNode.getNodeName());
 
                 if (nNode.getNodeType() == Node.ELEMENT_NODE) {
                     Element eElement = (Element) nNode;
@@ -118,6 +99,55 @@ public class TextParserGUI {
                             System.setOut(mapDisplayOut);
                             player1.checkMap();
                             System.setOut(commonDisplayOut);
+                        } else if(eElement.getElementsByTagName("tallgrass").item(0).getTextContent().contains(userArgument)
+                        || eElement.getElementsByTagName("boulder").item(0).getTextContent().contains(userArgument)
+                                || eElement.getElementsByTagName("holeinthewall").item(0).getTextContent().contains(userArgument)
+                                || eElement.getElementsByTagName("pileofrocks").item(0).getTextContent().contains(userArgument)
+                                || eElement.getElementsByTagName("caveinrubble").item(0).getTextContent().contains(userArgument)){
+
+                            if(!visitedRoom.contains(player1.getCurrentRoom().getName())) {
+                                String[] foundItems = {"Wild Pokemon", "Gold Coins","Rare Candy", "Berries"};
+                                String res = (String) JOptionPane.showInputDialog(null, "You found some items", "Items",
+                                        JOptionPane.PLAIN_MESSAGE, null, foundItems, foundItems[0]);
+                                List<String> wildPokemonNameSet = new ArrayList<>();
+                                for (Pokemon pk:game.listOfPokemon
+                                ) {
+                                    wildPokemonNameSet.add(pk.getName());
+                                }
+                                Random rand = new Random();
+                                int luckyNumber = rand.nextInt(wildPokemonNameSet.size() - 3 ) + 3;
+                                if(res!=null){
+                                    switch (res) {
+                                        case "Wild Pokemon":
+                                            player1.addInventory(wildPokemonNameSet.get(luckyNumber));
+                                            System.out.println(wildPokemonNameSet.get(luckyNumber) + " Pokeman is added to you inventory.");
+                                            break;
+                                        case "Gold Coins":
+                                            player1.addMoney(500);
+                                            System.out.println("$500 added to your wallet");
+                                            break;
+                                        case "Rare Candy":
+                                            int maxHealth = player1.getPlayersPokemon().get(0).getMaxHealth();
+                                            int currHealth = player1.getPlayersPokemon().get(0).getCurrentHealth();
+
+                                            if ((currHealth + 2) <= maxHealth) {
+                                                player1.getPlayersPokemon().get(0).setCurrentHealth(currHealth + 2);
+                                                System.out.println("You have chosen broccoli candy. Your HP increased by 2..");
+                                            } else {
+                                                player1.getPlayersPokemon().get(0).setCurrentHealth(currHealth);
+                                            }
+                                            break;
+                                        case "Berries":
+                                            player1.getPlayersPokemon().get(0).takeDamage(2);
+                                            System.out.println("You ate wild poisonous berries. Your HP decreased by 2..");
+                                            break;
+                                    }
+                                } else {
+                                    System.out.println("You've lost everything you found");
+                                }
+                            } else {
+                                System.out.println("Nothing is there anymore..");
+                            }
                         } else {
                             playActionSound("hint", eElement);
                             System.out.println("You don't have that... you can't check it!");
@@ -136,11 +166,14 @@ public class TextParserGUI {
                         }
                     }
                     else if (eElement.getElementsByTagName("go").item(0).getTextContent().contains(userActions)) {
+                        //adding visited rooms to the visitedRoom Set..
+                        visitedRoom.add(player1.getCurrentRoom().getName());
                         if (eElement.getElementsByTagName("up").item(0).getTextContent().contains(userArgument) && player1.validMove("north")) {
                             playActionSound("up", eElement);
                             System.out.println("You go North");
                             //System.out.println("----------------------------");
                             System.setOut(roomDisplayOut);
+
                             player1.setCurrentRoom(game.getRoom(player1.getCurrentRoom().getNorthTile()));
                             player1.showRoomDetails();
                         }
@@ -173,6 +206,7 @@ public class TextParserGUI {
                             System.out.println("Invalid direction, please try again :<");
                             //System.out.println("----------------------------");
                         }
+
                         System.setOut(System.out);
                     }
                 }
@@ -201,7 +235,6 @@ public class TextParserGUI {
                 GUI2nd.music.PlaySounds("hintAction.wav");
             }
             else {
-                //System.out.println(action);
                 NodeList nodes = eElement.getElementsByTagName(action);
                 GUI2nd.music.PlaySounds(((Element) nodes.item(0)).getElementsByTagName("sound").item(0).getTextContent());
             }
@@ -218,7 +251,6 @@ public class TextParserGUI {
         if (input.isEmpty()) {
             System.out.println("You have not entered any text");
                 return false;
-                //throw new IllegalArgumentException("You have not entered a move");
         } else if (input.split(" ").length < 2) {
             System.out.println("You have entered an invalid move, what can you do with only one word?");
             return false;

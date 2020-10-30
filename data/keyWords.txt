@@ -57,7 +57,27 @@
 	<mode>pokemon monster poke mon</mode>
 	<sound>intro.wav</sound>
 </pokemon>
-      <help>
+<tallgrass>
+    <mode>tall grass tallgrass tallgrass talgrass tall gras</mode>
+    <sound></sound>
+</tallgrass>
+<boulder>
+    <mode>bolder boulder bouldr bol Boulder</mode>
+    <sound></sound>
+</boulder>
+<holeinthewall>
+    <mode>hole wallhole hol</mode>
+     <sound></sound>
+</holeinthewall>
+<pileofrocks>
+    <mode>pile rocks rock piles</mode>
+    <sound></sound>
+</pileofrocks>
+<caveinrubble>
+    <mode>cave rubble cav rub</mode>
+    <sound></sound>
+</caveinrubble>
+<help>
 	<mode>help hel hep</mode>
 	<sound>intro.wav</sound>
 </help>

@@ -2,6 +2,7 @@ package com.capstone;
 
 import javax.swing.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 
@@ -186,7 +187,7 @@ public class Room {
     }
 
     public void processAcceptItems(String interactableItem) {
-        if(firstEntry)
+        /*if(firstEntry)
         {
             firstEntry = false;
             return;
@@ -196,24 +197,23 @@ public class Room {
         {
             return;
         }
-
+*/
         if (interactableItem == null || interactableItem.trim().isEmpty() || interactableItem.equals("nothing")) {
             return;
         }
 
         String locationname = this.getName();
-        JFrame frame = new JFrame("Choose");
+       ///JFrame frame = new JFrame("Choose");
         Object[] options = {"Check Items",
                 "Cancel"};
-        int selection = JOptionPane.showOptionDialog(frame,
-                this.getName() + " Has some items hidden in the " + interactableItem,
+        int selection = JOptionPane.showOptionDialog(GUI2nd.commonDisplay,
+                this.getName() + " might have some items hidden in the " + interactableItem,
                 "Available Room Items",
                 JOptionPane.YES_NO_CANCEL_OPTION,
                 JOptionPane.QUESTION_MESSAGE,
                 null,
                 options,
                 options[0]);
-
         processChoice(selection, locationname, interactableItem);
     }
 
@@ -221,16 +221,21 @@ public class Room {
         String[] arrItems = this.listItems.get(interactableItem);
         if(selection == 0)
         {
-            showPrompt(locationname + " has the following items:\n" +
-                            String.join("\n",arrItems) + "\nhidden in the " + interactableItem,
-                    "Items in a Room");
+            //System.out.println("from ROOM:\n"+ Arrays.toString(arrItems));;
+            if(arrItems.length == 0){
+                showPrompt("Unfortunately, there isn't anything available", "Alert: no items");
+            }else {
+                showPrompt(locationname + " has the following items:\n" +
+                                String.join("\n", arrItems) + "\nhidden in the " + interactableItem
+                        + "\nUse command check or interact.",
+                        "Items in a Room");
+            }
         }
     }
 
     private void showPrompt(String message, String Title) {
-        JFrame frame = new JFrame("Choose");
 
-        JOptionPane.showMessageDialog(frame,
+        JOptionPane.showMessageDialog(GUI2nd.commonDisplay,
                 message, Title,
                 JOptionPane.PLAIN_MESSAGE);
     }

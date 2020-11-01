@@ -44,7 +44,8 @@ public class GUI2nd extends JFrame { // Added 'extends JFrame'. *Zack*
     JTextArea pokemonDisplay = new JTextArea(7,45);
     JTextArea mapDisplay = new JTextArea(6,50);
     JTextArea roomDisplay = new JTextArea(6,57);
-    JTextArea inventoryDisplay = new JTextArea(7,45);
+    JTextArea inventoryDisplay = new JTextArea("\t\tYour Inventory Display ",7,45);
+
 
     // PrintStream Fields. *Zack*
     private PrintStream roomDisplayOut = new PrintStream(new CustomOutputStream(roomDisplay));
@@ -125,12 +126,7 @@ public class GUI2nd extends JFrame { // Added 'extends JFrame'. *Zack*
         startScreenTextPanel.add(pokemonImageLabel);
 
         startScreenTextPanel.setFont(startGameText); // Bold font. *Zack*
-        //startScreenTextPanel.add(new JLabel(""));
-        //startScreenTextPanel.add(new JLabel(""));
         startScreenTextPanel.add(new JLabel("Professor Oak: Hey! You're finally here, I've been waiting for you. I'm going on vacation soon, and the flight I'm going on has a strict \"1 Pokemon carry on limit\". I'm going to need you to look after one while I'm gone! I'll even let you choose who you want to take!"));
-        //startScreenTextPanel.add(new JLabel("I'm going on vacation soon, and the flight I'm going on has a strict \"1 Pokemon carry on limit\"."));
-        //startScreenTextPanel.add(new JLabel("I'm going to need you to look after one while I'm gone! I'll even let you choose who you want to take!"));
-        //startScreenTextPanel.add(new JLabel("..."));
 
         //Group the radio buttons.
         ButtonGroup group = new ButtonGroup();
@@ -142,7 +138,6 @@ public class GUI2nd extends JFrame { // Added 'extends JFrame'. *Zack*
                     break;
                 }
             }
-           // System.out.println("actionCommand: " + starter);
         };
 
         // *Sanju*
@@ -438,6 +433,7 @@ public class GUI2nd extends JFrame { // Added 'extends JFrame'. *Zack*
         statsPanel.add(getBorderedPanel(pokemonDisplay),BorderLayout.NORTH);
         statsPanel.add(getBorderedPanel(inventoryDisplay),BorderLayout.CENTER);
 
+
         //the pokemon Details Panel
         JPanel pokemonPanel = new JPanel();
         pokemonPanel.setLayout(new BoxLayout(pokemonPanel, BoxLayout.LINE_AXIS));
@@ -448,10 +444,17 @@ public class GUI2nd extends JFrame { // Added 'extends JFrame'. *Zack*
         //push it to the main bottom left corner panel-to the right of that
         pokemonPanel.add(statsPanel);
 
+        //setting text area colors
+        pokemonPanel.setBackground(Color.CYAN);
+        pokemonDisplay.setBackground(Color.CYAN);
+        inventoryDisplay.setBackground(Color.CYAN);
+        roomDisplay.setBackground(Color.CYAN);
+        mapDisplay.setBackground(Color.CYAN);
+        commonDisplay.setBackground(Color.CYAN);
+
         //Create Middle Panel with
         //the pokemon Details Panel,
         //the Output Display Panel and the Bag Panel.
-
         JPanel middlePanel = new JPanel();
         middlePanel.setLayout(new BorderLayout());
         middlePanel.add(getBorderedPanel(pokemonPanel), BorderLayout.WEST);
@@ -501,9 +504,10 @@ public class GUI2nd extends JFrame { // Added 'extends JFrame'. *Zack*
     // Add Given Component to JPanel w/ Border. *Zack*
     private JPanel getBorderedPanel(JComponent comp) {
         JPanel p = new JPanel();
-        Border blueLine = BorderFactory.createLineBorder(Color.RED);
+        Border blueLine = BorderFactory.createLineBorder(Color.LIGHT_GRAY);
         Border emptyBorder = BorderFactory.createEmptyBorder(10, 10, 10, 10);
         CompoundBorder compound = BorderFactory.createCompoundBorder(blueLine, emptyBorder);
+        p.setBackground(Color.darkGray);
         p.setBorder(compound);
         p.add(comp);
         return p;
@@ -516,7 +520,7 @@ public class GUI2nd extends JFrame { // Added 'extends JFrame'. *Zack*
         player.showRoomDetails(true);   //victor
         System.setOut(System.out);
      //   room.processAcceptItems(room.getInteractableItem());
-        player1.getCurrentRoom().processAcceptItems(player1.getCurrentRoom().getInteractableItem());
+       // player1.getCurrentRoom().processAcceptItems(player1.getCurrentRoom().getInteractableItem());
 
     }
     //displays inventory details

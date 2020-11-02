@@ -1,14 +1,10 @@
 <?xml version = "1.0"?>
 <keywords>
    <action activity = "01">
-      <engage>
-	<mode>interact touch inspect</mode>
-	<sound>intro.wav</sound>
+<engage>
+	<mode>interact touch inspect battle fight challenge</mode>
+	<sound>TrainerFightMusic.wav</sound>
  </engage>
-      <trainer>
-      <mode>battle fight duel challenge</mode>
-      <sound>TrainerFightMusic.wav</sound>
- </trainer>
       <communicate>
 	<mode>talk speak chat communicate express say tell gab contact</mode>
 	<sound>intro.wav</sound>
@@ -53,6 +49,10 @@
 	<mode>bag backpack pack gear handbag briefcase pocket pouch sack suitcase</mode>
 	<sound>intro.wav</sound>
 </bag>
+<items>
+	<mode>item things gift gifts</mode>
+	<sound>go.wav</sound>
+</items>
       <map>
 	<mode>map atlas picture</mode>
 	<sound>intro.wav</sound>

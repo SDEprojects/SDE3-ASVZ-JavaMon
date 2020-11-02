@@ -1,6 +1,10 @@
 package com.capstone;
 
+import javax.swing.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashMap;
 
 public class Room {
 
@@ -16,6 +20,14 @@ public class Room {
     private String westTile; //uses the data from <adjacent_west> in Rooms.txt XML
 
     private NPCFactory npcObj; //NPC object here is the npc that is in this room.
+    //String interactableItem = this.getInteractableItem();
+
+    //victor
+    private static boolean firstEntry = true;
+    private boolean processItems = false;
+    String[] tallGrass = {"Wild Pokermon", "Gold Coins", "Rare Candy", "Berries"};
+    String[] ShopCounter = {"Potion    $100", "Super Potion   $500", "Full Heal   $1,000", "Revive    $2,500", "Pokedex    $5,000"};
+    HashMap<String, String[]> listItems = new HashMap<>();
 
 
 
@@ -29,7 +41,9 @@ public class Room {
         southTile = adjSouthTile;
         eastTile = adjEastTile;
         westTile = adjWestTile;
-
+        //victor
+        listItems.put("Tall Grass", tallGrass);
+        listItems.put("Shop Counter", ShopCounter);
     }
 
     //Constructor that allows for npc and interactable instantiation.
@@ -71,7 +85,7 @@ public class Room {
     }
 
     public String getInteractableItem() {
-        return interactableItem;
+       return interactableItem;
     }
 
     //Business Methods
@@ -121,6 +135,11 @@ public class Room {
 
         }*/
     }
+ // victor
+    public String getRoomDetails(boolean processItems) {
+        this.processItems = processItems;
+        return getRoomDetails();
+    }
 
     public String getRoomDetails() {
 
@@ -137,14 +156,93 @@ public class Room {
         } else {
             sb.append("No one is here.").append("\n");
         }
+
         // Check if itemList is empty
-        String interactableItem = this.getInteractableItem();
+        // victor
+
+        //String interactableItem = this.getInteractableItem();
         if (interactableItem != null && !interactableItem.trim().isEmpty()) {
             sb.append("You observe the area and see " + interactableItem).append("\n");
         } else {
             sb.append("You look around and find nothing of interest here.").append("\n");
         }
+
+       // processAcceptItems(interactableItem);
         return sb.toString();
     }
+
+    //victor
+    public void showHiddenItems()
+    {
+        String interactableItem = this.getInteractableItem();
+        String locationname = this.getName();
+
+        if (interactableItem == null || interactableItem.trim().isEmpty() || interactableItem.equals("nothing")) {
+            showPrompt(locationname + " has no hidden item",
+                    "Items in a Room");
+            return;
+        }
+
+        processChoice(0, locationname, this.getInteractableItem());
+    }
+
+    public void processAcceptItems(String interactableItem) {
+        /*if(firstEntry)
+        {
+            firstEntry = false;
+            return;
+        }
+
+        if(!this.processItems)
+        {
+            return;
+        }
+*/
+        if (interactableItem == null || interactableItem.trim().isEmpty() || interactableItem.equals("nothing")) {
+            return;
+        }
+
+        String locationname = this.getName();
+       ///JFrame frame = new JFrame("Choose");
+        Object[] options = {"Check Items",
+                "Cancel"};
+        int selection = JOptionPane.showOptionDialog(GUI2nd.commonDisplay,
+                this.getName() + " might have some items hidden in the " + interactableItem,
+                "Available Room Items",
+                JOptionPane.YES_NO_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options,
+                options[0]);
+        processChoice(selection, locationname, interactableItem);
+    }
+
+    private void processChoice(int selection, String locationname, String interactableItem) {
+        String[] arrItems = this.listItems.get(interactableItem);
+        if(selection == 0)
+        {
+            //System.out.println("from ROOM:\n"+ Arrays.toString(arrItems));;
+            if(arrItems.length == 0){
+                showPrompt("Unfortunately, there isn't anything available", "Alert: no items");
+            }else {
+                showPrompt(locationname + " has the following items:\n" +
+                                String.join("\n", arrItems) + "\nhidden in the " + interactableItem
+                        + "\nUse command check or interact.",
+                        "Items in a Room");
+            }
+        }
+    }
+
+    private void showPrompt(String message, String Title) {
+
+        JOptionPane.showMessageDialog(GUI2nd.commonDisplay,
+                message, Title,
+                JOptionPane.PLAIN_MESSAGE);
+    }
+
+    /*public void setInteractableItem(String value) {
+        interactableItem = value;
+    }
+     */
 }
 

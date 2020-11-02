@@ -143,7 +143,7 @@ public class Pokemon {
     }
 
     void applyNewExpMultiplier(){
-        expToLevelUp = expToLevelUp * expToLevelMultiplier;
+        expToLevelUp = Math.round(expToLevelUp * expToLevelMultiplier);
     }
 
     public void displayOutPokeBelt(){

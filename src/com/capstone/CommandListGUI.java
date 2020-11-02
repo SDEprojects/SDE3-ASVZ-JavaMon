@@ -9,7 +9,7 @@ public class CommandListGUI {
     Font fontTitle = new Font("Times New Roman",Font.BOLD,25);
     Font fontCommand = new Font("Times New Roman",Font.PLAIN,23);
    public void displayCommandList(JButton btn){
-       commandWindow.setSize(600, 300);
+       commandWindow.setSize(600, 315);
        commandWindow.setResizable(false);
        commandWindow.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
        commandWindow.getContentPane().setBackground(Color.BLACK);
@@ -40,13 +40,14 @@ public class CommandListGUI {
                "To display this help prompt again: get help");
 
        JPanel commandPanel = new JPanel();
-       commandPanel.setBounds(10, 65, 565,190);
+       commandPanel.setBounds(10, 65, 565,200);
        commandPanel.setBackground(Color.GREEN);
 
        JTextArea commandTextArea = new JTextArea();
        commandTextArea.setFont(fontCommand);
        commandTextArea.setBackground(Color.LIGHT_GRAY);
        //commandTextArea.setBounds(15, 100,550,300);
+       commandTextArea.setEditable(false);
        commandTextArea.setText(commands);
        commandPanel.add(commandTextArea);
 

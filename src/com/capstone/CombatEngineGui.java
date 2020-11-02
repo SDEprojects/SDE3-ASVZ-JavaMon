@@ -46,7 +46,7 @@ public class CombatEngineGui {
     //Basic input validation is used here to limit choices to attack or item.
     String actionPhaseChoiceTrainerBattle(){
         String[] options = { "Attack","Use item" };
-        String res = (String) JOptionPane.showInputDialog(null, "What would you like to do? <attack> or <item>", "Attack or use items",
+        String res = (String) JOptionPane.showInputDialog(GUI2nd.commonDisplay, "What would you like to do? <attack> or <item>", "Attack or use items",
                 JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
         return res;
     }
@@ -202,7 +202,7 @@ public class CombatEngineGui {
                     playerFirstPoke.getMove2().getAttackName() + " [Damage: " + playerFirstPoke.getMove2().getDamage() + "-" + playerFirstPoke.getMove2().getPotentialDamage() + "]"
                     , "back"};
 
-            String res = (String) JOptionPane.showInputDialog(null, "Which attack would you like to use?", "Attacks",
+            String res = (String) JOptionPane.showInputDialog(GUI2nd.commonDisplay, "Which attack would you like to use?", "Attacks",
                     JOptionPane.PLAIN_MESSAGE, null, attacks, attacks[0]);
 
             // Created strippedAttacks and this for loop because attacks were invalid due to additional option description

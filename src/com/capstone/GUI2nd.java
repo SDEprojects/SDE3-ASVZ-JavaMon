@@ -433,7 +433,6 @@ public class GUI2nd extends JFrame { // Added 'extends JFrame'. *Zack*
         statsPanel.add(getBorderedPanel(pokemonDisplay),BorderLayout.NORTH);
         statsPanel.add(getBorderedPanel(inventoryDisplay),BorderLayout.CENTER);
 
-
         //the pokemon Details Panel
         JPanel pokemonPanel = new JPanel();
         pokemonPanel.setLayout(new BoxLayout(pokemonPanel, BoxLayout.LINE_AXIS));

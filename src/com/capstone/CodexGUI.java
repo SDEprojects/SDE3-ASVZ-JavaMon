@@ -29,7 +29,7 @@ public class CodexGUI {
         codexWindow.setSize(width, height);
         codexWindow.setResizable(false);
         codexWindow.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-        codexWindow.getContentPane().setBackground(Color.green);
+        codexWindow.getContentPane().setBackground(Color.darkGray);
         codexWindow.setLayout(null);
 
         Point popupLocation = CodexButton.getLocationOnScreen();

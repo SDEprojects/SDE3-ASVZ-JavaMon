@@ -51,7 +51,7 @@ public class TextParserGUI {
                                         break;
                                     case "pokedex":
                                         if (player1.getPlayersPokemon().get(0).getLevel() >= 10) { // *Zack*
-                                            player1.buyItem("pokedex", 5000);
+                                            player1.buyItem("Pokedex", 5000);
                                             break;
                                         }
                                         else {

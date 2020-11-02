@@ -26,7 +26,7 @@ public class Room {
     private static boolean firstEntry = true;
     private boolean processItems = false;
     String[] tallGrass = {"Wild Pokermon", "Gold Coins", "Rare Candy", "Berries"};
-    String[] ShopCounter = {"Portion    $100", "Super Portion   $500", "Full Heal   $1,000", "Revive    $2,500"};
+    String[] ShopCounter = {"Potion    $100", "Super Potion   $500", "Full Heal   $1,000", "Revive    $2,500", "Pokedex    $5,000"};
     HashMap<String, String[]> listItems = new HashMap<>();
 
 

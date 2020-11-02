@@ -18,6 +18,30 @@ public class CombatEngineGui {
     public CombatEngineGui() {
     }
 
+    //Class Methods
+
+    // This method checks for a critical hit. If true, display a critical hit message. *Zack*
+    public void checkForCritical() {
+        PokeAttack check = new PokeAttack();
+        if (check.rollCriticalChance() == 2) {
+            System.out.println("A critical hit!");
+        }
+    }
+
+    //Action Phase - this is the phase where the player gets to choose between fight, use item, or run (They cant run from trainer battles)
+    //This method is not yet used. Stubbed out and reserved for the wild pokemon encounter.
+//    String actionPhaseChoiceWildPoke(){
+////        //The userChoice here is what the user chooses to do
+////        Scanner scanner = new Scanner(System.in);
+////        String userChoice = scanner.nextLine();
+////
+////        if (!userChoice.equalsIgnoreCase("attack") && !userChoice.equalsIgnoreCase("item") && !userChoice.equalsIgnoreCase("run")){
+////            System.out.println("You can't do that.");
+////            actionPhaseChoiceWildPoke();
+////        }
+////        return userChoice;
+////    }
+
     //This method is for taking in user input if they want to attack or use item.
     //Basic input validation is used here to limit choices to attack or item.
     String actionPhaseChoiceTrainerBattle(){
@@ -198,13 +222,17 @@ public class CombatEngineGui {
                 //If user between attack move one or two
                 if (strippedAttacks.equalsIgnoreCase(playerFirstPoke.getMove1().getAttackName())) {
                     System.out.println(playerFirstPoke.getName() + " uses " + playerFirstPoke.getMove1().getAttackName());
+                    checkForCritical();
+                    codex.updateCodex(playerFirstPoke.getName() + " uses " + playerFirstPoke.getMove1().getAttackName());
+                    System.out.println(playerFirstPoke.getName() + " uses " + playerFirstPoke.getMove1().getAttackName());
                     codex.updateCodex(playerFirstPoke.getName() + " uses " + playerFirstPoke.getMove1().getAttackName());
                     playerPokeAttack = playerFirstPoke.getMove1().attack(playerFirstPoke.getAttack());
                     playerFirstPoke.getMove1().attackUsed();
                     npcFirstPoke.takeDamage(playerPokeAttack);
                 } else if (strippedAttacks.equalsIgnoreCase(playerFirstPoke.getMove2().getAttackName())) {
-                    System.out.println(playerFirstPoke.getName() + " use " + playerFirstPoke.getMove2().getAttackName());
-                    codex.updateCodex(playerFirstPoke.getName() + " use " + playerFirstPoke.getMove2().getAttackName());
+                    System.out.println(playerFirstPoke.getName() + " uses " + playerFirstPoke.getMove2().getAttackName());
+                    checkForCritical();
+                    codex.updateCodex(playerFirstPoke.getName() + " uses " + playerFirstPoke.getMove2().getAttackName());
                     playerPokeAttack = playerFirstPoke.getMove2().attack(playerFirstPoke.getAttack());
                     playerFirstPoke.getMove2().attackUsed();
                     npcFirstPoke.takeDamage(playerPokeAttack);

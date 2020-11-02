@@ -34,6 +34,9 @@ public class Pokemon {
         type = pokeType;
         this.startSound = startSound;
     }
+    public Pokemon() {
+        // No-OP. *Zack*
+    }
     public Pokemon(String pokeName, String pokeType, String startSound, int hp, int pokeLevel, int attackStat, String move1, String move2, Collection<PokeAttack> attacksList, int startingEXP){
         this(pokeName,pokeType, startSound);
         maxHealth = hp;
@@ -48,6 +51,11 @@ public class Pokemon {
         currentExp = 0;
         expToLevelUp = initialEXPtoLevel;
 
+
+    }
+
+    // Method that gets Pokemon level for parser. *Zack*
+    public void giveMeLevel() {
 
     }
 
@@ -135,7 +143,7 @@ public class Pokemon {
     }
 
     void applyNewExpMultiplier(){
-        expToLevelUp = expToLevelUp * expToLevelMultiplier;
+        expToLevelUp = Math.round(expToLevelUp * expToLevelMultiplier);
     }
 
     public void displayOutPokeBelt(){

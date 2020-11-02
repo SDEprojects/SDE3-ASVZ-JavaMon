@@ -45,6 +45,8 @@ public class ValidPlayerEntry {
                     // for(int a = 0; a < checker.length; a++)
                     if (checker[0] == eElement.getElementsByTagName("engage").item(0).getTextContent()) {
                         System.out.println("Player interacts");
+                    } else if (checker[0] == eElement.getElementsByTagName("trainer").item(0).getTextContent()) {
+                        System.out.println("trainer");
                     } else if (checker[0] == eElement.getElementsByTagName("communicate").item(0).getTextContent()) {
                         System.out.println("Player talks");
                     } else if (checker[0] == eElement.getElementsByTagName("utilize").item(0).getTextContent()) {

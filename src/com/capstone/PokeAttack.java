@@ -20,6 +20,10 @@ public class PokeAttack {
         this.currentEnergy = maxEnergy;
     }
 
+    public PokeAttack() {
+        // No-arg constructor. *Zack*
+    }
+
     //Getters and Setters -----------------------------------------------------------------------
 
 
@@ -53,6 +57,18 @@ public class PokeAttack {
 
     //Class Methods -------------------------------------------------------------------------
 
+    // Critical Hit RNG Method. *Zack*
+    public int rollCriticalChance() {
+        int randomlyGeneratedNumber = (int) Math.floor(Math.random() * 10) + 1; // Returns a random integer from 1 to 10 and casts it to a whole number. *Zack*
+//        int randomlyGeneratedNumber = (int) Math.floor(Math.random() * 0) + 1; // 100% Crit Chance CHEAT. USE FOR TESTING ONLY. *Zack*
+        if (randomlyGeneratedNumber == 1) {
+            return 2;
+        }
+        else {
+            return 1;
+        }
+    }
+
     //This is a displayOut that also calculates potential damage, and also shows remaining energy points.
     void displayOutAttackStats(int pokemonAttackStat){
         potentialDamage = damage + pokemonAttackStat;
@@ -68,6 +84,6 @@ public class PokeAttack {
     int attack(int attackStat){
         int potentialDamage = damage + attackStat;
 
-        return (int)(Math.random() * (potentialDamage - damage + 1) + damage);
+        return (int)(Math.random() * (potentialDamage - damage + 1) + damage) * rollCriticalChance(); // Crit chance added. *Zack*
     }
 }

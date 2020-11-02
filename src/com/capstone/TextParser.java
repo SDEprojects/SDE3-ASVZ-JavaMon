@@ -90,6 +90,10 @@ public class TextParser {
                         TextParserGUI.playActionSound( "engage", eElement);
                         playerInteracts(player1,userArgument);
                     }
+//                    else if (eElement.getElementsByTagName("trainer").item(0).getTextContent().contains(userActions)) {
+//                        TextParserGUI.playActionSound( "trainer", eElement);
+//                        playerInteracts(player1,userArgument);
+//                    }
                     else if (eElement.getElementsByTagName("communicate").item(0).getTextContent().contains(userActions)) {
                         TextParserGUI.playActionSound( "communicate", eElement);
                         playerTalks(player1,game,userArgument);
@@ -215,6 +219,7 @@ public class TextParser {
                 System.out.println("Super Potion        $500");
                 System.out.println("Full Heal          $1000");
                 System.out.println("Revive             $2500");
+                System.out.println("Pokedex            $5000");
                 System.out.println("------------------------");
                 System.out.println("To purchase an item: buy <item>!");
                 System.out.println("To exit shop: exit shop!");
@@ -236,7 +241,17 @@ public class TextParser {
                             case "revive":
                                 player1.buyItem("revive", 2500);
                                 break;
+                            case "pokedex":
+                                if (player1.getPlayersPokemon().get(0).getLevel() >= 10) { // *Zack*
+                                    player1.buyItem("pokedex", 5000);
+                                    break;
+                                }
+                                else {
+                                    System.out.println("You can't purchase the Pokedex until you have more experience! (level 10)");
+                                }
+                                break;
                         }
+
                     } else if (shopInput.equals("exit shop")) {
                         System.out.println("Thank you for your patronage!");
                         exit = true;

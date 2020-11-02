@@ -34,6 +34,7 @@ public class CommandListGUI {
                "To move: go <north,east,south, or west",
                "To talk: talk <NPC's name>",
                "To interact: interact <interactable object>",
+               "To battle a trainer: battle <full trainer name>",
                "To check the map: check map",
                "To check your inventory and wallet: check bag/inventory",
                "To display this help prompt again: get help");

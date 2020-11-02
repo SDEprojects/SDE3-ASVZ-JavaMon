@@ -26,4 +26,14 @@
         <description>A strange crystal that brings Pokemon back from fainting... Heals 1/2 max hp</description>
         <price>2500</price>
     </item>
+
+    <special>
+    <item>
+        <name>Pokedex</name>
+        <effect>map track save</effect>
+        <description>A device used to explore, track, and save progress.</description>
+        <price>5000</price>
+        <requirement>pokemon level 10</requirement>
+    </item>
+    </special>
 </class>
